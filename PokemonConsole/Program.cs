@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PokemonConsole
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+
+            // define entities 
+            Player playerOne = new Player(10);
+
+            Enemy enemyOne = new Enemy(10);
+
+            Tree tree = new Tree();
+
+            // game - we define the size of the map here
+            Game game = new Game(20, playerOne);
+
+            // add entities other than player 
+            game.AddEnemy(1, 1, enemyOne);
+
+            game.AddTree(3, 7, tree);
+
+            // run
+            game.Run();
+
+        }
+    }
+}
