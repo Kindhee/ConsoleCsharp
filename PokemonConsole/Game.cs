@@ -58,25 +58,30 @@ namespace PokemonConsole
                 char keyPressed = Console.ReadKey().KeyChar;
 
                 // get last position of player
-                _player._lastPosX = _player._posX;
-                _player._lastPosY = _player._posY;
+                _player.LastPosX = _player.PosX;
+                _player.LastPosY = _player.PosY;
+
+                /* _player._lastPosX = _player._posX;
+                _player._lastPosY = _player._posY;*/
 
                 switch (keyPressed) 
                 {
                     case 'z':
-                        if (_player._posY + 1 < _size && _map[_player._posX, _player._posY + 1].GetString() != "T") { _player._posY += 1; }
+                        if (_player.PosY + 1 < _size && _map[_player.PosX, _player.PosY + 1].GetString() != "T") { _player.PosY += 1; }
+
                         break;
 
                     case 'q':
-                        if (_player._posX - 1 > 0 && _map[_player._posX - 1, _player._posY].GetString() != "T") { _player._posX -= 1; }
+                        if (_player.PosX - 1 > 0 && _map[_player.PosX - 1, _player.PosY].GetString() != "T") { _player.PosX -= 1; }
+
                         break;
 
                     case 's':
-                        if (_player._posY - 1 > 0 && _map[_player._posX, _player._posY - 1].GetString() != "T") { _player._posY -= 1; }
+                        if (_player.PosY - 1 > 0 && _map[_player.PosX, _player.PosY - 1].GetString() != "T") { _player.PosY -= 1; }
                         break;
 
                     case 'd':
-                        if (_player._posX + 1 < _size && _map[_player._posX + 1, _player._posY].GetString() != "T") { _player._posX += 1; }
+                        if (_player.PosX + 1 < _size && _map[_player.PosX + 1, _player.PosY].GetString() != "T") { _player.PosX += 1; }
                         break;
 
                     default : 
@@ -84,8 +89,11 @@ namespace PokemonConsole
                 }
 
                 // update player pos on the map 
-                _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
-                _map[_player._posX, _player._posY] = new Tile(TileType.Player);
+                _map[_player.LastPosX, _player.LastPosY] = new Tile(TileType.Empty);
+                _map[_player.PosX, _player.PosY] = new Tile(TileType.Player);
+
+                /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
+                _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/
 
             }
         }

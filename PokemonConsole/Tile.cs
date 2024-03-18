@@ -34,7 +34,7 @@ namespace PokemonConsole
                     return "T";
 
                 default:
-                    return "#";
+                    return " ";
                     // or
                     //break;
             }

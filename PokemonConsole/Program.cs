@@ -12,9 +12,9 @@ namespace PokemonConsole
         {
 
             // define entities 
-            Player playerOne = new Player(10);
+            Player playerOne = new Player(1, 10, 10, 10, 10, 10);
 
-            Enemy enemyOne = new Enemy(10);
+            Enemy enemyOne = new Enemy(1, AttributType.Fire, 10, 10, 10, 10, 10);
 
             Tree tree = new Tree();
 

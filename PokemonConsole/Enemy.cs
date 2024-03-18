@@ -8,11 +8,42 @@ namespace PokemonConsole
 {
     public class Enemy : Tile
     {
-        public int _health;
+        int _level;
 
-        public Enemy(int health) : base(TileType.Enemy)
+        AttributType _attributType;
+
+        int _attack;
+        int _health;
+        int _defense;
+        int _speed;
+        int _accuracy;
+
+
+        public Enemy(int level, AttributType attributType, int health, int attack, int defense, int speed, int accuracy) : base(TileType.Enemy)
         {
+            _level = level;
+
+            _attributType = attributType;
+
             _health = health;
+            _attack = attack;
+            _defense = defense;
+            _speed = speed;
+            _accuracy = accuracy;
         }
+
+        // get / set
+        public int PosX { get => _posX; private set => _posX = value; }
+        public int PosY { get => _posY; private set => _posY = value; }
+        public int LastPosX { get => _lastPosX; private set => _lastPosX = value; }
+        public int LastPosY { get => _lastPosY; private set => _lastPosY = value; }
+        public int Level { get => _level; private set => _level = value; }
+        public int Type { get => _attributType; private set => _attributType = value; }
+        public int Health { get => _health; private set => _health = value; }
+        public int Attack { get => _attack; private set => _attack = value; }
+        public int Defense { get => _defense; private set => _defense = value; }
+        public int Speed { get => _speed; private set => _speed = value; }
+        public int Accuracy { get => _accuracy; private set => _accuracy = value; }
+
     }
 }
