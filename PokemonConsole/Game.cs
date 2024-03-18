@@ -28,7 +28,7 @@ namespace PokemonConsole
             }
             
             // put player on the map 
-            _map[player._posX, player._posY] = player;
+            _map[player.PosX, player.PosY] = player;
         }
 
         public void DrawMap()
