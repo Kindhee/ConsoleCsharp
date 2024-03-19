@@ -12,34 +12,33 @@ namespace PokemonConsole
 
         AttributType _attributType;
 
-        int _attack;
+        List<Capacity> _capacities;
+
         int _health;
         int _defense;
         int _speed;
-        int _accuracy;
 
 
-        public Enemy(int level, AttributType attributType, int health, int attack, int defense, int speed, int accuracy) : base(TileType.Enemy)
+        public Enemy(int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
         {
             _level = level;
 
             _attributType = attributType;
 
+            _capacities = capacities;
+
             _health = health;
-            _attack = attack;
             _defense = defense;
             _speed = speed;
-            _accuracy = accuracy;
         }
 
         // get / set
-        public int Level { get => _level; private set => _level = value; }
-        public AttributType Type { get => _attributType; private set => _attributType = value; }
-        public int Health { get => _health; private set => _health = value; }
-        public int Attack { get => _attack; private set => _attack = value; }
-        public int Defense { get => _defense; private set => _defense = value; }
-        public int Speed { get => _speed; private set => _speed = value; }
-        public int Accuracy { get => _accuracy; private set => _accuracy = value; }
+        public int Level { get => _level;  set => _level = value; }
+        public AttributType Type { get => _attributType;  set => _attributType = value; }
+        public List<Capacity> capacities { get => _capacities; set => _capacities = value; }
+        public int Health { get => _health;  set => _health = value; }
+        public int Defense { get => _defense;  set => _defense = value; }
+        public int Speed { get => _speed;  set => _speed = value; }
 
     }
 }
