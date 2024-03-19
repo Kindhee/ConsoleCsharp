@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,10 @@ namespace PokemonConsole
             // game - we define the size of the map here
             Game game = new Game(20, init.player);
 
-            game.SetState(new OverworldState());
+            game.SetState(new Menu());
 
             // add entities other than player 
-            //game.AddEnemy(1, 1, enemyOne);
+            game.AddEnemy(1, 1, init.enemyFire);
 
             game.AddTree(3, 7, init.tree);
 

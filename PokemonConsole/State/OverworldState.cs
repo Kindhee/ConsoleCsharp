@@ -48,7 +48,7 @@ namespace PokemonConsole.State
                     break;
 
                 case 'q':
-                    if (game._player.PosY - 1 > 0)
+                    if (game._player.PosX - 1 > 0)
                     {
                         string tile = game._map[game._player.PosX - 1, game._player.PosY].GetString();
                         if (tile != "T")
@@ -91,6 +91,10 @@ namespace PokemonConsole.State
                             game.PushState(new BattleState());
                         }
                     }
+                    break;
+
+                case 'e':
+                    game.PushState(new MenuOverwold());
                     break;
 
                 default:

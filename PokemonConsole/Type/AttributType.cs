@@ -8,6 +8,7 @@ namespace PokemonConsole
 {
     public enum AttributType
     {
+        Normal,
         Fire,
         Water,
         Plant,       
