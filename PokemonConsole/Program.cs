@@ -16,6 +16,8 @@ namespace PokemonConsole
             // game - we define the size of the map here
             Game game = new Game(20, init.player);
 
+            game.SetState(new OverworldState());
+
             // add entities other than player 
             //game.AddEnemy(1, 1, enemyOne);
 
