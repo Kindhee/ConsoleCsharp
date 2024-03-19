@@ -21,6 +21,8 @@ namespace PokemonConsole
         int _lastPosX;
         int _lastPosY;
 
+        Dictionary<string, List<Item>> Inventory;
+
         public Player(int level, int health, int attack, int defense, int speed, int accuracy) : base(TileType.Player)
         {
             _posX = 8;

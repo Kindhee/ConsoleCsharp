@@ -40,15 +40,27 @@ namespace PokemonConsole
 
         public void DrawMap()
         {
-            for(int i = _size - 1; i >= 0; i--)
+            Console.Write("╔");
+            for (int i = 0; i <= (_size*2)-1;  i++)
             {
+                Console.Write("═");
+            }
+            Console.WriteLine("╗");
+            for (int i = _size - 1; i >= 0; i--)
+            {
+                Console.Write("║");
                 for (int j = 0; j < _size; j++)
                 {
                     Console.Write(_map[j, i].GetString() + " ");
                 }
-                Console.WriteLine();
+                Console.WriteLine("║");
             }
-            Console.WriteLine();
+            Console.Write("╚");
+            for (int i = 0; i <= (_size * 2) - 1; i++)
+            {
+                Console.Write("═");
+            }
+            Console.WriteLine("╝");
         }
 
         public void Run()
@@ -56,7 +68,8 @@ namespace PokemonConsole
             while(true)
             {
                 // clear console
-                //Console.Clear();
+                Console.Clear();
+
                 Console.SetCursorPosition(0, 0);
 
                 State.Run(this);
