@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,18 @@ namespace PokemonConsole
         public Tile[,] _map;
         public int _size;
         public Player _player;
+        private BlankState _State;
+        private List<BlankState> _StateList;
+
+        public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
+        public List<BlankState> StateList { get => _StateList; }
 
         public Game(int size, Player player)
         {
             _map = new Tile[size,size];
             _size = size;
             _player = player;
+            _StateList = new List<BlankState>();
 
             // empty map 
             for(int i = 0; i < size; i++)
@@ -52,48 +59,9 @@ namespace PokemonConsole
                 //Console.Clear();
                 Console.SetCursorPosition(0, 0);
 
-                DrawMap();
+                State.Run(this);
 
-                // get key pressed
-                char keyPressed = Console.ReadKey().KeyChar;
-
-                // get last position of player
-                _player.LastPosX = _player.PosX;
-                _player.LastPosY = _player.PosY;
-
-                /* _player._lastPosX = _player._posX;
-                _player._lastPosY = _player._posY;*/
-
-                switch (keyPressed) 
-                {
-                    case 'z':
-                        if (_player.PosY + 1 < _size && _map[_player.PosX, _player.PosY + 1].GetString() != "T") { _player.PosY += 1; }
-
-                        break;
-
-                    case 'q':
-                        if (_player.PosX - 1 > 0 && _map[_player.PosX - 1, _player.PosY].GetString() != "T") { _player.PosX -= 1; }
-
-                        break;
-
-                    case 's':
-                        if (_player.PosY - 1 > 0 && _map[_player.PosX, _player.PosY - 1].GetString() != "T") { _player.PosY -= 1; }
-                        break;
-
-                    case 'd':
-                        if (_player.PosX + 1 < _size && _map[_player.PosX + 1, _player.PosY].GetString() != "T") { _player.PosX += 1; }
-                        break;
-
-                    default : 
-                        break;
-                }
-
-                // update player pos on the map 
-                _map[_player.LastPosX, _player.LastPosY] = new Tile(TileType.Empty);
-                _map[_player.PosX, _player.PosY] = new Tile(TileType.Player);
-
-                /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
-                _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/
+                State.HandleInput(this);
 
             }
         }
@@ -106,6 +74,40 @@ namespace PokemonConsole
         public void AddTree(int posX, int posY, Tree tree)
         {
             _map[posX, posY] = tree;
+        }
+
+        public void SetState(BlankState state)
+        {
+            BlankState old = null;
+            Console.WriteLine(StateList.Count);
+            if (StateList.Count > 0)
+            {
+                old = StateList.Last();
+                old.Leave(state);
+            }
+            StateList.Clear();
+
+            StateList.Add(state);
+            if (old != null)
+                state.Enter(old);
+        }
+
+        public void PushState(BlankState state)
+        {
+            BlankState old = StateList.Last();
+            StateList.Add(state);
+            state.Enter(old);
+            old.Pause(state);
+        }
+
+        public void PopState()
+        {
+            BlankState old = StateList.Last();
+            StateList.RemoveAt(StateList.Count - 1);
+            BlankState newS = StateList.Last();
+            old.Leave(newS);
+            newS.Resume(old);
+
         }
     }
 }
