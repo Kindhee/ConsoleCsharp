@@ -67,9 +67,9 @@ namespace PokemonConsole
 
 
             // enemies
-            _enemyFire = new Enemy(10, AttributType.Fire, _capacitiesFire, 10, 5, 25);
-            _enemyWater = new Enemy(10, AttributType.Water, _capacitiesWater, 15, 10, 15);
-            _enemyPlant = new Enemy(10, AttributType.Plant, _capacitiesPlant, 20, 15, 5);
+            _enemyFire = new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25);
+            _enemyWater = new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15);
+            _enemyPlant = new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5);
 
         }
 

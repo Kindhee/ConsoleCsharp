@@ -8,6 +8,8 @@ namespace PokemonConsole
 {
     public class Enemy : Tile
     {
+        string _name;
+
         int _level;
 
         AttributType _attributType;
@@ -19,8 +21,10 @@ namespace PokemonConsole
         int _speed;
 
 
-        public Enemy(int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
+        public Enemy(string name, int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
         {
+            _name = name;
+
             _level = level;
 
             _attributType = attributType;
@@ -33,6 +37,7 @@ namespace PokemonConsole
         }
 
         // get / set
+        public string Name { get => _name; set => _name = value; }
         public int Level { get => _level;  set => _level = value; }
         public AttributType Type { get => _attributType;  set => _attributType = value; }
         public List<Capacity> capacities { get => _capacities; set => _capacities = value; }
