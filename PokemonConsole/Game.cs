@@ -61,6 +61,28 @@ namespace PokemonConsole
                 Console.Write("═");
             }
             Console.WriteLine("╝");
+
+            Console.Write("\n\n");
+
+            Console.WriteLine("Inventory: ");
+
+            Console.WriteLine("Items:");
+            for (int i = 0; i < _player.Inventory.Items.Count(); i++)
+            {
+                Console.WriteLine("\t"+_player.Inventory.Items[i].item.name + "   x" + _player.Inventory.Items[i].nb);
+            }
+
+            Console.WriteLine("Pokeballs:");
+            for (int i = 0; i < _player.Inventory.Pokeballs.Count(); i++)
+            {
+                Console.WriteLine("\t" + _player.Inventory.Pokeballs[i].item.name + "   x" + _player.Inventory.Pokeballs[i].nb);
+            }
+
+            Console.WriteLine("Key Items:");
+            for (int i = 0; i < _player.Inventory.Keys.Count(); i++)
+            {
+                Console.WriteLine("\t" + _player.Inventory.Keys[i].item.name + "   x" + _player.Inventory.Keys[i].nb);
+            }
         }
 
         public void Run()

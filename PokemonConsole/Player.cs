@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonConsole.Items;
 
 namespace PokemonConsole
 {
@@ -21,7 +22,7 @@ namespace PokemonConsole
         int _lastPosX;
         int _lastPosY;
 
-        Dictionary<string, List<Item>> Inventory;
+        public Inventory _inventory = new();
 
         public Player(int level, int health, int attack, int defense, int speed, int accuracy) : base(TileType.Player)
         {
@@ -37,6 +38,11 @@ namespace PokemonConsole
             _defense = defense;
             _speed = speed;
             _accuracy = accuracy;
+
+            //Inventory.Items.Item1.Add(new Item("TestItem", "Can't you see him? He's looking at you right now.", false));
+            //Inventory.Items.Item1.Add(new HealthItem("Potion", "Restores Pokémon HP by 20.", false, 20));
+            //Inventory.Pokeballs.Item1.Add(new PokeBall("Poke Ball", "A tool for catching wild Pokémon.", 1f));
+            //Inventory.Keys.Item1.Add(new Item("iPhone 13", "You haven't bought the new iPhone 15 X+ at $10000 yet?\nHA!", true));
         }
 
         // get / set
@@ -50,6 +56,7 @@ namespace PokemonConsole
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
         public int Accuracy { get => _accuracy;  set => _accuracy = value; }
+        public Inventory Inventory { get => _inventory; }
 
 
     }
