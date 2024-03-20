@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State.Menus.Sous_Menus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,10 +29,8 @@ namespace PokemonConsole
         List<Capacity> _capacitiesFire;
         List<Capacity> _capacitiesPlant;
 
+        List<Enemy> _lEnemies = new List<Enemy>();
 
-        Enemy _enemyFire;
-        Enemy _enemyWater;
-        Enemy _enemyPlant;
 
 
         public void Init() {
@@ -67,19 +66,20 @@ namespace PokemonConsole
 
 
             // enemies
-            _enemyFire = new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25);
-            _enemyWater = new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15);
-            _enemyPlant = new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5);
+            _lEnemies.Add(new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25));
+            _lEnemies.Add(new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15));
+            _lEnemies.Add(new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5));
+
 
         }
 
         // get / set
         public Player player { get => _player; set => _player = value; }
         public Tree tree { get => _tree; set => _tree = value; }
-        public Enemy enemyFire { get => _enemyFire; set => _enemyFire = value; }
-        public Enemy enemyWater { get => _enemyWater; set => _enemyWater = value; }
-        public Enemy enemyPlant { get => _enemyPlant; set => _enemyPlant = value; }
-
+        public Enemy enemyFire { get => _lEnemies[0]; set => _lEnemies[0] = value; }
+        public Enemy enemyWater { get => _lEnemies[1]; set => _lEnemies[1] = value; }
+        public Enemy enemyPlant { get => _lEnemies[2]; set => _lEnemies[2] = value; }
+        public List<Enemy> enemies { get => _lEnemies; set => _lEnemies = value; }
     }
 }
 

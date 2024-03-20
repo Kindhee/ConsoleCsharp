@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State.Menus.Sous_Menus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,7 +66,8 @@ namespace PokemonConsole.State
                     break; 
                
                 case 4:
-                    // pokedex
+                    Console.Clear();
+                    game.SetState(new PokedexState());
                     break; 
                 
                 case 5:

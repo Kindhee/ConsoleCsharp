@@ -1,4 +1,5 @@
 ﻿using PokemonConsole.State;
+using PokemonConsole.State.Menus.Sous_Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,13 @@ namespace PokemonConsole
         public Player _player;
         private BlankState _State;
         private List<BlankState> _StateList;
+        
 
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
+
+        private List<Enemy> _lEnemiesMeet = new List<Enemy> { };
+        public List<Enemy> lEnemiesMeet { get => lEnemiesMeet; }
 
         public Game(int size, Player player)
         {
@@ -26,7 +31,7 @@ namespace PokemonConsole
             _StateList = new List<BlankState>();
 
             // empty map 
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
@@ -79,7 +84,7 @@ namespace PokemonConsole
         public void SetState(BlankState state)
         {
             BlankState old = null;
-            Console.WriteLine(StateList.Count);
+            //Console.WriteLine(StateList.Count);
             if (StateList.Count > 0)
             {
                 old = StateList.Last();
