@@ -39,7 +39,7 @@ namespace PokemonConsole
             var thing = JsonSerializer.Deserialize<Thing>(text);*/
 
             // only player
-            _player = new Player(1, 10, 10, 10, 10, 10);
+            _player = new Player();
 
             // generic can be used multiple times
             _tree = new Tree();

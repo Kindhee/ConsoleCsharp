@@ -33,6 +33,10 @@ namespace PokemonConsole.State
             switch (keyPressed)
             {
                 case 'z':
+
+                    game._player.DirX = 0;
+                    game._player.DirY = 1;
+
                     if (game._player.PosY + 1 < game._size)
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY + 1];
@@ -55,6 +59,10 @@ namespace PokemonConsole.State
                     break;
 
                 case 'q':
+
+                    game._player.DirX = -1;
+                    game._player.DirY = 0;
+
                     if (game._player.PosX - 1 > 0)
                     {
                         Tile t = game._map[game._player.PosX - 1, game._player.PosY];
@@ -77,6 +85,11 @@ namespace PokemonConsole.State
                     break;
 
                 case 's':
+
+
+                    game._player.DirX = 0;
+                    game._player.DirY = -1;
+
                     if (game._player.PosY - 1 > 0)
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY - 1];
@@ -99,6 +112,11 @@ namespace PokemonConsole.State
                     break;
 
                 case 'd':
+
+                    
+                    game._player.DirX = 1;
+                    game._player.DirY = 0;
+
                     if (game._player.PosX + 1 < game._size)
                     {
                         Tile t = game._map[game._player.PosX + 1, game._player.PosY];
@@ -122,6 +140,18 @@ namespace PokemonConsole.State
                 case 'e':
                     game.PushState(new MenuOverwold());
                     break;
+
+/*                case 'a':
+
+                    Tile t = game._map[game._player.PosX + game._player.DirX, game._player.PosY + game._player.DirY];
+                    string tile = t.GetString();
+
+                    if (tile == "O")
+                    {
+                        // pick up item
+                    }
+
+                    break;*/
 
                 default:
                     break;
