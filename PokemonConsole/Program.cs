@@ -26,6 +26,7 @@ namespace PokemonConsole
 
             game.AddTree(3, 7, init.tree);
 
+
             // run
             game.Run();
 

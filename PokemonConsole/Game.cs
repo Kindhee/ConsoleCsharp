@@ -20,8 +20,8 @@ namespace PokemonConsole
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
 
-        private List<Enemy> _lEnemiesMeet = new List<Enemy> { };
-        public List<Enemy> lEnemiesMeet { get => lEnemiesMeet; }
+        private Dictionary<string, Enemy> _lEnemiesMeet = new Dictionary<string, Enemy>();
+        public Dictionary<string, Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
 
         public Game(int size, Player player)
         {
@@ -113,6 +113,14 @@ namespace PokemonConsole
             old.Leave(newS);
             newS.Resume(old);
 
+        }
+
+        public void AddMetPokemon(Enemy newEnemy, Game game)
+        {
+            if (!game.lEnemiesMeet.ContainsKey(newEnemy.Name))
+            {
+                game.lEnemiesMeet.Add(newEnemy.Name, newEnemy);
+            }
         }
     }
 }

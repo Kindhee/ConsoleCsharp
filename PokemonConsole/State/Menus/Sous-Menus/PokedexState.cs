@@ -4,9 +4,15 @@
     {
         override public void Run(Game game)
         {
-            foreach(Enemy enemy in game.lEnemiesMeet)
+            foreach(var enemy in game.lEnemiesMeet)
             {
-                Console.WriteLine(enemy.Name);
+                Console.Write(enemy.Value.Name);
+                Console.Write(" | Type : " + enemy.Value.Type);
+                Console.Write(" | Capacities : " + enemy.Value.Capacities[0].Name + 
+                                            "; " + enemy.Value.Capacities[1].Name + 
+                                            "; " + enemy.Value.Capacities[2].Name + 
+                                            "; " + enemy.Value.Capacities[3].Name);
+                Console.WriteLine();
             }
         }
     }

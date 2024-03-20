@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State.Menus.Sous_Menus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,7 @@ namespace PokemonConsole.State
                         {
                             var enemyToBattle = t as Enemy;
 
-                            // Pokedex.add(enemy)
+                            game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
@@ -66,7 +67,7 @@ namespace PokemonConsole.State
                         {
                             var enemyToBattle = t as Enemy;
 
-                            // Pokedex.add(enemy)
+                            game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
@@ -88,7 +89,8 @@ namespace PokemonConsole.State
                         {
                             var enemyToBattle = t as Enemy;
 
-                            // Pokedex.add(enemy)
+
+                            game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
@@ -109,7 +111,7 @@ namespace PokemonConsole.State
                         {
                             var enemyToBattle = t as Enemy;
 
-                            // Pokedex.add(enemy)
+                            game.AddMetPokemon(enemyToBattle,game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
