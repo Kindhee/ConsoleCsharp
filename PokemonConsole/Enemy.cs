@@ -20,6 +20,8 @@ namespace PokemonConsole
         int _defense;
         int _speed;
 
+        bool _isInTeam;
+
 
         public Enemy(string name, int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
         {
@@ -34,6 +36,8 @@ namespace PokemonConsole
             _health = health;
             _defense = defense;
             _speed = speed;
+
+            _isInTeam = false;
         }
 
         // get / set
@@ -44,6 +48,7 @@ namespace PokemonConsole
         public int Health { get => _health;  set => _health = value; }
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
+        public bool isInTeam { get => _isInTeam; set => _isInTeam = value; }
 
     }
 }
