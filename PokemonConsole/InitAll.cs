@@ -11,6 +11,7 @@ namespace PokemonConsole
     public class InitAll
     {
         Player _player;
+
         Tree _tree;
 
         Capacity _bite;
@@ -40,7 +41,7 @@ namespace PokemonConsole
             // only player
             _player = new Player(1, 10, 10, 10, 10, 10);
 
-            // generic tree can be used multiple times
+            // generic can be used multiple times
             _tree = new Tree();
 
             // capacities 

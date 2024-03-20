@@ -40,7 +40,7 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "E")
+                        if (tile == "E" && game.IsEncoutering() == true)
                         {
                             var enemyToBattle = t as Enemy;
 
@@ -62,7 +62,7 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "E")
+                        if (tile == "E" && game.IsEncoutering() == true)
                         {
                             var enemyToBattle = t as Enemy;
 
@@ -84,7 +84,7 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "E")
+                        if (tile == "E" && game.IsEncoutering() == true)
                         {
                             var enemyToBattle = t as Enemy;
 
@@ -105,7 +105,7 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "E")
+                        if (tile == "E" && game.IsEncoutering() == true)
                         {
                             var enemyToBattle = t as Enemy;
 
