@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace PokemonConsole
@@ -15,6 +16,9 @@ namespace PokemonConsole
         public Player _player;
         private BlankState _State;
         private List<BlankState> _StateList;
+
+        int chance;
+        Random rand = new Random(); 
         
 
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
@@ -79,6 +83,16 @@ namespace PokemonConsole
         public void AddTree(int posX, int posY, Tree tree)
         {
             _map[posX, posY] = tree;
+        }
+
+        public bool IsEncoutering()
+        {
+            chance = rand.Next(0, 11);
+            if (chance <= 2)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void SetState(BlankState state)
