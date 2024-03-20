@@ -34,14 +34,20 @@ namespace PokemonConsole.State
                 case 'z':
                     if (game._player.PosY + 1 < game._size)
                     {
-                        string tile = game._map[game._player.PosX, game._player.PosY + 1].GetString();
+                        Tile t = game._map[game._player.PosX, game._player.PosY + 1];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosY += 1;
                         }
                         if (tile == "E")
                         {
-                            game.PushState(new BattleState());
+                            var enemyToBattle = t as Enemy;
+
+                            // Pokedex.add(enemy)
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
 
@@ -50,14 +56,20 @@ namespace PokemonConsole.State
                 case 'q':
                     if (game._player.PosX - 1 > 0)
                     {
-                        string tile = game._map[game._player.PosX - 1, game._player.PosY].GetString();
+                        Tile t = game._map[game._player.PosX - 1, game._player.PosY];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosX -= 1;
                         }
                         if (tile == "E")
                         {
-                            game.PushState(new BattleState());
+                            var enemyToBattle = t as Enemy;
+
+                            // Pokedex.add(enemy)
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
 
@@ -66,14 +78,20 @@ namespace PokemonConsole.State
                 case 's':
                     if (game._player.PosY - 1 > 0)
                     {
-                        string tile = game._map[game._player.PosX, game._player.PosY - 1].GetString();
+                        Tile t = game._map[game._player.PosX, game._player.PosY - 1];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosY -= 1;
                         }
                         if (tile == "E")
                         {
-                            game.PushState(new BattleState());
+                            var enemyToBattle = t as Enemy;
+
+                            // Pokedex.add(enemy)
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
@@ -81,14 +99,20 @@ namespace PokemonConsole.State
                 case 'd':
                     if (game._player.PosX + 1 < game._size)
                     {
-                        string tile = game._map[game._player.PosX + 1, game._player.PosY].GetString();
+                        Tile t = game._map[game._player.PosX + 1, game._player.PosY];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosX += 1;
                         }
                         if (tile == "E")
                         {
-                            game.PushState(new BattleState());
+                            var enemyToBattle = t as Enemy;
+
+                            // Pokedex.add(enemy)
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;

@@ -44,7 +44,7 @@ namespace PokemonConsole
         public string Name { get => _name; set => _name = value; }
         public int Level { get => _level;  set => _level = value; }
         public AttributType Type { get => _attributType;  set => _attributType = value; }
-        public List<Capacity> capacities { get => _capacities; set => _capacities = value; }
+        public List<Capacity> Capacities { get => _capacities; set => _capacities = value; }
         public int Health { get => _health;  set => _health = value; }
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
