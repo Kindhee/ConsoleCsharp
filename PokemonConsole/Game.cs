@@ -75,7 +75,7 @@ namespace PokemonConsole
 
             mapTxt.Close();
 
-
+            //
 
 
 
