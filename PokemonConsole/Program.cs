@@ -13,7 +13,6 @@ namespace PokemonConsole
         static void Main(string[] args)
         {
 
-
             InitAll init = new InitAll();
             init.Init();
 
@@ -21,11 +20,6 @@ namespace PokemonConsole
             Game game = new Game(20, init.player);
 
             game.SetState(new Menu());
-
-            // add entities other than player 
-
-            game.AddTree(3, 7, init.tree);*/
-
 
             // run
             game.Run();

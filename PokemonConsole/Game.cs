@@ -35,11 +35,10 @@ namespace PokemonConsole
             _player = player;
             _StateList = new List<BlankState>();
 
+            Tree _tree = new Tree();
+            Bush _bush = new Bush();
+
             // empty map 
-
-
-
-
             String lineRead;
             StreamReader mapTxt = new StreamReader("../../../txt/map.txt");
             lineRead = mapTxt.ReadLine();
@@ -60,7 +59,7 @@ namespace PokemonConsole
                             break;
 
                         case 'b':
-                            AddEnemy(colNumber, lineNumber, _lEnemies[0]);
+                            AddBush(colNumber, lineNumber, _bush);
                             break;
 
                         default:
