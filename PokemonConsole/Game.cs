@@ -93,6 +93,12 @@ namespace PokemonConsole
 
             return enemy;
         }
+
+        public void AddToTeam(Enemy enemy)
+        {
+            enemy.isInTeam = true;
+        }
+
         public void AddBush (int posX, int posY, Bush bush)
         {
             _map[posX, posY] = bush;
