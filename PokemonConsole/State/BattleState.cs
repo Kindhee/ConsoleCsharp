@@ -31,6 +31,8 @@ namespace PokemonConsole.State
             Console.WriteLine(_enemyInBattle.Defense);
             Console.WriteLine(_enemyInBattle.Speed);
 
+            // temporary
+            game.SetState(new OverworldState());
         }
     }
 }

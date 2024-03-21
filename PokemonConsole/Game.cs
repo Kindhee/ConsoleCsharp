@@ -3,6 +3,7 @@ using PokemonConsole.State.Menus.Sous_Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -16,11 +17,11 @@ namespace PokemonConsole
         public Player _player;
         private BlankState _State;
         private List<BlankState> _StateList;
+        List<string[]> pokemons = Utils.GetListFromFile("Json/Pokemons.txt");
 
         int chance;
-        Random rand = new Random(); 
+        Random rand = new Random();
         
-
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
 
@@ -33,40 +34,6 @@ namespace PokemonConsole
             _size = size;
             _player = player;
             _StateList = new List<BlankState>();
-
-
-
-            // generic can be used multiple times
-            List<Enemy> _lEnemies = new List<Enemy>();
-
-            Tree _tree = new Tree();
-
-            Capacity _bite = new Capacity("Bite", AttributType.Fire, 5, 100);
-            Capacity _stomp = new Capacity("Stomp", AttributType.Fire, 10, 90);
-
-            Capacity _firePunch = new Capacity("Fire Punch", AttributType.Fire, 15, 95);
-            Capacity _flameThrower = new Capacity("Flame Thrower", AttributType.Fire, 40, 60);
-
-            Capacity _waterGun = new Capacity("Water Gun", AttributType.Water, 20, 80);
-            Capacity _jetPunch = new Capacity("Jet Punch", AttributType.Water, 30, 70);
-
-            Capacity _leafBlade = new Capacity("Leaf Blade", AttributType.Plant, 25, 75);
-            Capacity _bulletSeed = new Capacity("Bullet Speed", AttributType.Plant, 15, 90);
-
-
-
-            // move sets 
-            List<Capacity> _capacitiesFire = new List<Capacity>() { _firePunch, _flameThrower, _bite, _stomp };
-            List<Capacity> _capacitiesWater = new List<Capacity>() { _waterGun, _jetPunch, _bite, _stomp };
-            List<Capacity> _capacitiesPlant = new List<Capacity>() { _leafBlade, _bulletSeed, _bite, _stomp };
-
-
-            // enemies
-            _lEnemies.Add(new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25));
-            _lEnemies.Add(new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15));
-            _lEnemies.Add(new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5));
-
-
 
             // empty map 
 
@@ -153,9 +120,32 @@ namespace PokemonConsole
             }
         }
 
-        public void AddEnemy(int posX, int posY, Enemy enemy)
+        public Enemy NewEnemy()
         {
-            _map[posX, posY] = enemy;
+            int index = rand.Next(0, pokemons.Count);
+
+            string[] randPokemon = pokemons[index];
+
+            Enemy enemy = new Enemy(
+                randPokemon[0], 
+                (AttributType)int.Parse(randPokemon[1]), 
+                int.Parse(randPokemon[2]), 
+                new List<string>() { randPokemon[3], randPokemon[4], randPokemon[5], randPokemon[6] }, 
+                int.Parse(randPokemon[7]),
+                int.Parse(randPokemon[8]),
+                int.Parse(randPokemon[9] ));
+
+            return enemy;
+        }
+
+        public void AddToTeam(Enemy enemy)
+        {
+            enemy.isInTeam = true;
+        }
+
+        public void AddBush (int posX, int posY, Bush bush)
+        {
+            _map[posX, posY] = bush;
         }
 
         public void AddTree(int posX, int posY, Tree tree)
@@ -165,7 +155,7 @@ namespace PokemonConsole
 
         public bool IsEncoutering()
         {
-            chance = 1;// rand.Next(0, 11);
+            chance = rand.Next(0, 1);
             if (chance <= 2)
             {
                 return true;

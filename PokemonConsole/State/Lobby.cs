@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokemonConsole
+namespace PokemonConsole.State
 {
-    public enum TileType
+    public class Lobby
     {
-        Empty,
-        Tree,
-        Bush,
-        Player,
+
     }
 }

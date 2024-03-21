@@ -34,6 +34,11 @@ namespace PokemonConsole.State
             {
                 case 'z':
                     if (game._player.PosY - 1 > 0)
+
+                    game._player.DirX = 0;
+                    game._player.DirY = 1;
+
+                    if (game._player.PosY + 1 < game._size)
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY-1];
                         string tile = t.GetString();
@@ -41,9 +46,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -55,6 +60,10 @@ namespace PokemonConsole.State
                     break;
 
                 case 'q':
+
+                    game._player.DirX = -1;
+                    game._player.DirY = 0;
+
                     if (game._player.PosX - 1 > 0)
                     {
                         Tile t = game._map[game._player.PosX - 1, game._player.PosY];
@@ -63,9 +72,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -77,7 +86,12 @@ namespace PokemonConsole.State
                     break;
 
                 case 's':
-                    if (game._player.PosY + 1 < game._size)
+
+
+                    game._player.DirX = 0;
+                    game._player.DirY = -1;
+
+                    if (game._player.PosY - 1 > 0)
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY+1];
                         string tile = t.GetString();
@@ -85,10 +99,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
-
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -99,6 +112,11 @@ namespace PokemonConsole.State
                     break;
 
                 case 'd':
+
+                    
+                    game._player.DirX = 1;
+                    game._player.DirY = 0;
+
                     if (game._player.PosX + 1 < game._size)
                     {
                         Tile t = game._map[game._player.PosX + 1, game._player.PosY];
@@ -107,11 +125,11 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                            game.AddMetPokemon(enemyToBattle,game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
@@ -122,6 +140,18 @@ namespace PokemonConsole.State
                 case 'e':
                     game.PushState(new MenuOverwold());
                     break;
+
+/*                case 'a':
+
+                    Tile t = game._map[game._player.PosX + game._player.DirX, game._player.PosY + game._player.DirY];
+                    string tile = t.GetString();
+
+                    if (tile == "O")
+                    {
+                        // pick up item
+                    }
+
+                    break;*/
 
                 default:
                     break;

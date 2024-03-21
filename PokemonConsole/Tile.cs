@@ -27,8 +27,8 @@ namespace PokemonConsole
                 case TileType.Player:
                     return "P";
 
-                case TileType.Enemy:
-                    return "E";
+                case TileType.Bush:
+                    return "B";
 
                 case TileType.Tree:
                     return "T";

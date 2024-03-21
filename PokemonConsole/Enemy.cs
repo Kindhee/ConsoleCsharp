@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PokemonConsole
 {
-    public class Enemy : Tile
+    public class Enemy
     {
         string _name;
 
-        int _level;
-
         AttributType _attributType;
+
+        int _level;
 
         List<Capacity> _capacities;
 
@@ -22,16 +22,17 @@ namespace PokemonConsole
 
         bool _isInTeam;
 
+        CapacitiesRegistration capacitiesRegistration = new CapacitiesRegistration();
 
-        public Enemy(string name, int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
+        public Enemy(string name, AttributType attributType, int level, List<string> capacities, int health, int defense, int speed)
         {
             _name = name;
 
+           _attributType = attributType;
+
             _level = level;
 
-            _attributType = attributType;
-
-            _capacities = capacities;
+            _capacities = capacitiesRegistration.GetCapacities(capacities);
 
             _health = health;
             _defense = defense;
@@ -42,8 +43,8 @@ namespace PokemonConsole
 
         // get / set
         public string Name { get => _name; set => _name = value; }
-        public int Level { get => _level;  set => _level = value; }
         public AttributType Type { get => _attributType;  set => _attributType = value; }
+        public int Level { get => _level; set => _level = value; }
         public List<Capacity> Capacities { get => _capacities; set => _capacities = value; }
         public int Health { get => _health;  set => _health = value; }
         public int Defense { get => _defense;  set => _defense = value; }

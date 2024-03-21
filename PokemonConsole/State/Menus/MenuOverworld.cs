@@ -59,7 +59,8 @@ namespace PokemonConsole.State
                     break;
 
                 case 2:
-                    // team screen
+                    Console.Clear();
+                    game.SetState(new TeamState());
                     break;
 
                 case 3:
