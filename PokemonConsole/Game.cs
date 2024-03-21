@@ -17,6 +17,7 @@ namespace PokemonConsole
         public Player _player;
         private BlankState _State;
         private List<BlankState> _StateList;
+        List<string[]> pokemons = Utils.GetListFromFile("Json/Pokemons.txt");
 
         int chance;
         Random rand = new Random();
@@ -77,7 +78,19 @@ namespace PokemonConsole
 
         public Enemy NewEnemy()
         {
-            Enemy enemy = new Enemy("Charmander", 1,AttributType.Fire, init.PokemonCapacities[0], 10, 10, 10);
+            int index = rand.Next(0, pokemons.Count);
+
+            string[] randPokemon = pokemons[index];
+
+            Enemy enemy = new Enemy(
+                randPokemon[0], 
+                (AttributType)int.Parse(randPokemon[1]), 
+                int.Parse(randPokemon[2]), 
+                new List<string>() { randPokemon[3], randPokemon[4], randPokemon[5], randPokemon[6] }, 
+                int.Parse(randPokemon[7]),
+                int.Parse(randPokemon[8]),
+                int.Parse(randPokemon[9] ));
+
             return enemy;
         }
         public void AddBush (int posX, int posY, Bush bush)

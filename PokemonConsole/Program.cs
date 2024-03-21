@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PokemonConsole
@@ -11,6 +12,8 @@ namespace PokemonConsole
     {
         static void Main(string[] args)
         {
+
+
             InitAll init = new InitAll();
             init.Init();
 
