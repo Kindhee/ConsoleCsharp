@@ -13,6 +13,7 @@ namespace PokemonConsole
         Player _player;
 
         Tree _tree;
+        Bush _bush;
 
         Capacity _bite;
         Capacity _stomp;
@@ -30,7 +31,9 @@ namespace PokemonConsole
         List<Capacity> _capacitiesFire;
         List<Capacity> _capacitiesPlant;
 
-        List<Enemy> _lEnemies = new List<Enemy>();
+        List<string> _PokemonNames;
+        List<AttributType> _PokemonTypes;
+        List<List<Capacity>> _PokemonCapacities;
 
 
 
@@ -43,6 +46,7 @@ namespace PokemonConsole
 
             // generic can be used multiple times
             _tree = new Tree();
+            _bush = new Bush();
 
             // capacities 
 
@@ -67,9 +71,13 @@ namespace PokemonConsole
 
 
             // enemies
-            _lEnemies.Add(new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25));
+            _PokemonNames = new List<string>() { "Charmander", "Squirtle", "Bulbasaur"};
+            _PokemonTypes = new List<AttributType>() { AttributType.Fire, AttributType.Water, AttributType.Plant };
+            _PokemonCapacities = new List<List<Capacity>>() { _capacitiesFire, _capacitiesWater, _capacitiesPlant };
+
+           /* _lEnemies.Add(new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25));
             _lEnemies.Add(new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15));
-            _lEnemies.Add(new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5));
+            _lEnemies.Add(new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5));*/
 
 
         }
@@ -77,10 +85,10 @@ namespace PokemonConsole
         // get / set
         public Player player { get => _player; set => _player = value; }
         public Tree tree { get => _tree; set => _tree = value; }
-        public Enemy enemyFire { get => _lEnemies[0]; set => _lEnemies[0] = value; }
-        public Enemy enemyWater { get => _lEnemies[1]; set => _lEnemies[1] = value; }
-        public Enemy enemyPlant { get => _lEnemies[2]; set => _lEnemies[2] = value; }
-        public List<Enemy> enemies { get => _lEnemies; set => _lEnemies = value; }
+        public Bush bush { get => _bush; set => _bush = value; }
+        public List<string> PokemonNames { get => _PokemonNames; set => _PokemonNames = value; }
+        public List<AttributType> PokemonTypes { get => _PokemonTypes; set => _PokemonTypes = value; }
+        public List<List<Capacity>> PokemonCapacities { get => _PokemonCapacities; set => _PokemonCapacities = value; }
     }
 }
 

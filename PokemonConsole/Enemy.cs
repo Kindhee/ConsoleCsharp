@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokemonConsole
 {
-    public class Enemy : Tile
+    public class Enemy
     {
         string _name;
 
@@ -23,7 +23,7 @@ namespace PokemonConsole
         bool _isInTeam;
 
 
-        public Enemy(string name, int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed) : base(TileType.Enemy)
+        public Enemy(string name, int level, AttributType attributType, List<Capacity> capacities, int health, int defense, int speed)
         {
             _name = name;
 

@@ -45,9 +45,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -71,9 +71,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -98,10 +98,9 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
-
+                            Enemy enemyToBattle = game.NewEnemy();
 
                             game.AddMetPokemon(enemyToBattle, game);
 
@@ -125,11 +124,11 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "E" && game.IsEncoutering() == true)
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            var enemyToBattle = t as Enemy;
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                            game.AddMetPokemon(enemyToBattle,game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));

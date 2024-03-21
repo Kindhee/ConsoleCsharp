@@ -20,11 +20,9 @@ namespace PokemonConsole
             game.SetState(new Menu());
 
             // add entities other than player 
-            game.AddEnemy(2, 2, init.enemyFire);
-            game.AddEnemy(2, 4, init.enemyPlant);
-            game.AddEnemy(2, 6, init.enemyWater);
 
             game.AddTree(3, 7, init.tree);
+            game.AddBush(3, 6, init.bush);
 
 
             // run

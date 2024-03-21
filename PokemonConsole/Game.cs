@@ -3,6 +3,7 @@ using PokemonConsole.State.Menus.Sous_Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -18,9 +19,8 @@ namespace PokemonConsole
         private List<BlankState> _StateList;
 
         int chance;
-        Random rand = new Random(); 
+        Random rand = new Random();
         
-
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
 
@@ -75,9 +75,14 @@ namespace PokemonConsole
             }
         }
 
-        public void AddEnemy(int posX, int posY, Enemy enemy)
+        public Enemy NewEnemy()
         {
-            _map[posX, posY] = enemy;
+            Enemy enemy = new Enemy("Charmander", 1,AttributType.Fire, init.PokemonCapacities[0], 10, 10, 10);
+            return enemy;
+        }
+        public void AddBush (int posX, int posY, Bush bush)
+        {
+            _map[posX, posY] = bush;
         }
 
         public void AddTree(int posX, int posY, Tree tree)
@@ -87,7 +92,7 @@ namespace PokemonConsole
 
         public bool IsEncoutering()
         {
-            chance = rand.Next(0, 11);
+            chance = rand.Next(0, 1);
             if (chance <= 2)
             {
                 return true;
