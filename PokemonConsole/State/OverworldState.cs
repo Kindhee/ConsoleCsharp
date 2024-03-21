@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State.Menus.Sous_Menus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,66 +33,125 @@ namespace PokemonConsole.State
             switch (keyPressed)
             {
                 case 'z':
+                    if (game._player.PosY - 1 > 0)
+
+                    game._player.DirX = 0;
+                    game._player.DirY = 1;
+
                     if (game._player.PosY + 1 < game._size)
                     {
-                        string tile = game._map[game._player.PosX, game._player.PosY + 1].GetString();
+                        Tile t = game._map[game._player.PosX, game._player.PosY-1];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
-                            game._player.PosY += 1;
+                            game._player.PosY -= 1;
                         }
-                        if (tile == "E")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            game.PushState(new BattleState());
+                            Enemy enemyToBattle = game.NewEnemy();
+
+                            game.AddMetPokemon(enemyToBattle, game);
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
 
                     break;
 
                 case 'q':
-                    if (game._player.PosY - 1 > 0)
+
+                    game._player.DirX = -1;
+                    game._player.DirY = 0;
+
+                    if (game._player.PosX - 1 > 0)
                     {
-                        string tile = game._map[game._player.PosX - 1, game._player.PosY].GetString();
+                        Tile t = game._map[game._player.PosX - 1, game._player.PosY];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "E")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            game.PushState(new BattleState());
+                            Enemy enemyToBattle = game.NewEnemy();
+
+                            game.AddMetPokemon(enemyToBattle, game);
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
 
                     break;
 
                 case 's':
+
+
+                    game._player.DirX = 0;
+                    game._player.DirY = -1;
+
                     if (game._player.PosY - 1 > 0)
                     {
-                        string tile = game._map[game._player.PosX, game._player.PosY - 1].GetString();
+                        Tile t = game._map[game._player.PosX, game._player.PosY+1];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
-                            game._player.PosY -= 1;
+                            game._player.PosY += 1;
                         }
-                        if (tile == "E")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            game.PushState(new BattleState());
+                            Enemy enemyToBattle = game.NewEnemy();
+
+                            game.AddMetPokemon(enemyToBattle, game);
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
 
                 case 'd':
+
+                    
+                    game._player.DirX = 1;
+                    game._player.DirY = 0;
+
                     if (game._player.PosX + 1 < game._size)
                     {
-                        string tile = game._map[game._player.PosX + 1, game._player.PosY].GetString();
+                        Tile t = game._map[game._player.PosX + 1, game._player.PosY];
+                        string tile = t.GetString();
                         if (tile != "T")
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "E")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            game.PushState(new BattleState());
+                            Enemy enemyToBattle = game.NewEnemy();
+
+                            game.AddMetPokemon(enemyToBattle, game);
+
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
+
+                case 'e':
+                    game.PushState(new MenuOverwold());
+                    break;
+
+/*                case 'a':
+
+                    Tile t = game._map[game._player.PosX + game._player.DirX, game._player.PosY + game._player.DirY];
+                    string tile = t.GetString();
+
+                    if (tile == "O")
+                    {
+                        // pick up item
+                    }
+
+                    break;*/
 
                 default:
                     break;

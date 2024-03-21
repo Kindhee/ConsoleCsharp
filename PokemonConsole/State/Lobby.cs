@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokemonConsole
+namespace PokemonConsole.State
 {
-    public class Bush : Tile
+    public class Lobby
     {
 
-        public Bush() : base(TileType.Bush)
-        {
-
-        }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PokemonConsole
@@ -13,22 +14,13 @@ namespace PokemonConsole
         static void Main(string[] args)
         {
 
-            // define entities 
-            Player playerOne = new Player(1, 10, 10, 10, 10, 10);
-
-            Enemy enemyOne = new Enemy(1, AttributType.Fire, 10, 10, 10, 10, 10);
-
-            Tree tree = new Tree();
+            InitAll init = new InitAll();
+            init.Init();
 
             // game - we define the size of the map here
-            Game game = new Game(20, playerOne);
+            Game game = new Game(20, init.player);
 
-            game.SetState(new OverworldState());
-
-            // add entities other than player 
-            game.AddEnemy(1, 2, enemyOne);
-
-            game.AddTree(3, 7, tree);
+            game.SetState(new Menu());
 
             // run
             game.Run();

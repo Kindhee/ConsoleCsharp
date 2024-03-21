@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace PokemonConsole
 {
-    public class Bush : Tile
+    public enum AttributType
     {
-
-        public Bush() : base(TileType.Bush)
-        {
-
-        }
+        Normal,
+        Fire,
+        Water,
+        Plant,       
     }
 }

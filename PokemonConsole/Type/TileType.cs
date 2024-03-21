@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace PokemonConsole
 {
-    public enum AttributType
+    public enum TileType
     {
-        Fire,
-        Water,
-        Plant,       
+        Empty,
+        Tree,
+        Bush,
+        Player,
     }
 }
