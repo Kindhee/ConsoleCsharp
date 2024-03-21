@@ -11,20 +11,27 @@ namespace PokemonConsole.Items
         string _name = "Item";
         string _desc = "Basic Item Moment";
 
-        public Item(string name, string desc, bool isKeyItem) {
+        public Item(string name, string desc, bool isKeyItem=false, int price=100, int sell=-0xfffffff) {
             _name = name;
             _desc = desc;
             _isKey = isKeyItem;
+            _price = price;
+            if (sell == -0xfffffff)
+                _sell = price/2;
+            else
+                _sell = sell;
         }
 
-        public int price = 100;
-        public int sell = 100;
+        public int _price = 100;
+        public int _sell = 100;
 
         private bool _isKey = false;
 
         public string name { get => _name; set => _name = value; }
         public string desc { get => _desc; set => _desc = value; }
         public bool isKey { get => _isKey; }
+        public int price { get => _price; set => _price = value; }
+        public int sell { get => _sell; set => _sell = value; }
 
         public bool canSell()
         {

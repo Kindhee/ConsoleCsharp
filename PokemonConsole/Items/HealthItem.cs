@@ -10,7 +10,7 @@ namespace PokemonConsole.Items
     {
         public int _healAmount = 42;
 
-        public HealthItem(string name, string desc, bool isKeyItem, int healAmount) : base(name, desc, isKeyItem)
+        public HealthItem(string name, string desc, bool isKeyItem, int healAmount, int price=100, int sell = -0xfffffff) : base(name, desc, isKeyItem, price, sell)
         {
             _healAmount = healAmount;
         }

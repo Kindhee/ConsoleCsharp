@@ -39,10 +39,13 @@ namespace PokemonConsole
             _speed = speed;
             _accuracy = accuracy;
 
-            //Inventory.Items.Item1.Add(new Item("TestItem", "Can't you see him? He's looking at you right now.", false));
-            //Inventory.Items.Item1.Add(new HealthItem("Potion", "Restores Pokémon HP by 20.", false, 20));
-            //Inventory.Pokeballs.Item1.Add(new PokeBall("Poke Ball", "A tool for catching wild Pokémon.", 1f));
-            //Inventory.Keys.Item1.Add(new Item("iPhone 13", "You haven't bought the new iPhone 15 X+ at $10000 yet?\nHA!", true));
+            Inventory.AddItem("test", "items");
+            Inventory.AddItem("potion", "items");
+            Inventory.AddPokeBall("pokeball", 10);
+            Inventory.AddItem("phone", "keys");
+
+            Inventory.AddItem("test", "items", 5);
+            //Inventory.AddItem(new Item("Fuck you", "lmao", false), "itm");
         }
 
         // get / set

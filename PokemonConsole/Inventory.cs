@@ -12,12 +12,20 @@ namespace PokemonConsole
         //List<Item> items = new();
         //List<Item> pokemon
 
-        public struct StorageItemInfo
+        public class StorageItemInfo
         {
             public Item item;
-            public int nb;
+            public int amount;
+
+            public StorageItemInfo(Item newItem, int amount)
+            {
+                this.item = newItem;
+                this.amount = amount;
+            }
         }
-        readonly Dictionary<string, List<StorageItemInfo>> _bag = new();
+        public Dictionary<string, List<StorageItemInfo>> _bag = new();
+
+        internal ItemRegistry database = new();
 
         public Inventory() {
             _bag["items"] = new List<StorageItemInfo>();
@@ -34,23 +42,45 @@ namespace PokemonConsole
         public List<StorageItemInfo> CDs { get => _bag["cds"]; }
         public List<StorageItemInfo> Keys { get => _bag["keys"]; }
 
-        bool AddItem(Item item, string storage)
+        public bool AddPokeBall(string ball_id, int amount=1)
         {
+            var item = database.pokeballs[ball_id];
+
+            // todo: this
+            for (int i = 0; i < _bag["pokeballs"].Count; i++)
+            {
+                var storItem = _bag["pokeballs"][i];
+                if (storItem.item.name == item.name && storItem.item.desc == item.desc)
+                {
+                    _bag["pokeballs"][i].amount = storItem.amount + amount;
+                    return true;
+                }
+            }
+            _bag["pokeballs"].Add(new StorageItemInfo(item, amount));
+            return true;
+        }
+
+        public bool AddItem(string item_id, string storage, int amount=1)
+        {
+            var item = database.items[item_id];
+
             if (!storage.EndsWith("s"))
             {
                 storage = storage + "s";
             }
 
-            if (storage.ToLower() == "pokeballs")
-            {
-                if (item is not PokeBall) {
-                    return false;
-                }
-            }
-
             try
             {
-                // todo: this
+                for (int i = 0; i < _bag[storage].Count; i++)
+                {
+                    var storItem = _bag[storage][i];
+                    if (storItem.item.name == item.name && storItem.item.desc == item.desc)
+                    {
+                        _bag[storage][i].amount = storItem.amount+amount;
+                        return true;
+                    }
+                }
+                _bag[storage].Add(new StorageItemInfo(item, amount));
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
