@@ -34,14 +34,92 @@ namespace PokemonConsole
             _player = player;
             _StateList = new List<BlankState>();
 
+
+
+            // generic can be used multiple times
+            List<Enemy> _lEnemies = new List<Enemy>();
+
+            Tree _tree = new Tree();
+
+            Capacity _bite = new Capacity("Bite", AttributType.Fire, 5, 100);
+            Capacity _stomp = new Capacity("Stomp", AttributType.Fire, 10, 90);
+
+            Capacity _firePunch = new Capacity("Fire Punch", AttributType.Fire, 15, 95);
+            Capacity _flameThrower = new Capacity("Flame Thrower", AttributType.Fire, 40, 60);
+
+            Capacity _waterGun = new Capacity("Water Gun", AttributType.Water, 20, 80);
+            Capacity _jetPunch = new Capacity("Jet Punch", AttributType.Water, 30, 70);
+
+            Capacity _leafBlade = new Capacity("Leaf Blade", AttributType.Plant, 25, 75);
+            Capacity _bulletSeed = new Capacity("Bullet Speed", AttributType.Plant, 15, 90);
+
+
+
+            // move sets 
+            List<Capacity> _capacitiesFire = new List<Capacity>() { _firePunch, _flameThrower, _bite, _stomp };
+            List<Capacity> _capacitiesWater = new List<Capacity>() { _waterGun, _jetPunch, _bite, _stomp };
+            List<Capacity> _capacitiesPlant = new List<Capacity>() { _leafBlade, _bulletSeed, _bite, _stomp };
+
+
+            // enemies
+            _lEnemies.Add(new Enemy("Charmander", 10, AttributType.Fire, _capacitiesFire, 10, 5, 25));
+            _lEnemies.Add(new Enemy("Squirtle", 10, AttributType.Water, _capacitiesWater, 15, 10, 15));
+            _lEnemies.Add(new Enemy("Bulbasaur", 10, AttributType.Plant, _capacitiesPlant, 20, 15, 5));
+
+
+
             // empty map 
-            for (int i = 0; i < size; i++)
+
+
+
+
+            String lineRead;
+            StreamReader mapTxt = new StreamReader("../../../txt/map.txt");
+            lineRead = mapTxt.ReadLine();
+            int lineNumber = 0;
+
+
+            while (lineRead != null)
+            {
+                int colNumber = 0;
+                foreach  (char charRead in lineRead)
+                {
+                    switch (charRead)
+                    {
+                        
+                        case 't':
+
+                            AddTree(colNumber, lineNumber, _tree);
+                            break;
+
+                        case 'b':
+                            AddEnemy(colNumber, lineNumber, _lEnemies[0]);
+                            break;
+
+                        default:
+                            _map[colNumber, lineNumber] = new Tile(TileType.Empty);
+                            break;
+                    }
+
+                    colNumber++;
+                }
+                lineRead = mapTxt.ReadLine();
+                lineNumber++;
+            }
+
+            mapTxt.Close();
+
+
+
+
+
+            /*for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     _map[i, j] = new Tile(TileType.Empty);
                 }
-            }
+            }*/
             
             // put player on the map 
             _map[player.PosX, player.PosY] = player;
@@ -49,7 +127,7 @@ namespace PokemonConsole
 
         public void DrawMap()
         {
-            for(int i = _size - 1; i >= 0; i--)
+            for(int i = 0; i < _size; i++)
             {
                 for (int j = 0; j < _size; j++)
                 {
@@ -87,7 +165,7 @@ namespace PokemonConsole
 
         public bool IsEncoutering()
         {
-            chance = rand.Next(0, 11);
+            chance = 1;// rand.Next(0, 11);
             if (chance <= 2)
             {
                 return true;

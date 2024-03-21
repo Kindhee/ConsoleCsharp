@@ -24,7 +24,7 @@ namespace PokemonConsole
         public Player(int level, int health, int attack, int defense, int speed, int accuracy) : base(TileType.Player)
         {
             _posX = 8;
-            _posY = 1;
+            _posY = 15;
             _lastPosX = 8;
             _lastPosY = 1;
 
