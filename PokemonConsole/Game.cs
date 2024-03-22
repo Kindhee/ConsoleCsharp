@@ -54,7 +54,6 @@ namespace PokemonConsole
                     {
                         
                         case 't':
-
                             AddTree(colNumber, lineNumber, _tree);
                             break;
 

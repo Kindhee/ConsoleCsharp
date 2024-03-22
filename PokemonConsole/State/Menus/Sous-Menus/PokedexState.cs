@@ -14,6 +14,13 @@
                                             "; " + enemy.Value.Capacities[3].Name);
                 Console.WriteLine();
             }
+
+            char keyPressed = Console.ReadKey().KeyChar;
+            
+            if(keyPressed == 'e')
+            {
+                game.SetState(new MenuOverwold());
+            }
         }
     }
         

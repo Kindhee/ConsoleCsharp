@@ -33,12 +33,11 @@ namespace PokemonConsole.State
             switch (keyPressed)
             {
                 case 'z':
-                    if (game._player.PosY - 1 > 0)
 
                     game._player.DirX = 0;
-                    game._player.DirY = 1;
+                    game._player.DirY = -1;
 
-                    if (game._player.PosY + 1 < game._size)
+                    if (game._player.PosY - 1 > 0)
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY-1];
                         string tile = t.GetString();
@@ -89,11 +88,11 @@ namespace PokemonConsole.State
 
 
                     game._player.DirX = 0;
-                    game._player.DirY = -1;
+                    game._player.DirY = 1;
 
-                    if (game._player.PosY - 1 > 0)
+                    if (game._player.PosY + 1 < game._size - 1)
                     {
-                        Tile t = game._map[game._player.PosX, game._player.PosY+1];
+                        Tile t = game._map[game._player.PosX, game._player.PosY +1 ];
                         string tile = t.GetString();
                         if (tile != "T")
                         {
