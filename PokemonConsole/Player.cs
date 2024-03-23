@@ -21,10 +21,10 @@ namespace PokemonConsole
 
         public Player() : base(TileType.Player)
         {
-            _posX = 8;
+            _posX = 9;
             _posY = 15;
-            _lastPosX = 8;
-            _lastPosY = 1;
+            _lastPosX = 9;
+            _lastPosY = 15;
 
             _dirX = 0;
             _dirY = 0;

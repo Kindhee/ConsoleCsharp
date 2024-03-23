@@ -17,7 +17,7 @@ namespace PokemonConsole
         public Player _player;
         private BlankState _State;
         private List<BlankState> _StateList;
-        List<string[]> pokemons = Utils.GetListFromFile("Json/Pokemons.txt");
+        List<string[]> pokemons = Utils.GetListFromFile("txt/Pokemons.txt");
 
         int chance;
         Random rand = new Random();
@@ -98,7 +98,7 @@ namespace PokemonConsole
                 Console.Write("═");
             }
             Console.WriteLine("╗");
-            for (int i = 0; i < _size - 1; i++)
+            for (int i = 0; i < _size; i++)
             {
                 Console.Write("║");
                 for (int j = 0; j < _size; j++)
@@ -188,8 +188,8 @@ namespace PokemonConsole
 
         public bool IsEncoutering()
         {
-            chance = rand.Next(0, 1);
-            if (chance <= 2)
+            chance = rand.Next(0, 11);
+            if (chance >= 2)
             {
                 return true;
             }

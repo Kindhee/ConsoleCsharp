@@ -10,11 +10,9 @@ namespace PokemonConsole.State.Menus.Sous_Menus
     {
         override public void Run(Game game)
         {
-/*            Console.WriteLine("Your team");
+            Console.WriteLine("Press e to go back to the Menu");
 
-            Console.WriteLine(init.[0]);
-
-            foreach (var enemy in init.enemies)
+            /*foreach (var enemy in game.lEnemiesMeet)
             {
                 if (enemy.isInTeam == true)
                 {
@@ -24,6 +22,13 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                     Console.WriteLine();
                 }
             }*/
+
+            char keyPressed = Console.ReadKey().KeyChar;
+
+            if (keyPressed == 'e')
+            {
+                game.SetState(new MenuOverwold());
+            }
         }
     }
 }

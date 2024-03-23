@@ -73,7 +73,8 @@ namespace PokemonConsole.State
                     break; 
                 
                 case 5:
-                    //quit 
+                    Console.Clear();
+                    game.SetState(new Menu());
                     break;
             }
         }

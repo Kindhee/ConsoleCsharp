@@ -4,6 +4,8 @@
     {
         override public void Run(Game game)
         {
+            Console.WriteLine("Press e to go back to the Menu");
+
             foreach(var enemy in game.lEnemiesMeet)
             {
                 Console.Write(enemy.Value.Name);
