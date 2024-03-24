@@ -28,6 +28,9 @@ namespace PokemonConsole
         private Dictionary<string, Enemy> _lEnemiesMeet = new Dictionary<string, Enemy>();
         public Dictionary<string, Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
 
+        private List<Enemy> _lInTeam = new List<Enemy>();
+        public List<Enemy> lInTeam { get => _lInTeam; }
+
         public Game(int size, Player player)
         {
             _map = new Tile[size,size];
@@ -155,6 +158,22 @@ namespace PokemonConsole
 
         public Enemy NewEnemy()
         {
+            int index2 = rand.Next(0, pokemons.Count);
+
+            string[] randPokemon2 = pokemons[index2];
+
+            Enemy enemy2 = new Enemy(
+                randPokemon2[0],
+                (AttributType)int.Parse(randPokemon2[1]),
+                int.Parse(randPokemon2[2]),
+                new List<string>() { randPokemon2[3], randPokemon2[4], randPokemon2[5], randPokemon2[6] },
+                int.Parse(randPokemon2[7]),
+                int.Parse(randPokemon2[8]),
+                int.Parse(randPokemon2[9]));
+
+            enemy2.isInTeam = true;
+            lInTeam.Add(enemy2);
+
             int index = rand.Next(0, pokemons.Count);
 
             string[] randPokemon = pokemons[index];
