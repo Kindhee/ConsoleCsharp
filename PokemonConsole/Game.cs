@@ -141,8 +141,9 @@ namespace PokemonConsole
         }
 
 
-            public void DrawMapInit()
-        {
+            
+       public void DrawMapInit()
+       {
             Console.Write("╔");
             for (int i = 0; i <= (_size*2)-1;  i++)
             {
@@ -186,7 +187,7 @@ namespace PokemonConsole
             {
                 Console.WriteLine("\t" + _player.Inventory.Keys[i].item.name + "   x" + _player.Inventory.Keys[i].amount);
             }
-        }
+       }
 
         public void Run()
         {
