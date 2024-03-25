@@ -143,6 +143,8 @@ namespace PokemonConsole.State
 
                         case 4:
                             game.SetState(new OverworldState());
+                            _currentTurn = "Run";
+                            _combat = true;
                             break;
                     }
                 } else if (_currentTurn == "Enemy")
@@ -159,16 +161,22 @@ namespace PokemonConsole.State
                 }
             }
             // end of combat
-            Console.WriteLine("End of combat");
-
-            if (_currentTurn == "You")
+            switch(_currentTurn)
             {
-                Console.WriteLine("You won !");
+                case "You":
+                    Console.WriteLine("You won !");
+                    break;
 
-            } else
-            {
-                Console.WriteLine("Your Pokemon fainted");
+                case "Enemy":
+                    Console.WriteLine("Your Pokemon fainted");
+                    break;
+
+                case "Run":
+                    Console.WriteLine("You ran");
+                    break;
             }
+
+            Console.WriteLine("End of combat");
             game.SetState(new OverworldState());
         }
     }

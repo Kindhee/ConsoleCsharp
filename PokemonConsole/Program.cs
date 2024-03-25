@@ -18,7 +18,7 @@ namespace PokemonConsole
             init.Init();
 
             // game - we define the size of the map here
-            Game game = new Game(20, init.player);
+            Game game = new Game(21, init.player);
 
             game.SetState(new Menu());
 

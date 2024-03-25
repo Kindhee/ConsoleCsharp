@@ -2,7 +2,9 @@
 using PokemonConsole.State.Menus.Sous_Menus;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Channels;
@@ -13,6 +15,9 @@ namespace PokemonConsole
     public  class Game
     {
         public Tile[,] _map;
+        Tree _tree;
+        Bush _bush;
+
         public int _size;
         public Player _player;
         private BlankState _State;
@@ -38,12 +43,49 @@ namespace PokemonConsole
             _player = player;
             _StateList = new List<BlankState>();
 
-            Tree _tree = new Tree();
-            Bush _bush = new Bush();
+            _tree = new Tree();
+            _bush = new Bush();
 
+            // choose map
+            LoadMap("overworld");
+
+            // Temporary get pokemon in our team
+            int index2 = rand.Next(0, pokemons.Count);
+
+            string[] randPokemon2 = pokemons[index2];
+
+            Enemy enemy2 = new Enemy(
+                randPokemon2[0],
+                (AttributType)int.Parse(randPokemon2[1]),
+                int.Parse(randPokemon2[2]),
+                new List<string>() { randPokemon2[3], randPokemon2[4], randPokemon2[5], randPokemon2[6] },
+                int.Parse(randPokemon2[7]),
+                int.Parse(randPokemon2[8]),
+                int.Parse(randPokemon2[9]));
+
+            enemy2.isInTeam = true;
+            lInTeam.Add(enemy2);
+            //
+
+        }
+
+        public void LoadMap(string name)
+        {
             // empty map 
             String lineRead;
-            StreamReader mapTxt = new StreamReader("../../../txt/map.txt");
+            StreamReader mapTxt = null;
+
+            switch (name)
+            {
+                case "lobby":
+                    mapTxt = new StreamReader("../../../txt/lobby.txt");
+                    break;
+
+                case "overworld":
+                    mapTxt = new StreamReader("../../../txt/overworld.txt");
+                    break;
+            }
+
             lineRead = mapTxt.ReadLine();
             int lineNumber = 0;
 
@@ -51,11 +93,11 @@ namespace PokemonConsole
             while (lineRead != null)
             {
                 int colNumber = 0;
-                foreach  (char charRead in lineRead)
+                foreach (char charRead in lineRead)
                 {
                     switch (charRead)
                     {
-                        
+
                         case 't':
                             AddTree(colNumber, lineNumber, _tree);
                             break;
@@ -77,20 +119,8 @@ namespace PokemonConsole
 
             mapTxt.Close();
 
-            //
-
-
-
-            /*for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    _map[i, j] = new Tile(TileType.Empty);
-                }
-            }*/
-            
             // put player on the map 
-            _map[player.PosX, player.PosY] = player;
+            _map[_player.PosX, _player.PosY] = _player;
         }
 
         public void DrawMap()
@@ -158,22 +188,6 @@ namespace PokemonConsole
 
         public Enemy NewEnemy()
         {
-            int index2 = rand.Next(0, pokemons.Count);
-
-            string[] randPokemon2 = pokemons[index2];
-
-            Enemy enemy2 = new Enemy(
-                randPokemon2[0],
-                (AttributType)int.Parse(randPokemon2[1]),
-                int.Parse(randPokemon2[2]),
-                new List<string>() { randPokemon2[3], randPokemon2[4], randPokemon2[5], randPokemon2[6] },
-                int.Parse(randPokemon2[7]),
-                int.Parse(randPokemon2[8]),
-                int.Parse(randPokemon2[9]));
-
-            enemy2.isInTeam = true;
-            lInTeam.Add(enemy2);
-
             int index = rand.Next(0, pokemons.Count);
 
             string[] randPokemon = pokemons[index];
@@ -208,7 +222,7 @@ namespace PokemonConsole
         public bool IsEncoutering()
         {
             chance = rand.Next(0, 11);
-            if (chance >= 2)
+            if (chance <= 2)
             {
                 return true;
             }
