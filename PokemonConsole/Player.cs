@@ -38,6 +38,12 @@ namespace PokemonConsole
             //Inventory.AddItem(new Item("Fuck you", "lmao", false), "itm");
         }
 
+        public static void DrawPlayer()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("P ");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         // get / set
         public int PosX { get => _posX;  set => _posX = value; }
         public int PosY { get => _posY;  set => _posY = value; }

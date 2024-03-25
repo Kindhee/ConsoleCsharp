@@ -133,7 +133,14 @@ namespace PokemonConsole
                     {
                         if (i == _player.PosX && j == _player.PosY)
                         {
-                            Console.Write("P ");
+                            Player.DrawPlayer();
+                        }
+                        else if (_map[i, j]._tileType == TileType.Bush)
+                        {
+                            Console.SetCursorPosition(i * 2 + 1, j + 1);
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.Write("  ");
+                            Console.BackgroundColor = ConsoleColor.Black;
                         }
                         else
                         {
@@ -163,10 +170,15 @@ namespace PokemonConsole
                 {
                     if (i == _player.PosY && j == _player.PosX)
                     {
-                        Console.Write("P ");
+                        Player.DrawPlayer();
                     }
-                    else
+                    else if (_map[j, i]._tileType == TileType.Bush)
                     {
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("  ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else { 
                         Console.Write(_map[j, i].GetString() + " ");
                     }
                 }
