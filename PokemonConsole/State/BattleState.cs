@@ -106,7 +106,7 @@ namespace PokemonConsole.State
                         Console.WriteLine($"{(option == 4 ? decorator : " ")}Run\u001b[0m");
 
 
-                        key = Console.ReadKey(false);
+                        key = Console.ReadKey(true);
 
                         switch (key.Key)
                         {

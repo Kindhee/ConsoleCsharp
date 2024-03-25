@@ -32,7 +32,7 @@ namespace PokemonConsole.State
                 Console.WriteLine($"{(option == 4 ? decorator : " ")}Pokedex\u001b[0m");
                 Console.WriteLine($"{(option == 5 ? decorator : " ")}Exit\u001b[0m");
 
-                key = Console.ReadKey(false);
+                key = Console.ReadKey(true);
 
                 switch (key.Key)
                 {

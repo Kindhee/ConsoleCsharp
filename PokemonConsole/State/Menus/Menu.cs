@@ -28,7 +28,7 @@ namespace PokemonConsole.State
                 Console.WriteLine($"{(option == 1 ? decorator : " ")}Game\u001b[0m");
                 Console.WriteLine($"{(option == 2 ? decorator : " ")}Exit\u001b[0m");
 
-                key = Console.ReadKey(false);
+                key = Console.ReadKey(true);
 
                 switch (key.Key)
                 {

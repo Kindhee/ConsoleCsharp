@@ -22,7 +22,7 @@ namespace PokemonConsole.State
 
             base.HandleInput(game);
             // get key pressed
-            char keyPressed = Console.ReadKey().KeyChar;
+            char keyPressed = Console.ReadKey(true).KeyChar;
 
             // get last position of player
             game._player.LastPosX = game._player.PosX;
@@ -34,6 +34,7 @@ namespace PokemonConsole.State
             switch (keyPressed)
             {
                 case 'z':
+                case 'Z':
 
                     game._player.DirX = 0;
                     game._player.DirY = -1;
@@ -58,6 +59,7 @@ namespace PokemonConsole.State
                     break;
 
                 case 'q':
+                case 'Q':
 
                     game._player.DirX = -1;
                     game._player.DirY = 0;
@@ -83,7 +85,7 @@ namespace PokemonConsole.State
                     break;
 
                 case 's':
-
+                case 'S':
 
                     game._player.DirX = 0;
                     game._player.DirY = 1;
@@ -109,8 +111,8 @@ namespace PokemonConsole.State
                     break;
 
                 case 'd':
+                case 'D':
 
-                    
                     game._player.DirX = 1;
                     game._player.DirY = 0;
 
@@ -141,8 +143,6 @@ namespace PokemonConsole.State
                 default:
                     break;
             }
-            Console.SetCursorPosition(0, game._size+12);
-            Console.Write(" ");
 
             game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
 
