@@ -160,7 +160,7 @@ namespace PokemonConsole.State
                     }
                 }
             }
-            // end of combat
+            // end of combat 
             switch(_currentTurn)
             {
                 case "You":
