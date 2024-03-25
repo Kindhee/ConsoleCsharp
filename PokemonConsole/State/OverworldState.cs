@@ -19,17 +19,15 @@ namespace PokemonConsole.State
 
         public override void HandleInput(Game game)
         {
-            Tile previousTile;
+
             base.HandleInput(game);
+
             // get key pressed
             char keyPressed = Console.ReadKey(true).KeyChar;
 
             // get last position of player
             game._player.LastPosX = game._player.PosX;
             game._player.LastPosY = game._player.PosY;
-
-            /* _player._lastPosX = _player._posX;
-            _player._lastPosY = _player._posY;*/
 
             switch (keyPressed)
             {

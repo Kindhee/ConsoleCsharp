@@ -46,15 +46,20 @@ namespace PokemonConsole.State
         {
             int miss = _rand.Next(0,100);
 
-            if (miss <= attack.Accuracy)
-            {
-                Console.WriteLine(attack.Name);
+            if (_currentTurn == "You") {
+                Console.WriteLine($"{attacker.Name} uses {attack.Name} on enemy {defender.Name}");
+            } else {
+                Console.WriteLine($"{attacker.Name} uses {attack.Name} on your {defender.Name}");
+            }
 
-                defender.Health -= attack.Attack - (attack.Attack * (defender.Defense / 100));
+            if (miss <= attack.Accuracy) { 
 
-                Console.WriteLine(attack.Attack - (attack.Attack * (defender.Defense / 100)));
+                int damage = attack.Attack - (attack.Attack * (defender.Defense / 100));
+                defender.Health -= damage;
 
-                if(isDead(defender) == true)
+                Console.WriteLine($"It deals {damage} damage !");
+
+                if (isDead(defender) == true)
                 {
                     return true;
                 } 
@@ -62,7 +67,11 @@ namespace PokemonConsole.State
             }
             else
             {
-                Console.WriteLine("Attack Missed !");
+                if (_currentTurn == "You") {
+                    Console.WriteLine($"Your {attacker.Name} missed !");
+                } else {
+                    Console.WriteLine($"Enemy {attacker.Name} missed !");
+                }
             }
             return false;
         }
@@ -91,8 +100,6 @@ namespace PokemonConsole.State
                     while (!isSelected)
                     {
                         Console.SetCursorPosition(left, top);
-
-                        Console.WriteLine(_enemyInBattle.Health);
 
                         Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
 
