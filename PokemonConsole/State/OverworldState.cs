@@ -21,15 +21,13 @@ namespace PokemonConsole.State
         {
 
             base.HandleInput(game);
+
             // get key pressed
             char keyPressed = Console.ReadKey(true).KeyChar;
 
             // get last position of player
             game._player.LastPosX = game._player.PosX;
             game._player.LastPosY = game._player.PosY;
-
-            /* _player._lastPosX = _player._posX;
-            _player._lastPosY = _player._posY;*/
 
             switch (keyPressed)
             {
@@ -47,13 +45,17 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "B" && game.IsEncoutering() == true){
+                        if (tile == "B")
+                        {                  
+                            if (game.IsEncoutering() == true)
+                            {
                                 Enemy enemyToBattle = game.NewEnemy();
 
                                 game.AddMetPokemon(enemyToBattle, game);
 
                                 Console.Clear();
                                 game.PushState(new BattleState(enemyToBattle));
+                            }
                         }
                     }
                     break;
@@ -72,14 +74,17 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "B" && game.IsEncoutering() == true)
+                        if (tile == "B")
                         {
-                            Enemy enemyToBattle = game.NewEnemy();
+                            if (game.IsEncoutering() == true)
+                            {
+                                Enemy enemyToBattle = game.NewEnemy();
 
-                            game.AddMetPokemon(enemyToBattle, game);
+                                game.AddMetPokemon(enemyToBattle, game);
 
-                            Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                                Console.Clear();
+                                game.PushState(new BattleState(enemyToBattle));
+                            }
                         }
                     }
                     break;
@@ -98,14 +103,17 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "B" && game.IsEncoutering() == true)
+                        if (tile == "B")
                         {
-                            Enemy enemyToBattle = game.NewEnemy();
+                            if (game.IsEncoutering() == true)
+                            {
+                                Enemy enemyToBattle = game.NewEnemy();
 
-                            game.AddMetPokemon(enemyToBattle, game);
+                                game.AddMetPokemon(enemyToBattle, game);
 
-                            Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                                Console.Clear();
+                                game.PushState(new BattleState(enemyToBattle));
+                            }
                         }
                     }
                     break;
@@ -124,14 +132,17 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "B" && game.IsEncoutering() == true)
+                        if (tile == "B")
                         {
-                            Enemy enemyToBattle = game.NewEnemy();
+                            if (game.IsEncoutering() == true)
+                            {
+                                Enemy enemyToBattle = game.NewEnemy();
 
-                            game.AddMetPokemon(enemyToBattle, game);
+                                game.AddMetPokemon(enemyToBattle, game);
 
-                            Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                                Console.Clear();
+                                game.PushState(new BattleState(enemyToBattle));
+                            }
                         }
                     }
                     break;
@@ -143,8 +154,6 @@ namespace PokemonConsole.State
                 default:
                     break;
             }
-
-            game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
 
             // update player pos on the map 
             game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);

@@ -49,22 +49,30 @@ namespace PokemonConsole
             // choose map
             LoadMap("overworld");
 
-            // Temporary get pokemon in our team
-            int index2 = rand.Next(0, pokemons.Count);
+            int index = rand.Next(0, pokemons.Count);
 
-            string[] randPokemon2 = pokemons[index2];
+            string[] randPokemon = pokemons[index];
 
-            Enemy enemy2 = new Enemy(
-                randPokemon2[0],
-                (AttributType)int.Parse(randPokemon2[1]),
-                int.Parse(randPokemon2[2]),
-                new List<string>() { randPokemon2[3], randPokemon2[4], randPokemon2[5], randPokemon2[6] },
-                int.Parse(randPokemon2[7]),
-                int.Parse(randPokemon2[8]),
-                int.Parse(randPokemon2[9]));
+            // level scaling
+            int level = rand.Next(int.Parse(randPokemon[2]), int.Parse(randPokemon[3]));
+            int scaling = level / 100;
 
-            enemy2.isInTeam = true;
-            lInTeam.Add(enemy2);
+            // stats affected
+            int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
+            int defense = rand.Next(int.Parse(randPokemon[10]), int.Parse(randPokemon[11]));
+            int speed = rand.Next(int.Parse(randPokemon[12]), int.Parse(randPokemon[13]));
+
+            Enemy enemy = new Enemy(
+                randPokemon[0],                                                                         // name
+                (AttributType)int.Parse(randPokemon[1]),                                                // type
+                level,                                                                                  // level
+                new List<string>() { randPokemon[4], randPokemon[5], randPokemon[6], randPokemon[7] },  // capacities
+                health + (health * scaling),                                                            // health
+                defense + (defense * scaling),                                                          // defense
+                speed + (speed * scaling));                                                             // speed
+
+            enemy.isInTeam = true;
+            lInTeam.Add(enemy);
             //
 
         }
@@ -211,14 +219,23 @@ namespace PokemonConsole
 
             string[] randPokemon = pokemons[index];
 
+            // level scaling
+            int level = rand.Next(int.Parse(randPokemon[2]), int.Parse(randPokemon[3]));
+            int scaling = level / 100;
+
+            // stats affected
+            int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
+            int defense = rand.Next(int.Parse(randPokemon[10]), int.Parse(randPokemon[11]));
+            int speed = rand.Next(int.Parse(randPokemon[12]), int.Parse(randPokemon[13]));
+
             Enemy enemy = new Enemy(
-                randPokemon[0], 
-                (AttributType)int.Parse(randPokemon[1]), 
-                int.Parse(randPokemon[2]), 
-                new List<string>() { randPokemon[3], randPokemon[4], randPokemon[5], randPokemon[6] }, 
-                int.Parse(randPokemon[7]),
-                int.Parse(randPokemon[8]),
-                int.Parse(randPokemon[9] ));
+                randPokemon[0],                                                                         // name
+                (AttributType)int.Parse(randPokemon[1]),                                                // type
+                level,                                                                                  // level
+                new List<string>() { randPokemon[4], randPokemon[5], randPokemon[6], randPokemon[7] },  // capacities
+                health + (health * scaling),                                                            // health
+                defense + (defense * scaling),                                                          // defense
+                speed + (speed * scaling));                                                             // speed
 
             return enemy;
         }
