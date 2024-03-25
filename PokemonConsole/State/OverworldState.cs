@@ -45,17 +45,13 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "B")
-                        {                  
-                            if (game.IsEncoutering() == true)
-                            {
+                        if (tile == "B" && game.IsEncoutering() == true){
                                 Enemy enemyToBattle = game.NewEnemy();
 
                                 game.AddMetPokemon(enemyToBattle, game);
 
                                 Console.Clear();
                                 game.PushState(new BattleState(enemyToBattle));
-                            }
                         }
                     }
                     break;
@@ -74,17 +70,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                                game.AddMetPokemon(enemyToBattle, game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
@@ -103,17 +96,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                                game.AddMetPokemon(enemyToBattle, game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
@@ -132,17 +122,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                                game.AddMetPokemon(enemyToBattle, game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
@@ -155,12 +142,14 @@ namespace PokemonConsole.State
                     break;
             }
 
+            
+
             // update player pos on the map 
-            game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
-            game._map[game._player.PosX, game._player.PosY] = new Tile(TileType.Player);
 
             Console.SetCursorPosition(game._player.LastPosX * 2 + 1, game._player.LastPosY + 1);
             Console.Write(" ");
+            Console.SetCursorPosition(game._player.PosX * 2 + 1, game._player.PosY + 1);
+            Console.Write("P");
 
             /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
             _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/
