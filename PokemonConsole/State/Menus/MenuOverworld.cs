@@ -54,7 +54,7 @@ namespace PokemonConsole.State
             {
                 case 1:
                     Console.Clear();
-                    game.DrawMap();
+                    game.DrawMapInit();
                     game.SetState(new OverworldState());
                     break;
 

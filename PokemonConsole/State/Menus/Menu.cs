@@ -49,7 +49,7 @@ namespace PokemonConsole.State
             if (option == 1)
             {
                 Console.Clear();
-                game.DrawMap();
+                game.DrawMapInit();
                 game.SetState(new OverworldState());
             } 
             else if (option == 2)

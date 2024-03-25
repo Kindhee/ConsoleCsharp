@@ -14,7 +14,7 @@ namespace PokemonConsole.State
         override public void Run(Game game)
         {
             base.Run(game);
-            game.DrawMap();
+            game.DrawMapUpdate();
         }
 
         public override void HandleInput(Game game)
@@ -141,12 +141,16 @@ namespace PokemonConsole.State
                 default:
                     break;
             }
+            Console.SetCursorPosition(0, game._size+12);
+            Console.Write(" ");
 
             game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
 
             // update player pos on the map 
             game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
             game._map[game._player.PosX, game._player.PosY] = new Tile(TileType.Player);
+            Console.SetCursorPosition(game._player.LastPosX * 2 + 1, game._player.LastPosY + 1);
+            Console.Write(" ");
 
             /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
             _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/

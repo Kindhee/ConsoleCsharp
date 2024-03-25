@@ -123,7 +123,25 @@ namespace PokemonConsole
             _map[_player.PosX, _player.PosY] = _player;
         }
 
-        public void DrawMap()
+
+        public void DrawMapUpdate()
+        {
+            for (int i = 0; i < _size; i++)
+            {
+                for (int j = 0; j < _size; j++)
+                {
+                    if (_map[i, j]._tileType != TileType.Empty)
+                    {
+                        Console.SetCursorPosition(i * 2 + 1, j + 1);
+                        Console.Write(_map[i, j].GetString() + " ");
+                    }
+                }
+            }
+            Console.SetCursorPosition(0, _size+12);
+        }
+
+
+            public void DrawMapInit()
         {
             Console.Write("╔");
             for (int i = 0; i <= (_size*2)-1;  i++)
@@ -175,7 +193,7 @@ namespace PokemonConsole
             while(true)
             {
                 // clear console
-                Console.Clear();
+                //Console.Clear();
 
                 Console.SetCursorPosition(0, 0);
 
