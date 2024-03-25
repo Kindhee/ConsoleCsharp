@@ -12,7 +12,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
         {
             Console.WriteLine("Press e to go back to the Menu");
 
-            /*foreach (var enemy in game.lEnemiesMeet)
+            foreach (var enemy in game.lInTeam)
             {
                 if (enemy.isInTeam == true)
                 {
@@ -21,7 +21,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                     Console.Write(" | Health : " + enemy.Health);
                     Console.WriteLine();
                 }
-            }*/
+            }
 
             char keyPressed = Console.ReadKey().KeyChar;
 
