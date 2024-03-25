@@ -15,8 +15,8 @@ namespace PokemonConsole
     public  class Game
     {
         public Tile[,] _map;
-        Tree _tree;
-        Bush _bush;
+        public Tree _tree;
+        public Bush _bush;
 
         public int _size;
         public Player _player;
@@ -120,7 +120,6 @@ namespace PokemonConsole
             mapTxt.Close();
 
             // put player on the map 
-            _map[_player.PosX, _player.PosY] = _player;
         }
 
 
@@ -132,8 +131,15 @@ namespace PokemonConsole
                 {
                     if (_map[i, j]._tileType != TileType.Empty)
                     {
-                        Console.SetCursorPosition(i * 2 + 1, j + 1);
-                        Console.Write(_map[i, j].GetString() + " ");
+                        if (i == _player.PosX && j == _player.PosY)
+                        {
+                            Console.Write("P ");
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(i * 2 + 1, j + 1);
+                            Console.Write(_map[i, j].GetString() + " ");
+                        }
                     }
                 }
             }
@@ -155,7 +161,14 @@ namespace PokemonConsole
                 Console.Write("║");
                 for (int j = 0; j < _size; j++)
                 {
-                    Console.Write(_map[j, i].GetString() + " ");
+                    if (i == _player.PosY && j == _player.PosX)
+                    {
+                        Console.Write("P ");
+                    }
+                    else
+                    {
+                        Console.Write(_map[j, i].GetString() + " ");
+                    }
                 }
                 Console.WriteLine("║");
             }

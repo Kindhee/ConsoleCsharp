@@ -69,7 +69,7 @@ namespace PokemonConsole.State
 
         override public void Run(Game game)
         {
-
+            Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
             Console.WriteLine("\nUse z and s to navigate and press Enter/Return to select:");

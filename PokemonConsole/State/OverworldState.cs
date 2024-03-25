@@ -19,7 +19,7 @@ namespace PokemonConsole.State
 
         public override void HandleInput(Game game)
         {
-
+            Tile previousTile;
             base.HandleInput(game);
             // get key pressed
             char keyPressed = Console.ReadKey().KeyChar;
@@ -141,17 +141,15 @@ namespace PokemonConsole.State
                 default:
                     break;
             }
-            Console.SetCursorPosition(0, game._size+12);
-            Console.Write(" ");
 
-            game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
+            
 
             // update player pos on the map 
-            game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
-            game._map[game._player.PosX, game._player.PosY] = new Tile(TileType.Player);
 
             Console.SetCursorPosition(game._player.LastPosX * 2 + 1, game._player.LastPosY + 1);
             Console.Write(" ");
+            Console.SetCursorPosition(game._player.PosX * 2 + 1, game._player.PosY + 1);
+            Console.Write("P");
 
             /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
             _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/
