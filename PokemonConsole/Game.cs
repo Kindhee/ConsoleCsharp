@@ -58,9 +58,11 @@ namespace PokemonConsole
             int scaling = level / 100;
 
             // stats affected
-            int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
+            //int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
+            int health = 1000;
             int defense = rand.Next(int.Parse(randPokemon[10]), int.Parse(randPokemon[11]));
             int speed = rand.Next(int.Parse(randPokemon[12]), int.Parse(randPokemon[13]));
+            int strength = rand.Next(int.Parse(randPokemon[14]), int.Parse(randPokemon[15]));
 
             Enemy enemy = new Enemy(
                 randPokemon[0],                                                                         // name
@@ -69,7 +71,8 @@ namespace PokemonConsole
                 new List<string>() { randPokemon[4], randPokemon[5], randPokemon[6], randPokemon[7] },  // capacities
                 health + (health * scaling),                                                            // health
                 defense + (defense * scaling),                                                          // defense
-                speed + (speed * scaling));                                                             // speed
+                speed + (speed * scaling),                                                              // speed
+                strength + (strength * scaling));                                                       // strength
 
             enemy.isInTeam = true;
             lInTeam.Add(enemy);
@@ -162,7 +165,7 @@ namespace PokemonConsole
         }
 
 
-            public void DrawMapInit()
+        public void DrawMapInit()
         {
             Console.Clear();
             Console.Write("╔");
@@ -220,7 +223,7 @@ namespace PokemonConsole
             {
                 Console.WriteLine("\t" + _player.Inventory.Keys[i].item.name + "   x" + _player.Inventory.Keys[i].amount);
             }
-       }
+        }
 
         public void Run()
         {
@@ -252,6 +255,7 @@ namespace PokemonConsole
             int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
             int defense = rand.Next(int.Parse(randPokemon[10]), int.Parse(randPokemon[11]));
             int speed = rand.Next(int.Parse(randPokemon[12]), int.Parse(randPokemon[13]));
+            int strength = rand.Next(int.Parse(randPokemon[14]), int.Parse(randPokemon[15]));
 
             Enemy enemy = new Enemy(
                 randPokemon[0],                                                                         // name
@@ -260,7 +264,8 @@ namespace PokemonConsole
                 new List<string>() { randPokemon[4], randPokemon[5], randPokemon[6], randPokemon[7] },  // capacities
                 health + (health * scaling),                                                            // health
                 defense + (defense * scaling),                                                          // defense
-                speed + (speed * scaling));                                                             // speed
+                speed + (speed * scaling),                                                              // speed
+                strength + (strength * scaling));                                                       // strength
 
             return enemy;
         }

@@ -19,12 +19,13 @@ namespace PokemonConsole
         int _health;
         int _defense;
         int _speed;
+        int _stength;
 
         bool _isInTeam;
 
         CapacitiesRegistration capacitiesRegistration = new CapacitiesRegistration();
 
-        public Enemy(string name, AttributType attributType, int level, List<string> capacities, int health, int defense, int speed)
+        public Enemy(string name, AttributType attributType, int level, List<string> capacities, int health, int defense, int speed, int strength)
         {
             _name = name;
 
@@ -37,6 +38,7 @@ namespace PokemonConsole
             _health = health;
             _defense = defense;
             _speed = speed;
+            _stength = strength;
 
             _isInTeam = false;
         }
@@ -49,6 +51,7 @@ namespace PokemonConsole
         public int Health { get => _health;  set => _health = value; }
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
+        public int Strength { get => _stength; set => _stength = value; }
         public bool isInTeam { get => _isInTeam; set => _isInTeam = value; }
 
     }

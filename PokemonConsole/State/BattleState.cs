@@ -20,6 +20,8 @@ namespace PokemonConsole.State
 
         int _enemyRandom;
 
+        int _turnPlayed;
+
         Random _rand;
 
 
@@ -30,6 +32,8 @@ namespace PokemonConsole.State
 
             _currentTurn = "You";
             _combat = false;
+
+            _turnPlayed = 0;
 
             _rand = new Random();
 
@@ -46,6 +50,8 @@ namespace PokemonConsole.State
         {
             int miss = _rand.Next(0,100);
 
+            Console.WriteLine(" ");
+
             if (_currentTurn == "You") {
                 Console.WriteLine($"{attacker.Name} uses {attack.Name} on enemy {defender.Name}");
             } else {
@@ -54,7 +60,7 @@ namespace PokemonConsole.State
 
             if (miss <= attack.Accuracy) { 
 
-                int damage = attack.Attack - (attack.Attack * (defender.Defense / 100));
+                int damage = (attack.Attack + (attack.Attack * (attacker.Strength / 100))) - (attack.Attack * (defender.Defense / 100));
                 defender.Health -= damage;
 
                 Console.WriteLine($"It deals {damage} damage !");
@@ -88,87 +94,103 @@ namespace PokemonConsole.State
             ConsoleKeyInfo key;
             bool isSelected = false;
 
-            if(game.lInTeam[_pokemonOnField].Speed < _enemyInBattle.Speed)
-            {
-                _currentTurn = "Enemy";
-            }
-
             while (_combat == false)
             {
-                if (_currentTurn == "You")
+
+                _turnPlayed = 0;
+
+                while (!isSelected)
                 {
-                    while (!isSelected)
+                    Console.SetCursorPosition(left, top);
+
+                    Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
+
+                    Console.WriteLine($"{(option == 1 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[1].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[1].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[1].Accuracy}\u001b[0m");
+
+                    Console.WriteLine($"{(option == 2 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[2].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[2].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[2].Accuracy}\u001b[0m");
+
+                    Console.WriteLine($"{(option == 3 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[3].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[3].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[3].Accuracy}\u001b[0m");
+
+
+                    Console.WriteLine($"{(option == 4 ? decorator : " ")}Run\u001b[0m");
+
+                    key = Console.ReadKey(true);
+
+                    switch (key.Key)
                     {
-                        Console.SetCursorPosition(left, top);
+                        case ConsoleKey.Z:
+                            option = option == 0 ? 4 : option - 1;
+                            break;
 
-                        Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
+                        case ConsoleKey.S:
+                            option = option == 4 ? 0 : option + 1;
+                            break;
 
-                        Console.WriteLine($"{(option == 1 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[1].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[1].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[1].Accuracy}\u001b[0m");
+                        case ConsoleKey.Enter:
+                            isSelected = true;
+                            break;
+                    }
+                }
 
-                        Console.WriteLine($"{(option == 2 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[2].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[2].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[2].Accuracy}\u001b[0m");
+                if(game.lInTeam[_pokemonOnField].Speed < _enemyInBattle.Speed)
+                {
+                    _currentTurn = "Enemy";
+                }
 
-                        Console.WriteLine($"{(option == 3 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[3].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[3].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[3].Accuracy}\u001b[0m");
-
-
-                        Console.WriteLine($"{(option == 4 ? decorator : " ")}Run\u001b[0m");
-
-
-                        key = Console.ReadKey(true);
-
-                        switch (key.Key)
+                while (_turnPlayed != 2)
+                {
+                    if (_currentTurn == "You")
+                    {
+                        switch (option)
                         {
-                            case ConsoleKey.Z:
-                                option = option == 0 ? 4 : option - 1;
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyInBattle) == true)
+                                {
+                                    _turnPlayed = 2;
+                                    _combat = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    isSelected = false;
+                                    _turnPlayed += 1;
+                                    _currentTurn = "Enemy";
+                                }
                                 break;
 
-                            case ConsoleKey.S:
-                                option = option == 4 ? 0 : option + 1;
-                                break;
-
-                            case ConsoleKey.Enter:
-                                isSelected = true;
+                            case 4:
+                                game.SetState(new OverworldState());
+                                _currentTurn = "Run";
+                                _combat = true;
                                 break;
                         }
+
                     }
-
-                    switch (option)
+                    else if (_currentTurn == "Enemy")
                     {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyInBattle) == true)
-                            {
-                                _combat = true;
-                            }
-                            else
-                            {
-                                isSelected = false;
-                                _currentTurn = "Enemy";
-                            }
-                            break;
-
-                        case 4:
-                            game.SetState(new OverworldState());
-                            _currentTurn = "Run";
+                        _enemyRandom = _rand.Next(0, 4);
+                        if (Attack(_enemyInBattle, _enemyInBattle.Capacities[_enemyRandom], game.lInTeam[_pokemonOnField]) == true)
+                        {
+                            _turnPlayed = 2;
                             _combat = true;
                             break;
-                    }
-                } else if (_currentTurn == "Enemy")
-                {
-                    _enemyRandom = _rand.Next(0,4);
-                    if(Attack(_enemyInBattle, _enemyInBattle.Capacities[_enemyRandom], game.lInTeam[_pokemonOnField]) == true)
-                    {
-                        _combat = true;
-                    }
-                    else
-                    {
-                        _currentTurn = "You";
+                        }
+                        else
+                        {
+                            _turnPlayed += 1;
+                            _currentTurn = "You";
+                        }
                     }
                 }
             }
-            // end of combat 
-            switch(_currentTurn)
+
+            Console.WriteLine(" ");
+
+            // end of combat
+            switch (_currentTurn)
             {
                 case "You":
                     Console.WriteLine("You won !");
