@@ -200,7 +200,7 @@ namespace PokemonConsole
             {
                 Console.WriteLine("\t" + _player.Inventory.Keys[i].item.name + "   x" + _player.Inventory.Keys[i].amount);
             }
-        }
+       }
 
         public void Run()
         {
