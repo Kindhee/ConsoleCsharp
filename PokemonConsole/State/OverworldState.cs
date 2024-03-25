@@ -19,7 +19,6 @@ namespace PokemonConsole.State
 
         public override void HandleInput(Game game)
         {
-            List<Tile> bushTiles = new List<Tile>(); 
 
             base.HandleInput(game);
             // get key pressed
@@ -47,22 +46,15 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "B")
-                        {
-                            bushTiles.Add(t);
-
-                            if (game.IsEncoutering() == true)
-                            {
+                        if (tile == "B" && game.IsEncoutering() == true){
                                 Enemy enemyToBattle = game.NewEnemy();
 
                                 game.AddMetPokemon(enemyToBattle, game);
 
                                 Console.Clear();
                                 game.PushState(new BattleState(enemyToBattle));
-                            }
                         }
                     }
-
                     break;
 
                 case 'q':
@@ -78,22 +70,16 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX -= 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            bushTiles.Add(t);
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                game.AddMetPokemon(enemyToBattle, game);
-
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
-
                     break;
 
                 case 's':
@@ -110,19 +96,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY += 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            bushTiles.Add(t);
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                game.AddMetPokemon(enemyToBattle, game);
-
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;
@@ -141,19 +122,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosX += 1;
                         }
-                        if (tile == "B")
+                        if (tile == "B" && game.IsEncoutering() == true)
                         {
-                            bushTiles.Add(t);
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                            if (game.IsEncoutering() == true)
-                            {
-                                Enemy enemyToBattle = game.NewEnemy();
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                game.AddMetPokemon(enemyToBattle, game);
-
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
-                            }
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     }
                     break;

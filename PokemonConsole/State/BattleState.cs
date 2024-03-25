@@ -57,7 +57,8 @@ namespace PokemonConsole.State
                 if(isDead(defender) == true)
                 {
                     return true;
-                }
+                } 
+                return false;
             }
             else
             {
@@ -159,6 +160,15 @@ namespace PokemonConsole.State
             }
             // end of combat
             Console.WriteLine("End of combat");
+
+            if (_currentTurn == "You")
+            {
+                Console.WriteLine("You won !");
+
+            } else
+            {
+                Console.WriteLine("Your Pokemon fainted");
+            }
             game.SetState(new OverworldState());
         }
     }
