@@ -149,6 +149,7 @@ namespace PokemonConsole.State
             // update player pos on the map 
             game._map[game._player.LastPosX, game._player.LastPosY] = new Tile(TileType.Empty);
             game._map[game._player.PosX, game._player.PosY] = new Tile(TileType.Player);
+
             Console.SetCursorPosition(game._player.LastPosX * 2 + 1, game._player.LastPosY + 1);
             Console.Write(" ");
 

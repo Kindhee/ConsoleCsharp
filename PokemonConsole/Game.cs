@@ -141,9 +141,9 @@ namespace PokemonConsole
         }
 
 
-            
-       public void DrawMapInit()
-       {
+            public void DrawMapInit()
+        {
+            Console.Clear();
             Console.Write("╔");
             for (int i = 0; i <= (_size*2)-1;  i++)
             {

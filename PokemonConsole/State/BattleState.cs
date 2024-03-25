@@ -178,6 +178,8 @@ namespace PokemonConsole.State
 
             Console.WriteLine("End of combat");
             game.SetState(new OverworldState());
+            Console.ReadKey();
+            game.DrawMapInit();
         }
     }
 }
