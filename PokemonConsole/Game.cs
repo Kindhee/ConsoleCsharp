@@ -17,7 +17,7 @@ namespace PokemonConsole
         public Tile[,] _map;
         public Tree _tree;
         public Bush _bush;
-
+        public string _currentMap;
         public int _size;
         public Player _player;
         private BlankState _State;
@@ -47,7 +47,8 @@ namespace PokemonConsole
             _bush = new Bush();
 
             // choose map
-            LoadMap("overworld");
+            _currentMap = "lobby";
+            LoadMap(_currentMap);
 
             int index = rand.Next(0, pokemons.Count);
 
@@ -58,8 +59,7 @@ namespace PokemonConsole
             int scaling = level / 100;
 
             // stats affected
-            //int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
-            int health = 1000;
+            int health = rand.Next(int.Parse(randPokemon[8]), int.Parse(randPokemon[9]));
             int defense = rand.Next(int.Parse(randPokemon[10]), int.Parse(randPokemon[11]));
             int speed = rand.Next(int.Parse(randPokemon[12]), int.Parse(randPokemon[13]));
             int strength = rand.Next(int.Parse(randPokemon[14]), int.Parse(randPokemon[15]));
@@ -130,7 +130,6 @@ namespace PokemonConsole
 
             mapTxt.Close();
 
-            // put player on the map 
         }
 
 
@@ -140,24 +139,39 @@ namespace PokemonConsole
             {
                 for (int j = 0; j < _size; j++)
                 {
-                    if (_map[i, j]._tileType != TileType.Empty)
+                    if (i == _player.PosX && j == _player.PosY)
                     {
-                        if (i == _player.PosX && j == _player.PosY)
+                        Player.DrawPlayer();
+                    } 
+                    else
+                    {
+                        switch(_map[i, j]._tileType)
                         {
-                            Player.DrawPlayer();
-                        }
-                        else if (_map[i, j]._tileType == TileType.Bush)
-                        {
-                            Console.SetCursorPosition(i * 2 + 1, j + 1);
-                            Console.BackgroundColor = ConsoleColor.DarkGreen;
-                            Console.Write("  ");
-                            Console.BackgroundColor = ConsoleColor.Black;
-                        }
-                        else
-                        {
-                            Console.SetCursorPosition(i * 2 + 1, j + 1);
-                            Console.Write(_map[i, j].GetString() + " ");
-                        }
+                            case TileType.Bush:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case TileType.Tree:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.Gray;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case TileType.Empty:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            default:
+                                Console.Write(_map[i, j].GetString() + " ");
+                                break;
+                        }   
                     }
                 }
             }
@@ -183,14 +197,35 @@ namespace PokemonConsole
                     {
                         Player.DrawPlayer();
                     }
-                    else if (_map[j, i]._tileType == TileType.Bush)
+                    else
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
-                        Console.Write("  ");
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    else { 
-                        Console.Write(_map[j, i].GetString() + " ");
+                        switch (_map[j, i]._tileType)
+                        {
+
+                            case (TileType.Bush):
+                                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+
+                            case (TileType.Tree):
+                                Console.BackgroundColor = ConsoleColor.Gray;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case (TileType.Empty):
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            default:
+                                Console.Write(_map[i, j].GetString() + " ");
+                                break;
+
+                        }
                     }
                 }
                 Console.WriteLine("║");
@@ -223,6 +258,11 @@ namespace PokemonConsole
             {
                 Console.WriteLine("\t" + _player.Inventory.Keys[i].item.name + "   x" + _player.Inventory.Keys[i].amount);
             }
+        }
+
+        public void ChangeMap(string mapName)
+        {
+            LoadMap(mapName);
         }
 
         public void Run()
@@ -287,8 +327,8 @@ namespace PokemonConsole
 
         public bool IsEncoutering()
         {
-            chance = rand.Next(0, 11);
-            if (chance <= 2)
+            chance = rand.Next(0, 10);
+            if (chance == 0)
             {
                 return true;
             }

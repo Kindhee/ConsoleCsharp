@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PokemonConsole
 {
-    public class Tree : Tile
+    public class Bush : Tile
     {
 
-        public Tree() : base(TileType.Tree)
+        public Bush() : base(TileType.Bush)
         {
 
         }

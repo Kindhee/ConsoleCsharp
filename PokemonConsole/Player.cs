@@ -40,9 +40,9 @@ namespace PokemonConsole
 
         public static void DrawPlayer()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("P ");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Write("  ");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
         // get / set
         public int PosX { get => _posX;  set => _posX = value; }

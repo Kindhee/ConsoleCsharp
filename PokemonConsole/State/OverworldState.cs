@@ -53,6 +53,19 @@ namespace PokemonConsole.State
                                 Console.Clear();
                                 game.PushState(new BattleState(enemyToBattle));
                         }
+                    } else {
+
+                        if (game._currentMap == "lobby")
+                        {
+                            // update map
+                            game._currentMap = "overworld";
+                            game.ChangeMap(game._currentMap);
+                            game.DrawMapInit();
+                            
+                            // place player
+                            game._player.PosX = 11;
+                            game._player.PosY = 20;
+                        }
                     }
                     break;
 
@@ -150,9 +163,6 @@ namespace PokemonConsole.State
             Console.Write(" ");
             Console.SetCursorPosition(game._player.PosX * 2 + 1, game._player.PosY + 1);
             Player.DrawPlayer();
-
-            /* _map[_player._lastPosX, _player._lastPosY] = new Tile(TileType.Empty);
-            _map[_player._posX, _player._posY] = new Tile(TileType.Player);*/
         }
     }
 }
