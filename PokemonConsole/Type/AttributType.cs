@@ -11,6 +11,16 @@ namespace PokemonConsole
         Normal,
         Fire,
         Water,
-        Plant,       
+        Plant,  
+        Electric,
+        Ice,
+        Fighting,
+        Poison,
+        Ground,
+        Flying,
+        Psychic,
+        Bug,
+        Rock,
+        Ghost,
     }
 }

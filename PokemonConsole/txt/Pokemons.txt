@@ -1,3 +1,14 @@
-Charmander,1,1,10,_bite,_stomp,_firePunch,_flameThrower,1,100,1,100,1,100,1,100
-Squirtle,2,1,10,_bite,_stomp,_waterGun,_jetPunch,1,100,1,100,1,100,1,100
-Bulbasaur,3,1,10,_bite,_stomp,_leafBlade,_bulletSeed,1,100,1,100,1,100,1,100
+Rattata,0,1,10,_tailWhip,_bite,_megaPunch,_headButt,1,100,1,100,1,100,1,100
+Charmander,1,1,10,_bite,_tailWhip,_firePunch,_flameThrower,1,100,1,100,1,100,1,100
+Squirtle,2,1,10,_headButt,_megaPunch,_waterGun,_bubble,1,100,1,100,1,100,1,100
+Bulbasaur,3,1,10,_headButt,_tailWhip,_razorLeaf,_vineWhip,1,100,1,100,1,100,1,100
+Pikachu,4,1,10,_headButt,_megaPunch,_thunder,_thunderPunch,1,100,1,100,1,100,1,100
+Lapras,5,1,10,_headButt,_tailWhip,_iceBeam,_blizzard,1,100,1,100,1,100,1,100
+Machop,6,1,10,_headButt,_megaPunch,_lowKick,_submission,1,100,1,100,1,100,1,100
+Ekans,7,1,10,_tailWhip,_bite,_toxic,_poisonSting,1,100,1,100,1,100,1,100
+Onix,8,1,10,_tailWhip,_headButt,_earthQuake,_fissure,1,100,1,100,1,100,1,100
+Zubat,9,1,10,_bite,_headButt,_fly,_wingAttack,1,100,1,100,1,100,1,100
+Abra,10,1,10,_headButt,_megaPunch,_psychic,_psybeam,1,100,1,100,1,100,1,100
+Scyther,11,1,10,_headButt,_bite,_stringShot,_twinNeedle,1,100,1,100,1,100,1,100
+Geodude,12,1,10,_headButt,_megaPunch,_rockSlide,_rockThrow,1,100,1,100,1,100,1,100
+Gengar,13,1,10,_bite,_megaPunch,_lick,_nightShade,1,100,1,100,1,100,1,100

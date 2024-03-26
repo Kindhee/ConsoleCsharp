@@ -17,7 +17,7 @@
                 Console.WriteLine();
             }
 
-            char keyPressed = Console.ReadKey().KeyChar;
+            char keyPressed = Console.ReadKey(true).KeyChar;
             
             if(keyPressed == 'e')
             {

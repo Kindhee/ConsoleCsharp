@@ -11,6 +11,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
         override public void Run(Game game)
         {
             Console.WriteLine("Press e to go back to the Menu");
+            Console.WriteLine("");
 
             foreach (var enemy in game.lInTeam)
             {
@@ -23,7 +24,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                 }
             }
 
-            char keyPressed = Console.ReadKey().KeyChar;
+            char keyPressed = Console.ReadKey(true).KeyChar;
 
             if (keyPressed == 'e')
             {
