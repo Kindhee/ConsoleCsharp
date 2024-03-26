@@ -15,7 +15,7 @@ namespace PokemonConsole.State
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
-            Console.WriteLine("\nUse z and s to navigate and press Enter/Return to select:");
+            Console.WriteLine("\nUse z and s to navigate and press Enter to select:");
             (int left, int top) = Console.GetCursorPosition();
             var option = 1;
             var decorator = " \u001b[32m";

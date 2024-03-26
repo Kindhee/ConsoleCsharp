@@ -86,19 +86,7 @@ namespace PokemonConsole
         {
             // empty map 
             String lineRead;
-            StreamReader mapTxt = null;
-
-            switch (name)
-            {
-                case "lobby":
-                    mapTxt = new StreamReader("../../../txt/lobby.txt");
-                    break;
-
-                case "overworld":
-                    mapTxt = new StreamReader("../../../txt/overworld.txt");
-                    break;
-            }
-
+            StreamReader mapTxt = new StreamReader($"../../../txt/{name}.txt");
             lineRead = mapTxt.ReadLine();
             int lineNumber = 0;
 
@@ -117,6 +105,18 @@ namespace PokemonConsole
 
                         case 'b':
                             AddBush(colNumber, lineNumber, _bush);
+                            break;
+
+                        case 'r':
+                            _map[colNumber, lineNumber] = new Tile(TileType.Roof);
+                            break;
+
+                        case 'w':
+                            _map[colNumber, lineNumber] = new Tile(TileType.Wall);
+                            break;
+
+                        case 'd':
+                            _map[colNumber, lineNumber] = new Tile(TileType.Door);
                             break;
 
                         default:
@@ -162,6 +162,29 @@ namespace PokemonConsole
                                 Console.Write("  ");
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
+
+
+                            case TileType.Roof:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.DarkRed;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case TileType.Wall:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.White;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case TileType.Door:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
 
                             case TileType.Empty:
                                 Console.SetCursorPosition(i * 2 + 1, j + 1);
@@ -213,6 +236,24 @@ namespace PokemonConsole
 
                             case (TileType.Tree):
                                 Console.BackgroundColor = ConsoleColor.Gray;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case (TileType.Roof):
+                                Console.BackgroundColor = ConsoleColor.DarkRed;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case (TileType.Wall):
+                                Console.BackgroundColor = ConsoleColor.White;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
+
+                            case (TileType.Door):
+                                Console.BackgroundColor = ConsoleColor.Red;
                                 Console.Write("  ");
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;

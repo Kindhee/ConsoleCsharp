@@ -16,6 +16,7 @@ namespace PokemonConsole
 
         List<Capacity> _capacities;
 
+        int _maxHealth;
         int _health;
         int _defense;
         int _speed;
@@ -37,6 +38,7 @@ namespace PokemonConsole
 
             _capacities = capacitiesRegistration.GetCapacities(capacities);
 
+            _maxHealth = health;
             _health = health;
             _defense = defense;
             _speed = speed;
@@ -53,6 +55,7 @@ namespace PokemonConsole
         public int Level { get => _level; set => _level = value; }
         public List<Capacity> Capacities { get => _capacities; set => _capacities = value; }
         public int Health { get => _health;  set => _health = value; }
+        public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
         public int Strength { get => _stength; set => _stength = value; }

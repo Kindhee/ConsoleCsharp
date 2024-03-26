@@ -33,6 +33,15 @@ namespace PokemonConsole
                 case TileType.Tree:
                     return "T";
 
+                case TileType.Wall:
+                    return "W";
+
+                case TileType.Roof:
+                    return "R";
+
+                case TileType.Door:
+                    return "D";
+
                 default:
                     return " ";
                     // or

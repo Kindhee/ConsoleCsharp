@@ -12,5 +12,8 @@ namespace PokemonConsole
         Tree,
         Bush,
         Player,
+        Wall,
+        Roof,
+        Door,
     }
 }

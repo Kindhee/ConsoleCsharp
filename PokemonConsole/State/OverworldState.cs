@@ -41,7 +41,7 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY-1];
                         string tile = t.GetString();
-                        if (tile != "T")
+                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
                         {
                             game._player.PosY -= 1;
                         }
@@ -76,11 +76,11 @@ namespace PokemonConsole.State
                     game._player.DirX = -1;
                     game._player.DirY = 0;
 
-                    if (game._player.PosX - 1 > 0)
+                    if (game._player.PosX - 1 >= 0)
                     {
                         Tile t = game._map[game._player.PosX - 1, game._player.PosY];
                         string tile = t.GetString();
-                        if (tile != "T")
+                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
                         {
                             game._player.PosX -= 1;
                         }
@@ -92,6 +92,20 @@ namespace PokemonConsole.State
 
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
+                        }
+                    } else
+                    {
+                        if (game._currentMap == "overworld")
+                        {
+                            // update map
+                            game._currentMap = "center";
+                            game.ChangeMap(game._currentMap);
+                            game.DrawMapInit();
+
+                            // place player
+                            game._player.PosX = 20;
+                            game._player.PosY = 11;
+
                         }
                     }
                     break;
@@ -106,7 +120,7 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY +1 ];
                         string tile = t.GetString();
-                        if (tile != "T")
+                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
                         {
                             game._player.PosY += 1;
                         }
@@ -132,7 +146,7 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX + 1, game._player.PosY];
                         string tile = t.GetString();
-                        if (tile != "T")
+                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
                         {
                             game._player.PosX += 1;
                         }
@@ -145,6 +159,20 @@ namespace PokemonConsole.State
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
                         }
+                    } else
+                    {
+                        if (game._currentMap == "center")
+                        {
+                            // update map
+                            game._currentMap = "overworld";
+                            game.ChangeMap(game._currentMap);
+                            game.DrawMapInit();
+
+                            // place player
+                            game._player.PosX = 0;
+                            game._player.PosY = 11;
+
+                        }
                     }
                     break;
 
@@ -152,12 +180,27 @@ namespace PokemonConsole.State
                     game.PushState(new MenuOverwold());
                     break;
 
+                case 'a':
+
+                    Tile tDir = game._map[game._player.PosX + game._player.DirX, game._player.PosY + game._player.DirY];
+                    string tileDir = tDir.GetString();
+
+                    if (tileDir == "D")
+                    {
+                        foreach(var pokemon in game.lInTeam)
+                        {
+                            Console.WriteLine("supposed to heal");
+                            pokemon.Health = pokemon.MaxHealth;
+                        }
+
+                    }
+                    break;
+
                 default:
                     break;
             }
 
             
-
             // update player pos on the map 
 
             Console.SetCursorPosition(game._player.LastPosX * 2 + 1, game._player.LastPosY + 1);
