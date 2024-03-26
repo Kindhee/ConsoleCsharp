@@ -45,13 +45,14 @@ namespace PokemonConsole.State
                         {
                             game._player.PosY -= 1;
                         }
-                        if (tile == "B" && game.IsEncoutering() == true){
-                                Enemy enemyToBattle = game.NewEnemy();
+                        if (tile == "B" && game.IsEncoutering() == true)
+                        {
+                            Enemy enemyToBattle = game.NewEnemy();
 
-                                game.AddMetPokemon(enemyToBattle, game);
+                            game.AddMetPokemon(enemyToBattle, game);
 
-                                Console.Clear();
-                                game.PushState(new BattleState(enemyToBattle));
+                            Console.Clear();
+                            game.PushState(new BattleState(enemyToBattle));
                         }
                     } else {
 

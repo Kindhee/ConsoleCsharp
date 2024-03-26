@@ -21,6 +21,8 @@ namespace PokemonConsole
         int _speed;
         int _stength;
 
+        int _reward;
+
         bool _isInTeam;
 
         CapacitiesRegistration capacitiesRegistration = new CapacitiesRegistration();
@@ -40,6 +42,8 @@ namespace PokemonConsole
             _speed = speed;
             _stength = strength;
 
+            _reward = 1;
+
             _isInTeam = false;
         }
 
@@ -52,6 +56,7 @@ namespace PokemonConsole
         public int Defense { get => _defense;  set => _defense = value; }
         public int Speed { get => _speed;  set => _speed = value; }
         public int Strength { get => _stength; set => _stength = value; }
+        public int Reward { get => _reward; set => _reward = value; }
         public bool isInTeam { get => _isInTeam; set => _isInTeam = value; }
 
     }

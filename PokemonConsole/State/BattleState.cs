@@ -81,27 +81,51 @@ namespace PokemonConsole.State
             }
             return false;
         }
-
         override public void Run(Game game)
         {
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
-            Console.WriteLine("\nUse z and s to navigate and press Enter/Return to select:");
             (int left, int top) = Console.GetCursorPosition();
             var option = 1;
             var decorator = " \u001b[32m";
             ConsoleKeyInfo key;
             bool isSelected = false;
 
+            bool test = false;
+
+            foreach (var pokemon in game.lInTeam)
+            {
+                if(pokemon.Health > 0)
+                {
+                    test = true;
+                }
+            }
+
+            if (test == false) {
+
+                Console.WriteLine("You don't have any Pokemon that can fight");
+                Console.WriteLine("Go heal them");
+
+                game.SetState(new OverworldState());
+                Console.ReadKey();
+                game.DrawMapInit();
+
+                _combat = true;
+            }
+
             while (_combat == false)
             {
+                Console.ReadKey(true);
+                Console.Clear();
 
                 _turnPlayed = 0;
 
                 while (!isSelected)
                 {
                     Console.SetCursorPosition(left, top);
+
+                    Console.WriteLine("\nUse z and s to navigate and press Enter/Return to select:");
 
                     Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
 
@@ -174,9 +198,31 @@ namespace PokemonConsole.State
                         _enemyRandom = _rand.Next(0, 4);
                         if (Attack(_enemyInBattle, _enemyInBattle.Capacities[_enemyRandom], game.lInTeam[_pokemonOnField]) == true)
                         {
-                            _turnPlayed = 2;
-                            _combat = true;
-                            break;
+                            test = false;
+
+                            for(int index = 0; index < game.lInTeam.Count; index++)
+                            {
+                                if (game.lInTeam[index].Health > 0)
+                                {
+                                    Console.WriteLine("");
+
+                                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} fainted");
+
+                                    _pokemonOnField = index;
+
+                                    Console.WriteLine($"Go {game.lInTeam[_pokemonOnField].Name}");
+
+                                    test = true;
+                                    _turnPlayed = 2;
+                                    break;
+                                }
+                            }
+
+                            if(test == false) {
+                                _turnPlayed = 2;
+                                _combat = true;
+                                break;
+                            }
                         }
                         else
                         {
@@ -194,6 +240,13 @@ namespace PokemonConsole.State
             {
                 case "You":
                     Console.WriteLine("You won !");
+
+                    Console.WriteLine(" ");
+
+                    game.lInTeam[_pokemonOnField].Level += _enemyInBattle.Reward;
+                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} gained {_enemyInBattle.Reward} level !");
+                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} is now level {game.lInTeam[_pokemonOnField].Level}");
+
                     break;
 
                 case "Enemy":
