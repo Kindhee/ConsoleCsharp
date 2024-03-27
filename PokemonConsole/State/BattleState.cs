@@ -242,7 +242,7 @@ namespace PokemonConsole.State
                             }
                             else
                             {
-                                if (game.lInTeam.Count > 6)
+                                if (game.lInTeam.Count >= 6)
                                 {
                                     Console.WriteLine("Your team is full");
                                     isSelected = false;
@@ -252,7 +252,7 @@ namespace PokemonConsole.State
                                 }
                                 else
                                 {
-                                    if (_rand.Next(0, 100) < 100)
+                                    if (_rand.Next(0, 100) < 0 + _enemyTeam[_enemyOnField].Health)
                                     {
                                         haveCapture = !haveCapture;
                                     }
