@@ -133,6 +133,7 @@ namespace PokemonConsole.State
             ConsoleKeyInfo key;
             bool isSelected = false;
 
+            bool haveCapture = false;
             bool test = false;
 
             foreach (var pokemon in game.lInTeam)
@@ -191,19 +192,20 @@ namespace PokemonConsole.State
 
                     Console.WriteLine($"{(option == 3 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[3].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[3].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[3].Accuracy}\u001b[0m");
 
+                    Console.WriteLine($"{(option == 4 ? decorator : " ")}Try to capture\u001b[0m");
 
-                    Console.WriteLine($"{(option == 4 ? decorator : " ")}Run\u001b[0m");
+                    Console.WriteLine($"{(option == 5 ? decorator : " ")}Run\u001b[0m");
 
                     key = Console.ReadKey(true);
 
                     switch (key.Key)
                     {
                         case ConsoleKey.Z:
-                            option = option == 0 ? 4 : option - 1;
+                            option = option == 0 ? 5 : option - 1;
                             break;
 
                         case ConsoleKey.S:
-                            option = option == 4 ? 0 : option + 1;
+                            option = option == 5 ? 0 : option + 1;
                             break;
 
                         case ConsoleKey.Enter:
@@ -212,7 +214,7 @@ namespace PokemonConsole.State
                     }
                 }
 
-                if(option == 4)
+                if(option == 5)
                 {
                     _currentTurn = "Run";
                     _combat = true;
@@ -229,7 +231,52 @@ namespace PokemonConsole.State
                 {
                     if (_currentTurn == "You")
                     {
-                        if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyTeam[_enemyOnField]) == true)
+                        if (option == 4)
+                        {
+                            if (_enemyTeam.Count != 1)
+                            {
+                                Console.WriteLine("Can't capture trainer's pokemon");
+                                isSelected = false;
+                                _turnPlayed += 1;
+                                _currentTurn = "Enemy";
+                            }
+                            else
+                            {
+                                if (game.lInTeam.Count > 6)
+                                {
+                                    Console.WriteLine("Your team is full");
+                                    isSelected = false;
+                                    _turnPlayed += 1;
+                                    _currentTurn = "Enemy";
+
+                                }
+                                else
+                                {
+                                    if (_rand.Next(0, 100) < 100)
+                                    {
+                                        haveCapture = !haveCapture;
+                                    }
+
+                                    if (haveCapture)
+                                    {
+                                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
+                                        _enemyTeam[_enemyOnField].isInTeam = true;
+                                        _turnPlayed = 2;
+                                        _combat = true;
+                                        _currentTurn = "Capture";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Capture failed");
+                                        isSelected = false;
+                                        _turnPlayed += 1;
+                                        _currentTurn = "Enemy";
+                                    }
+                                }
+                            }
+                        }
+                        else if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyTeam[_enemyOnField]) == true)
                         {
                             test = false;
 
@@ -350,6 +397,10 @@ namespace PokemonConsole.State
 
                 case "Run":
                     Console.WriteLine("You ran");
+                    break;
+
+                case "Capture":
+                    Console.WriteLine("Capture succed");
                     break;
             }
 
