@@ -45,6 +45,10 @@ namespace PokemonConsole
                 case TileType.Challenger:
                     return "C";
 
+                case TileType.Pokeball:
+                    return "O";
+
+
                 default:
                     return " ";
                     // or

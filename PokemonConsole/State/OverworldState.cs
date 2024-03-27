@@ -39,7 +39,7 @@ namespace PokemonConsole.State
 
                     if (game._player.PosY - 1 >= 0)
                     {
-                        Tile t = game._map[game._player.PosX, game._player.PosY-1];
+                        Tile t = game._map[game._player.PosX, game._player.PosY - 1];
                         string tile = t.GetString();
                         if (tile == " " || tile == "B")
                         {
@@ -58,7 +58,7 @@ namespace PokemonConsole.State
                             Console.Clear();
                             game.PushState(new BattleState(enemies));
                         }
-                    } else {
+                    } else if(game.lInTeam.Count > 0) {
 
                         switch (game._currentMap)
                         {
@@ -79,6 +79,9 @@ namespace PokemonConsole.State
 
                         game.ChangeMap(game._currentMap);
                         game.DrawMapInit();
+                    } else
+                    {
+                        Console.WriteLine("\nPickup the pokeball");
                     }
                     break;
 
@@ -142,7 +145,7 @@ namespace PokemonConsole.State
 
                     if (game._player.PosY + 1 < game._size)
                     {
-                        Tile t = game._map[game._player.PosX, game._player.PosY +1 ];
+                        Tile t = game._map[game._player.PosX, game._player.PosY + 1];
                         string tile = t.GetString();
                         if (tile == " " || tile == "B")
                         {
@@ -211,8 +214,8 @@ namespace PokemonConsole.State
                         }
                     } else
                     {
-                        
-                        switch(game._currentMap)
+
+                        switch (game._currentMap)
                         {
                             case "center":
                                 // update map
@@ -244,17 +247,36 @@ namespace PokemonConsole.State
                     Tile tDir = game._map[game._player.PosX + game._player.DirX, game._player.PosY + game._player.DirY];
                     string tileDir = tDir.GetString();
 
-                    if (tileDir == "D")
+                    switch (tileDir)
                     {
-                        foreach(var pokemon in game.lInTeam)
-                        {
-                            Console.WriteLine("Healed your pokemons !");
-                            pokemon.Health = pokemon.MaxHealth;
-                        }
+                        case "D":
 
-                    } else if (tileDir == "C") {
-                        Challenger challenger = new Challenger(3);
-                        game.PushState(new BattleState(challenger.ChallengerTeam));
+                            foreach (var pokemon in game.lInTeam)
+                            {
+                                Console.WriteLine("Healed your pokemons !");
+                                pokemon.Health = pokemon.MaxHealth;
+                            }
+                            break;
+
+                        case "C":
+
+                            Challenger challenger = new Challenger(3);
+                            game.PushState(new BattleState(challenger.ChallengerTeam));
+                            break;
+
+                        case "O": 
+
+                            game.OnPokeballPickUp();
+                            for (int i = 0; i < game.lInTeam.Count; i++) {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write($"{game.lInTeam[i].Name} ");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine(" has been added to the team !");
+                            }
+                            break;
+
+                        default:
+                            break;
                     }
                     break;
 
