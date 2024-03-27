@@ -38,6 +38,7 @@ namespace PokemonConsole
 
         public Game(int size, Player player)
         {
+            Console.WindowHeight= size+15; 
             _map = new Tile[size,size];
             _size = size;
             _player = player;
