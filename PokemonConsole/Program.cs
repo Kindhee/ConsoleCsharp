@@ -16,7 +16,7 @@ namespace PokemonConsole
 
             InitAll init = new InitAll();
             init.Init();
-
+            TypeManager typeManager = new TypeManager();
             // game - we define the size of the map here
             Game game = new Game(21, init.player);
 

@@ -141,11 +141,7 @@ namespace PokemonConsole
             {
                 for (int j = 0; j < _size; j++)
                 {
-                    if (i == _player.PosX && j == _player.PosY)
-                    {
-                        Player.DrawPlayer();
-                    } 
-                    else
+                    if (!(i == _player.PosX && j == _player.PosY))
                     {
                         switch(_map[i, j]._tileType)
                         {
