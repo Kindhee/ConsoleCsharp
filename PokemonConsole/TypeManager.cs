@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,249 +9,254 @@ namespace PokemonConsole
 {
     internal class TypeManager
     {
-        private Dictionary<string, Dictionary<string, double>> _weaknesses = new Dictionary<string, Dictionary<string, double>>();
-        public Dictionary<string, Dictionary<string, double>> Weakness { get => _weaknesses; }
+        private Dictionary<AttributType, Dictionary<AttributType, double>> _weaknesses = new Dictionary<AttributType, Dictionary<AttributType, double>>();
+        public Dictionary<AttributType, Dictionary<AttributType, double>> Weakness { get => _weaknesses; }
 
         public TypeManager()
         {
-            _weaknesses["Normal"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Normal] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 1.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 0.5 },
-                { "Poison", 1.0 },
-                { "Ground", 1.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 1.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 0.5 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Fire"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Fire] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 0.5 },
-                { "Plant", 2.0 },
-                { "Electric", 1.0 },
-                { "Ice", 2.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 0.5 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 2.0 },
-                { "Rock", 0.5 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 0.5 },
+                { AttributType.Plant, 2.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 2.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 0.5 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 2.0 },
+                { AttributType.Rock, 0.5 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Water"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Water] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 2.0 },
-                { "Water", 1.0 },
-                { "Plant", 0.5 },
-                { "Electric", 0.5 },
-                { "Ice", 1.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 2.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 2.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 2.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 0.5 },
+                { AttributType.Electric, 0.5 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 2.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 2.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Plant"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Plant] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 0.5 },
-                { "Water", 2.0 },
-                { "Plant", 1.0 },
-                { "Electric", 1.0 },
-                { "Ice", 0.5 },
-                { "Fighting", 1.0 },
-                { "Poison", 0.5 },
-                { "Ground", 2.0 },
-                { "Flying", 0.5 },
-                { "Psychic", 1.0 },
-                { "Bug", 0.5 },
-                { "Rock", 2.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 0.5 },
+                { AttributType.Water, 2.0 },
+                { AttributType.Plant, 1.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 0.5 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 0.5 },
+                { AttributType.Ground, 2.0 },
+                { AttributType.Flying, 0.5 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 0.5 },
+                { AttributType.Rock, 2.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Electric"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Electric] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 2.0 },
-                { "Plant", 1.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 0.5 },
-                { "Flying", 2.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 2.0 },
+                { AttributType.Plant, 1.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 0.5 },
+                { AttributType.Flying, 2.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Ice"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Ice] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 0.5 },
-                { "Water", 1.0 },
-                { "Plant", 2.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 0.5 },
-                { "Poison", 1.0 },
-                { "Ground", 2.0 },
-                { "Flying", 2.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 0.5 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 0.5 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 2.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 0.5 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 2.0 },
+                { AttributType.Flying, 2.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 0.5 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Fighting"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Fighting] = new Dictionary<AttributType, double>
             {
-                { "Normal", 2.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 1.0 },
-                { "Electric", 1.0 },
-                { "Ice", 2.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 1.0 },
-                { "Flying", 0.5 },
-                { "Psychic", 0.5 },
-                { "Bug", 1.0 },
-                { "Rock", 2.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 2.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 1.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 2.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 0.5 },
+                { AttributType.Psychic, 0.5 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 2.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Poison"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Poison] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 2.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 0.5 },
-                { "Flying", 1.0 },
-                { "Psychic", 0.5 },
-                { "Bug", 1.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 2.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 0.5 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 0.5 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Ground"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Ground] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 2.0 },
-                { "Water", 0.5 },
-                { "Plant", 0.5 },
-                { "Electric", 2.0 },
-                { "Ice", 0.5 },
-                { "Fighting", 1.0 },
-                { "Poison", 2.0 },
-                { "Ground", 1.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 2.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 2.0 },
+                { AttributType.Water, 0.5 },
+                { AttributType.Plant, 0.5 },
+                { AttributType.Electric, 2.0 },
+                { AttributType.Ice, 0.5 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 2.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 2.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Flying"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Flying] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 2.0 },
-                { "Electric", 0.5 },
-                { "Ice", 0.5 },
-                { "Fighting", 2.0 },
-                { "Poison", 1.0 },
-                { "Ground", 1.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 2.0 },
-                { "Rock", 0.5 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 2.0 },
+                { AttributType.Electric, 0.5 },
+                { AttributType.Ice, 0.5 },
+                { AttributType.Fighting, 2.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 2.0 },
+                { AttributType.Rock, 0.5 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Psychic"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Psychic] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 0.5 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 2.0 },
-                { "Poison", 2.0 },
-                { "Ground", 1.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 1.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 0.5 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 0.5 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 2.0 },
+                { AttributType.Poison, 2.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 0.5 }
             };
-            _weaknesses["Bug"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Bug] = new Dictionary<AttributType, double>
             {
-                { "Normal", 0.5 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 2.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 1.0 },
-                { "Flying", 0.5 },
-                { "Psychic", 2.0 },
-                { "Bug", 1.0 },
-                { "Rock", 0.5 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 0.5 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 2.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 0.5 },
+                { AttributType.Psychic, 2.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 0.5 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Rock"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Rock] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 2.0 },
-                { "Water", 0.5 },
-                { "Plant", 0.5 },
-                { "Electric", 1.0 },
-                { "Ice", 2.0 },
-                { "Fighting", 0.5 },
-                { "Poison", 1.0 },
-                { "Ground", 0.5 },
-                { "Flying", 2.0 },
-                { "Psychic", 1.0 },
-                { "Bug", 2.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 2.0 },
+                { AttributType.Water, 0.5 },
+                { AttributType.Plant, 0.5 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 2.0 },
+                { AttributType.Fighting, 0.5 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 0.5 },
+                { AttributType.Flying, 2.0 },
+                { AttributType.Psychic, 1.0 },
+                { AttributType.Bug, 2.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 1.0 }
             };
-            _weaknesses["Ghost"] = new Dictionary<string, double>
+            _weaknesses[AttributType.Ghost] = new Dictionary<AttributType, double>
             {
-                { "Normal", 1.0 },
-                { "Fire", 1.0 },
-                { "Water", 1.0 },
-                { "Plant", 1.0 },
-                { "Electric", 1.0 },
-                { "Ice", 1.0 },
-                { "Fighting", 1.0 },
-                { "Poison", 1.0 },
-                { "Ground", 1.0 },
-                { "Flying", 1.0 },
-                { "Psychic", 2.0 },
-                { "Bug", 1.0 },
-                { "Rock", 1.0 },
-                { "Ghost", 1.0 }
+                { AttributType.Normal, 1.0 },
+                { AttributType.Fire, 1.0 },
+                { AttributType.Water, 1.0 },
+                { AttributType.Plant, 1.0 },
+                { AttributType.Electric, 1.0 },
+                { AttributType.Ice, 1.0 },
+                { AttributType.Fighting, 1.0 },
+                { AttributType.Poison, 1.0 },
+                { AttributType.Ground, 1.0 },
+                { AttributType.Flying, 1.0 },
+                { AttributType.Psychic, 2.0 },
+                { AttributType.Bug, 1.0 },
+                { AttributType.Rock, 1.0 },
+                { AttributType.Ghost, 1.0 }
             };
+        }
+
+        public double GetRatioType(AttributType attackType, AttributType defenseType)
+        {
+            return _weaknesses[attackType][defenseType];    
         }
     }
 }

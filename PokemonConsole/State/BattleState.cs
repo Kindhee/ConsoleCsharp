@@ -12,6 +12,9 @@ namespace PokemonConsole.State
 {
     internal class BattleState : BlankState
     {
+
+        TypeManager _typeManager;
+
         int _pokemonOnField;
         int _enemyOnField;
 
@@ -28,6 +31,8 @@ namespace PokemonConsole.State
 
         public BattleState(List<Enemy> enemies)
         {
+            _typeManager = new TypeManager();
+
             _enemyTeam = enemies;
 
             _pokemonOnField = 0;
@@ -61,12 +66,31 @@ namespace PokemonConsole.State
                 Console.WriteLine($"{attacker.Name} uses {attack.Name} on your {defender.Name}");
             }
 
-            if (miss <= attack.Accuracy) { 
+            if (miss <= attack.Accuracy) {
 
-                int damage = (attack.Attack + (attack.Attack * (attacker.Strength / 100))) - (attack.Attack * (defender.Defense / 100));
+                double d = (((attack.Attack + (attack.Attack * (attacker.Strength / 100f))) - (attack.Attack * (defender.Defense / 100f))));
+                int damage = (int)(d  * _typeManager.GetRatioType(attack.Type, defender.Type));
                 defender.Health -= damage;
 
-                Console.WriteLine($"It deals {damage} damage !");
+                string effectiveness = "";
+
+                switch(_typeManager.GetRatioType(attack.Type, defender.Type))
+                {
+                    case 0.5:
+                        effectiveness = "It's not very effective...";
+                        break;
+
+                    case 1.0:
+                        effectiveness = "It's effective.";
+                        break;
+
+                    case 2.0:
+                        effectiveness = "It's very effective !";
+                        break;
+
+                }
+
+                Console.WriteLine($"{effectiveness} It deals {damage} damage !");
 
                 if (isDead(defender) == true)
                 {
