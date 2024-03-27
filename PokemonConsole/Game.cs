@@ -43,9 +43,6 @@ namespace PokemonConsole
             _player = player;
             _StateList = new List<BlankState>();
 
-            _tree = new Tree();
-            _bush = new Bush();
-
             // choose map
             _currentMap = "lobby";
             LoadMap(_currentMap);
@@ -86,7 +83,7 @@ namespace PokemonConsole
         {
             // empty map 
             String lineRead;
-            StreamReader mapTxt = new StreamReader($"../../../txt/{name}.txt");
+            StreamReader mapTxt = new StreamReader($"../../../txt/maps/{name}.txt");
             lineRead = mapTxt.ReadLine();
             int lineNumber = 0;
 
@@ -100,11 +97,12 @@ namespace PokemonConsole
                     {
 
                         case 't':
-                            AddTree(colNumber, lineNumber, _tree);
+                            _map[colNumber, lineNumber] = new Tree();
+
                             break;
 
                         case 'b':
-                            AddBush(colNumber, lineNumber, _bush);
+                            _map[colNumber, lineNumber] = new Bush();
                             break;
 
                         case 'r':
@@ -117,6 +115,10 @@ namespace PokemonConsole
 
                         case 'd':
                             _map[colNumber, lineNumber] = new Tile(TileType.Door);
+                            break;
+
+                        case 'c':
+                            _map[colNumber, lineNumber] = new Challenger(3);
                             break;
 
                         default:
@@ -185,6 +187,12 @@ namespace PokemonConsole
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
 
+                            case TileType.Challenger:
+                                Console.SetCursorPosition(i * 2 + 1, j + 1);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Write("  ");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                break;
 
                             case TileType.Empty:
                                 Console.SetCursorPosition(i * 2 + 1, j + 1);
@@ -357,17 +365,6 @@ namespace PokemonConsole
         {
             enemy.isInTeam = true;
         }
-
-        public void AddBush (int posX, int posY, Bush bush)
-        {
-            _map[posX, posY] = bush;
-        }
-
-        public void AddTree(int posX, int posY, Tree tree)
-        {
-            _map[posX, posY] = tree;
-        }
-
         public bool IsEncoutering()
         {
             chance = rand.Next(0, 10);

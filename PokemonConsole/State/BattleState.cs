@@ -125,7 +125,10 @@ namespace PokemonConsole.State
                 {
                     Console.SetCursorPosition(left, top);
 
-                    Console.WriteLine("\nUse z and s to navigate and press Enter/Return to select:");
+                    Console.WriteLine($"\nYour pokemon hp : {game.lInTeam[_pokemonOnField].Health}\n");
+                    Console.WriteLine($"\nEnemy pokemon hp : {_enemyInBattle.Health}\n\n");
+
+                    Console.WriteLine("Use z and s to navigate and press Enter/Return to select:");
 
                     Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
 
@@ -156,6 +159,14 @@ namespace PokemonConsole.State
                     }
                 }
 
+                if(option == 4)
+                {
+                    _currentTurn = "Run";
+                    _combat = true;
+                    game.SetState(new OverworldState());
+                    break;
+                }
+
                 if(game.lInTeam[_pokemonOnField].Speed < _enemyInBattle.Speed)
                 {
                     _currentTurn = "Enemy";
@@ -165,33 +176,18 @@ namespace PokemonConsole.State
                 {
                     if (_currentTurn == "You")
                     {
-                        switch (option)
+                        if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyInBattle) == true)
                         {
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyInBattle) == true)
-                                {
-                                    _turnPlayed = 2;
-                                    _combat = true;
-                                    break;
-                                }
-                                else
-                                {
-                                    isSelected = false;
-                                    _turnPlayed += 1;
-                                    _currentTurn = "Enemy";
-                                }
-                                break;
-
-                            case 4:
-                                game.SetState(new OverworldState());
-                                _currentTurn = "Run";
-                                _combat = true;
-                                break;
+                            _turnPlayed = 2;
+                            _combat = true;
+                            break;
                         }
-
+                        else
+                        {
+                            isSelected = false;
+                            _turnPlayed += 1;
+                            _currentTurn = "Enemy";
+                        }
                     }
                     else if (_currentTurn == "Enemy")
                     {
@@ -239,9 +235,7 @@ namespace PokemonConsole.State
             switch (_currentTurn)
             {
                 case "You":
-                    Console.WriteLine("You won !");
-
-                    Console.WriteLine(" ");
+                    Console.WriteLine("You won !\n");
 
                     game.lInTeam[_pokemonOnField].Level += _enemyInBattle.Reward;
                     Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} gained {_enemyInBattle.Reward} level !");

@@ -26,7 +26,7 @@ namespace PokemonConsole.State
             Console.WriteLine("      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\     /   |  |   |");
             Console.WriteLine("       \\    \\ `.__,'|  |`-._    `|      |  | \\/ | `.__,'|   |  |   |");
             Console.WriteLine("        \\_.-'       |__|    `-._ |      '--      '-.|    '-.|  |   |");
-            Console.WriteLine("                                `'                           '-._|");
+            Console.WriteLine("                                `'                             '-._|");
 
 
             Console.WriteLine("\nUse z and s to navigate and press Enter to select:\n");

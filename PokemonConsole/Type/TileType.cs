@@ -15,5 +15,6 @@ namespace PokemonConsole
         Wall,
         Roof,
         Door,
+        Challenger,
     }
 }

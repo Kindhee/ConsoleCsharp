@@ -42,6 +42,9 @@ namespace PokemonConsole
                 case TileType.Door:
                     return "D";
 
+                case TileType.Challenger:
+                    return "C";
+
                 default:
                     return " ";
                     // or
