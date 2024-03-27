@@ -11,12 +11,12 @@ namespace PokemonConsole.State
         private string _name = "BLANK";
 
         public string Name { get { return _name; } }
-        public virtual void Enter(BlankState oldState)
+        public virtual void Enter(BlankState oldState, Game game)
         {
 
         }
 
-        public virtual void Leave(BlankState newState)
+        public virtual void Leave(BlankState newState, Game game)
         {
 
         }
@@ -31,8 +31,8 @@ namespace PokemonConsole.State
 
         }
 
-        public virtual void Pause(BlankState newState) { }
+        public virtual void Pause(BlankState newState, Game game) { }
 
-        public virtual void Resume(BlankState oldState) { }
+        public virtual void Resume(BlankState oldState, Game game) { }
     }
 }

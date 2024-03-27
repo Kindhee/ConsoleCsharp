@@ -22,6 +22,8 @@ namespace PokemonConsole
         private List<BlankState> _StateList;
         List<string[]> pokemons = Utils.GetListFromFile("txt/Pokemons.txt");
 
+        Enemy _selectedPkm;
+
         int chance;
         Random rand = new Random();
         
@@ -33,6 +35,8 @@ namespace PokemonConsole
 
         private List<Enemy> _lInTeam = new List<Enemy>();
         public List<Enemy> lInTeam { get => _lInTeam; }
+
+        public Enemy SelectedPKM { get => _selectedPkm; set => _selectedPkm = value; }
 
         public Game(int size, Player player)
         {
@@ -369,21 +373,21 @@ namespace PokemonConsole
             if (StateList.Count > 0)
             {
                 old = StateList.Last();
-                old.Leave(state);
+                old.Leave(state, this);
             }
             StateList.Clear();
 
             StateList.Add(state);
             if (old != null)
-                state.Enter(old);
+                state.Enter(old, this);
         }
 
         public void PushState(BlankState state)
         {
             BlankState old = StateList.Last();
             StateList.Add(state);
-            state.Enter(old);
-            old.Pause(state);
+            state.Enter(old, this);
+            old.Pause(state, this);
         }
 
         public void PopState()
@@ -391,8 +395,8 @@ namespace PokemonConsole
             BlankState old = StateList.Last();
             StateList.RemoveAt(StateList.Count - 1);
             BlankState newS = StateList.Last();
-            old.Leave(newS);
-            newS.Resume(old);
+            old.Leave(newS, this);
+            newS.Resume(old, this);
 
         }
 

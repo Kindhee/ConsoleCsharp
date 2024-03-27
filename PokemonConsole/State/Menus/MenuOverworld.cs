@@ -64,7 +64,8 @@ namespace PokemonConsole.State
                     break;
 
                 case 3:
-                    // inventory
+                    Console.Clear();
+                    game.PushState(new InventoryState());
                     break; 
                
                 case 4:
