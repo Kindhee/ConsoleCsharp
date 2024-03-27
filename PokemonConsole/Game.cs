@@ -118,7 +118,7 @@ namespace PokemonConsole
                             break;
 
                         case 'c':
-                            _map[colNumber, lineNumber] = new Challenger(3);
+                            _map[colNumber, lineNumber] = new Tile(TileType.Challenger);
                             break;
 
                         default:

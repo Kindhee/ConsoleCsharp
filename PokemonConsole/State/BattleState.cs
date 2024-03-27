@@ -12,8 +12,8 @@ namespace PokemonConsole.State
 {
     internal class BattleState : BlankState
     {
-        Enemy _enemyInBattle;
         int _pokemonOnField;
+        int _enemyOnField;
 
         string _currentTurn;
         bool _combat;
@@ -24,11 +24,14 @@ namespace PokemonConsole.State
 
         Random _rand;
 
+        List<Enemy> _enemyTeam;
 
-        public BattleState(Enemy enemy)
+        public BattleState(List<Enemy> enemies)
         {
-            _enemyInBattle = enemy;
+            _enemyTeam = enemies;
+
             _pokemonOnField = 0;
+            _enemyOnField = 0;
 
             _currentTurn = "You";
             _combat = false;
@@ -125,8 +128,8 @@ namespace PokemonConsole.State
                 {
                     Console.SetCursorPosition(left, top);
 
-                    Console.WriteLine($"\nYour pokemon hp : {game.lInTeam[_pokemonOnField].Health}\n");
-                    Console.WriteLine($"\nEnemy pokemon hp : {_enemyInBattle.Health}\n\n");
+                    Console.WriteLine($"\nYour {game.lInTeam[_pokemonOnField].Name} pokemon hp : {game.lInTeam[_pokemonOnField].Health}\n");
+                    Console.WriteLine($"\nEnemy {_enemyTeam[_enemyOnField].Name} pokemon hp : {_enemyTeam[_enemyOnField].Health}\n\n");
 
                     Console.WriteLine("Use z and s to navigate and press Enter/Return to select:");
 
@@ -167,7 +170,7 @@ namespace PokemonConsole.State
                     break;
                 }
 
-                if(game.lInTeam[_pokemonOnField].Speed < _enemyInBattle.Speed)
+                if(game.lInTeam[_pokemonOnField].Speed < _enemyTeam[_enemyOnField].Speed)
                 {
                     _currentTurn = "Enemy";
                 }
@@ -176,11 +179,34 @@ namespace PokemonConsole.State
                 {
                     if (_currentTurn == "You")
                     {
-                        if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyInBattle) == true)
+                        if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyTeam[_enemyOnField]) == true)
                         {
-                            _turnPlayed = 2;
-                            _combat = true;
-                            break;
+                            test = false;
+
+                            for (int index = 0; index < _enemyTeam.Count; index++)
+                            {
+                                if (_enemyTeam[index].Health > 0)
+                                {
+                                    Console.WriteLine("");
+
+                                    Console.WriteLine($"Enemy {_enemyTeam[_enemyOnField].Name} fainted");
+
+                                    _enemyOnField = index;
+
+                                    Console.WriteLine($"They throw {_enemyTeam[_enemyOnField].Name} in combat");
+
+                                    test = true;
+                                    _turnPlayed = 2;
+                                    break;
+                                }
+                            }
+
+                            if (test == false)
+                            {
+                                _turnPlayed = 2;
+                                _combat = true;
+                                break;
+                            }
                         }
                         else
                         {
@@ -192,7 +218,7 @@ namespace PokemonConsole.State
                     else if (_currentTurn == "Enemy")
                     {
                         _enemyRandom = _rand.Next(0, 4);
-                        if (Attack(_enemyInBattle, _enemyInBattle.Capacities[_enemyRandom], game.lInTeam[_pokemonOnField]) == true)
+                        if (Attack(_enemyTeam[_enemyOnField], _enemyTeam[_enemyOnField].Capacities[_enemyRandom], game.lInTeam[_pokemonOnField]) == true)
                         {
                             test = false;
 
@@ -237,8 +263,8 @@ namespace PokemonConsole.State
                 case "You":
                     Console.WriteLine("You won !\n");
 
-                    game.lInTeam[_pokemonOnField].Level += _enemyInBattle.Reward;
-                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} gained {_enemyInBattle.Reward} level !");
+                    game.lInTeam[_pokemonOnField].Level += _enemyTeam[_enemyOnField].Reward;
+                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} gained {_enemyTeam[_enemyOnField].Reward} level !");
                     Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} is now level {game.lInTeam[_pokemonOnField].Level}");
 
                     break;

@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PokemonConsole
-{    public class Challenger : Tile
+{    public class Challenger
     {
         List<string[]> pokemons = Utils.GetListFromFile("txt/Pokemons.txt");
 
         Random rand = new Random();
 
-        List<Enemy> lChallengerTeam = new List<Enemy>();
-        public Challenger(int teamSize) : base(TileType.Challenger)
+        List<Enemy> _lChallengerTeam = new List<Enemy>();
+        public Challenger(int teamSize) 
         {
 
             for (int i = 0; i < teamSize; i++)
@@ -41,8 +41,10 @@ namespace PokemonConsole
                     speed + (speed * scaling),                                                              // speed
                     strength + (strength * scaling));                                                       // strength
 
-                lChallengerTeam.Add(enemy);
+                _lChallengerTeam.Add(enemy);
             }
         }
+
+        public List<Enemy> ChallengerTeam { get => _lChallengerTeam; }
     }
 }

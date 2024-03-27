@@ -41,18 +41,22 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY-1];
                         string tile = t.GetString();
-                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
+                        if (tile == " " || tile == "B")
                         {
                             game._player.PosY -= 1;
                         }
                         if (tile == "B" && game.IsEncoutering() == true)
                         {
+                            List<Enemy> enemies = new List<Enemy>();
+
                             Enemy enemyToBattle = game.NewEnemy();
+
+                            enemies.Add(enemyToBattle);
 
                             game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                            game.PushState(new BattleState(enemies));
                         }
                     } else {
 
@@ -88,18 +92,22 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX - 1, game._player.PosY];
                         string tile = t.GetString();
-                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
+                        if (tile == " " || tile == "B")
                         {
                             game._player.PosX -= 1;
                         }
                         if (tile == "B" && game.IsEncoutering() == true)
                         {
+                            List<Enemy> enemies = new List<Enemy>();
+
                             Enemy enemyToBattle = game.NewEnemy();
+
+                            enemies.Add(enemyToBattle);
 
                             game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                            game.PushState(new BattleState(enemies));
                         }
                     }
                     else
@@ -136,18 +144,22 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX, game._player.PosY +1 ];
                         string tile = t.GetString();
-                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
+                        if (tile == " " || tile == "B")
                         {
                             game._player.PosY += 1;
                         }
                         if (tile == "B" && game.IsEncoutering() == true)
                         {
+                            List<Enemy> enemies = new List<Enemy>();
+
                             Enemy enemyToBattle = game.NewEnemy();
+
+                            enemies.Add(enemyToBattle);
 
                             game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                            game.PushState(new BattleState(enemies));
                         }
                     } else
                     {
@@ -180,18 +192,22 @@ namespace PokemonConsole.State
                     {
                         Tile t = game._map[game._player.PosX + 1, game._player.PosY];
                         string tile = t.GetString();
-                        if (tile != "T" && tile != "R" && tile != "W" && tile != "D")
+                        if (tile == " " || tile == "B")
                         {
                             game._player.PosX += 1;
                         }
                         if (tile == "B" && game.IsEncoutering() == true)
                         {
+                            List<Enemy> enemies = new List<Enemy>();
+
                             Enemy enemyToBattle = game.NewEnemy();
+
+                            enemies.Add(enemyToBattle);
 
                             game.AddMetPokemon(enemyToBattle, game);
 
                             Console.Clear();
-                            game.PushState(new BattleState(enemyToBattle));
+                            game.PushState(new BattleState(enemies));
                         }
                     } else
                     {
@@ -237,7 +253,8 @@ namespace PokemonConsole.State
                         }
 
                     } else if (tileDir == "C") {
-                        //Challenger combat
+                        Challenger challenger = new Challenger(3);
+                        game.PushState(new BattleState(challenger.ChallengerTeam));
                     }
                     break;
 
