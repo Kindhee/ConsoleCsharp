@@ -56,17 +56,25 @@ namespace PokemonConsole.State
                         }
                     } else {
 
-                        if (game._currentMap == "lobby")
+                        switch (game._currentMap)
                         {
-                            // update map
-                            game._currentMap = "overworld";
-                            game.ChangeMap(game._currentMap);
-                            game.DrawMapInit();
-                            
-                            // place player
-                            game._player.PosX = 11;
-                            game._player.PosY = 20;
+                            case "lobby":
+                                // update map
+                                game._currentMap = "overworld";
+                                break;
+
+                            case "overworld":
+                                // update map
+                                game._currentMap = "arena";
+                                break;
                         }
+
+                        // place player
+                        game._player.PosX = 10;
+                        game._player.PosY = 20;
+
+                        game.ChangeMap(game._currentMap);
+                        game.DrawMapInit();
                     }
                     break;
 
@@ -93,20 +101,28 @@ namespace PokemonConsole.State
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
                         }
-                    } else
+                    }
+                    else
                     {
-                        if (game._currentMap == "overworld")
+                        switch (game._currentMap)
                         {
-                            // update map
-                            game._currentMap = "center";
-                            game.ChangeMap(game._currentMap);
-                            game.DrawMapInit();
+                            case "overworld":
+                                // update map
+                                game._currentMap = "center";
+                                break;
 
-                            // place player
-                            game._player.PosX = 20;
-                            game._player.PosY = 11;
-
+                            case "blank":
+                                // update map
+                                game._currentMap = "overworld";
+                                break;
                         }
+
+                        game.ChangeMap(game._currentMap);
+                        game.DrawMapInit();
+
+                        // place player
+                        game._player.PosX = 20;
+                        game._player.PosY = 10;
                     }
                     break;
 
@@ -133,6 +149,24 @@ namespace PokemonConsole.State
                             Console.Clear();
                             game.PushState(new BattleState(enemyToBattle));
                         }
+                    } else
+                    {
+
+                        switch (game._currentMap)
+                        {
+                            case "arena":
+                                // update map
+                                game._currentMap = "overworld";
+                                break;
+                        }
+
+                        game.ChangeMap(game._currentMap);
+                        game.DrawMapInit();
+
+                        // place player
+                        game._player.PosX = 10;
+                        game._player.PosY = 0;
+
                     }
                     break;
 
@@ -161,18 +195,27 @@ namespace PokemonConsole.State
                         }
                     } else
                     {
-                        if (game._currentMap == "center")
+                        
+                        switch(game._currentMap)
                         {
-                            // update map
-                            game._currentMap = "overworld";
-                            game.ChangeMap(game._currentMap);
-                            game.DrawMapInit();
+                            case "center":
+                                // update map
+                                game._currentMap = "overworld";
+                                break;
 
-                            // place player
-                            game._player.PosX = 0;
-                            game._player.PosY = 11;
-
+                            case "overworld":
+                                // update map
+                                game._currentMap = "blank";
+                                break;
                         }
+
+                        game.ChangeMap(game._currentMap);
+                        game.DrawMapInit();
+
+                        // place player
+                        game._player.PosX = 0;
+                        game._player.PosY = 10;
+
                     }
                     break;
 
@@ -189,10 +232,12 @@ namespace PokemonConsole.State
                     {
                         foreach(var pokemon in game.lInTeam)
                         {
-                            Console.WriteLine("supposed to heal");
+                            Console.WriteLine("Healed your pokemons !");
                             pokemon.Health = pokemon.MaxHealth;
                         }
 
+                    } else if (tileDir == "C") {
+                        //Challenger combat
                     }
                     break;
 
