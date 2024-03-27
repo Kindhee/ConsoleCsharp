@@ -61,10 +61,18 @@ namespace PokemonConsole.State
             Console.WriteLine(" ");
 
             if (_currentTurn == "You") {
-                Console.WriteLine($"{attacker.Name} uses {attack.Name} on enemy {defender.Name}");
-            } else {
-                Console.WriteLine($"{attacker.Name} uses {attack.Name} on your {defender.Name}");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"{attacker.Name} ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"uses {attack.Name} on enemy {defender.Name}");
             }
+            else {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"{attacker.Name} ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"uses {attack.Name} on your {defender.Name}");
+            }
+
 
             if (miss <= attack.Accuracy) {
 
@@ -101,9 +109,15 @@ namespace PokemonConsole.State
             else
             {
                 if (_currentTurn == "You") {
-                    Console.WriteLine($"Your {attacker.Name} missed !");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{attacker.Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"missed !");
                 } else {
-                    Console.WriteLine($"Enemy {attacker.Name} missed !");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($"{attacker.Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($" missed !");
                 }
             }
             return false;
@@ -152,10 +166,22 @@ namespace PokemonConsole.State
                 {
                     Console.SetCursorPosition(left, top);
 
-                    Console.WriteLine($"\nYour {game.lInTeam[_pokemonOnField].Name} pokemon hp : {game.lInTeam[_pokemonOnField].Health}\n");
-                    Console.WriteLine($"\nEnemy {_enemyTeam[_enemyOnField].Name} pokemon hp : {_enemyTeam[_enemyOnField].Health}\n\n");
+                    // Your Pokemon
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{game.lInTeam[_pokemonOnField].Name} ");
 
-                    Console.WriteLine("Use z and s to navigate and press Enter/Return to select:");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"| HP : {game.lInTeam[_pokemonOnField].Health} | Type : {game.lInTeam[_pokemonOnField].Type}\n");
+
+                    // Enemy Pokemon
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($"{_enemyTeam[_enemyOnField].Name} ");
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"| HP : {_enemyTeam[_enemyOnField].Health} | Type : {_enemyTeam[_enemyOnField].Type}\n\n");
+
+                    Console.WriteLine("Use z and s to navigate and press Enter/Return to select your capacity:\n");
 
                     Console.WriteLine($"{(option == 0 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[0].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[0].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[0].Accuracy}\u001b[0m");
 
@@ -213,11 +239,17 @@ namespace PokemonConsole.State
                                 {
                                     Console.WriteLine("");
 
-                                    Console.WriteLine($"Enemy {_enemyTeam[_enemyOnField].Name} fainted");
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write($"{_enemyTeam[_enemyOnField].Name} ");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine($"fainted");
 
                                     _enemyOnField = index;
 
-                                    Console.WriteLine($"They throw {_enemyTeam[_enemyOnField].Name} in combat");
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write($"{_enemyTeam[_enemyOnField].Name} ");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine($"is now up !");
 
                                     test = true;
                                     _turnPlayed = 2;
@@ -252,11 +284,18 @@ namespace PokemonConsole.State
                                 {
                                     Console.WriteLine("");
 
-                                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} fainted");
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write($"{game.lInTeam[_pokemonOnField].Name} ");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine($"fainted");
+
 
                                     _pokemonOnField = index;
 
-                                    Console.WriteLine($"Go {game.lInTeam[_pokemonOnField].Name}");
+                                    Console.Write($"Go ");
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"{game.lInTeam[_pokemonOnField].Name}");
+                                    Console.ForegroundColor = ConsoleColor.White;
 
                                     test = true;
                                     _turnPlayed = 2;
@@ -285,16 +324,28 @@ namespace PokemonConsole.State
             switch (_currentTurn)
             {
                 case "You":
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You won !\n");
+                    Console.ForegroundColor = ConsoleColor.White;
 
                     game.lInTeam[_pokemonOnField].Level += _enemyTeam[_enemyOnField].Reward;
-                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} gained {_enemyTeam[_enemyOnField].Reward} level !");
-                    Console.WriteLine($"Your {game.lInTeam[_pokemonOnField].Name} is now level {game.lInTeam[_pokemonOnField].Level}");
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{game.lInTeam[_pokemonOnField].Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"gained {_enemyTeam[_enemyOnField].Reward} level !");
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{game.lInTeam[_pokemonOnField].Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"is now level {game.lInTeam[_pokemonOnField].Level}");
 
                     break;
 
                 case "Enemy":
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Your Pokemon fainted");
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
 
                 case "Run":
