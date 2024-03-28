@@ -15,10 +15,19 @@ namespace PokemonConsole.State.Menus.Sous_Menus
 
         private string decorator;
 
+        private bool inBattle;
+        private BattleState battleState;
+
         ConsoleKeyInfo key;
 
         override public void Enter(BlankState state, Game game)
         {
+            if (state is BattleState)
+            {
+                inBattle = true;
+                battleState = (BattleState)state;
+            }
+
             bags = new List<List<Inventory.StorageItemInfo>>();
 
             bags.Add(game._player.Inventory.Items);
@@ -107,7 +116,10 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                     game.PopState();
                     break;
                 case ConsoleKey.Enter:
-                    bags[bIndex][iIndex].item.onOverWorldUse(game);
+                    if (inBattle)
+                        bags[bIndex][iIndex].item.OnBattleUse(game, battleState);
+                    else
+                        bags[bIndex][iIndex].item.OnOverWorldUse(game);
                     break;
                 default:
                     break;
