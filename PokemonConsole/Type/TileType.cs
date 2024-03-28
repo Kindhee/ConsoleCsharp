@@ -17,5 +17,6 @@ namespace PokemonConsole
         Door,
         Challenger,
         Pokeball,
+        DoorH,
     }
 }

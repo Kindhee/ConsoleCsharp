@@ -97,6 +97,10 @@ namespace PokemonConsole
                             _map[colNumber, lineNumber] = new Tile(TileType.Pokeball);
                             break;
 
+                        case 'h':
+                            _map[colNumber, lineNumber] = new Tile(TileType.DoorH);
+                            break;
+
                         default:
                             _map[colNumber, lineNumber] = new Tile(TileType.Empty);
                             break;
@@ -151,7 +155,8 @@ namespace PokemonConsole
                                 Console.Write("  ");
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
-
+                            
+                            case TileType.DoorH:
                             case TileType.Door:
                                 Console.SetCursorPosition(i * 2 + 1, j + 1);
                                 Console.BackgroundColor = ConsoleColor.Red;
@@ -239,6 +244,7 @@ namespace PokemonConsole
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
 
+                            case (TileType.DoorH):
                             case (TileType.Door):
                                 Console.BackgroundColor = ConsoleColor.Red;
                                 Console.Write("  ");

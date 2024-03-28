@@ -71,10 +71,15 @@ namespace PokemonConsole.State
                                 // update map
                                 game._currentMap = "arena";
                                 break;
+
+                            case "center":
+                                // update map
+                                game._currentMap = "forest";
+                                break;
                         }
 
-                        // place player
-                        game._player.PosX = 10;
+                        // place player 
+                        //game._player.PosX = 10;
                         game._player.PosY = 20;
 
                         game.ChangeMap(game._currentMap);
@@ -133,7 +138,7 @@ namespace PokemonConsole.State
 
                         // place player
                         game._player.PosX = 20;
-                        game._player.PosY = 10;
+                        //game._player.PosY = 10;
                     }
                     break;
 
@@ -173,13 +178,18 @@ namespace PokemonConsole.State
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
+
+                            case "forest":
+                                //update map
+                                game._currentMap = "center";
+                                break;  
                         }
 
                         game.ChangeMap(game._currentMap);
                         game.DrawMapInit();
 
                         // place player
-                        game._player.PosX = 10;
+                        //game._player.PosX = 10;
                         game._player.PosY = 0;
 
                     }
@@ -233,7 +243,7 @@ namespace PokemonConsole.State
 
                         // place player
                         game._player.PosX = 0;
-                        game._player.PosY = 10;
+                        //game._player.PosY = 10;
 
                     }
                     break;
@@ -257,6 +267,10 @@ namespace PokemonConsole.State
                                 pokemon.Health = pokemon.MaxHealth;
                             }
                             break;
+
+                        case "H":
+                            Console.WriteLine("Nobody in the house !");
+                            break;  
 
                         case "C":
 
