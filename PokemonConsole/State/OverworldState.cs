@@ -72,7 +72,7 @@ namespace PokemonConsole.State
                                 game._currentMap = "arena";
                                 break;
 
-                            case "center":
+                            case "healcenter":
                                 // update map
                                 game._currentMap = "forest";
                                 break;
@@ -181,7 +181,7 @@ namespace PokemonConsole.State
 
                             case "forest":
                                 //update map
-                                game._currentMap = "center";
+                                game._currentMap = "healcenter";
                                 break;  
                         }
 
