@@ -43,6 +43,7 @@ namespace PokemonConsole
         
         public Game(int size, Player player)
         {
+
             Console.WindowHeight= size+15; 
             _map = new Tile[size,size];
             _size = size;
@@ -58,7 +59,7 @@ namespace PokemonConsole
         {
             // empty map 
             String lineRead;
-            StreamReader mapTxt = new StreamReader($"../../../txt/maps/{name}.txt");
+            StreamReader mapTxt = new StreamReader($"./txt/maps/{name}.txt");
             lineRead = mapTxt.ReadLine();
             int lineNumber = 0;
 
