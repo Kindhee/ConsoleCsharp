@@ -277,7 +277,7 @@ namespace PokemonConsole.State
                             break;
 
                         case "H":
-                            Console.WriteLine("Nobody in the house !");
+                            Console.WriteLine("\nNobody is in the house...");
                             break;  
 
                         case "C":
