@@ -249,7 +249,7 @@ namespace PokemonConsole.State
                             }
                             else
                             {
-                                if (_rand.Next(0, 100) < 0 + _enemyTeam[_enemyOnField].Health)
+                                if (_rand.Next(0, 100) < 100 - _enemyTeam[_enemyOnField].Health)
                                 {
                                     haveCapture = !haveCapture;
                                 }
@@ -265,9 +265,9 @@ namespace PokemonConsole.State
                                     else
                                     {
                                         game.lInTeam.Add(_enemyTeam[_enemyOnField]);
+                                        _enemyTeam[_enemyOnField].isInTeam = true;
                                     }
                                     Console.WriteLine("\nCapture succeed");
-                                    _enemyTeam[_enemyOnField].isInTeam = true;
                                     _turnPlayed += 1;
                                     _combat = true;
                                     _currentTurn = "Enemy";

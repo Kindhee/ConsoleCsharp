@@ -437,7 +437,7 @@ namespace PokemonConsole
         {
             if (lInTeam.Count == 0)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     int index = rand.Next(0, pokemons.Count);
 
