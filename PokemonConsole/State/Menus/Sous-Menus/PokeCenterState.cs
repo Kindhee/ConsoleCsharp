@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +15,21 @@ namespace PokemonConsole.State.Menus.Sous_Menus
             Console.Clear();
             Console.WriteLine("Press e to go back to the Menu");
 
+           /* Console.WriteLine($"{(option == 1 ? decorator : " ")}Game\u001b[0m");
+            Console.WriteLine($"{(option == 2 ? decorator : " ")}Exit\u001b[0m");*/
+
             Console.WriteLine("Your team :");
             foreach (var pokemonInTeam in game.lInTeam)
             {
                 Console.WriteLine(pokemonInTeam.Name);
             }
 
-            Console.SetCursorPosition(20, 1);
-            Console.Write("Your Pokemons :");
+
 
             if(game.lPokemonCatch.Count > 0)
             {
+                Console.SetCursorPosition(20, 1);
+                Console.Write("Your Pokemons :");
                 int i = 0;
                 foreach (var pokemonCatch in game.lPokemonCatch)
                 {

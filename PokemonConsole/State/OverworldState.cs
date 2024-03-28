@@ -119,10 +119,10 @@ namespace PokemonConsole.State
                         {
                             case "overworld":
                                 // update map
-                                game._currentMap = "center";
+                                game._currentMap = "healcenter";
                                 break;
 
-                            case "blank":
+                            case "pokecenter":
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
@@ -217,14 +217,14 @@ namespace PokemonConsole.State
 
                         switch (game._currentMap)
                         {
-                            case "center":
+                            case "healcenter":
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
 
                             case "overworld":
                                 // update map
-                                game._currentMap = "blank";
+                                game._currentMap = "pokecenter";
                                 break;
                         }
 
