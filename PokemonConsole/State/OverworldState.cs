@@ -270,7 +270,6 @@ namespace PokemonConsole.State
                             break;
 
                         case "O": 
-
                             game.OnPokeballPickUp();
                             break;
 

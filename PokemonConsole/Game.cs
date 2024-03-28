@@ -30,8 +30,8 @@ namespace PokemonConsole
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
 
-        private Dictionary<string, Enemy> _lEnemiesMeet = new Dictionary<string, Enemy>();
-        public Dictionary<string, Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
+        private List<Enemy> _lEnemiesMeet = new List<Enemy>();
+        public List<Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
 
         private List<Enemy> _lInTeam = new List<Enemy>();
         public List<Enemy> lInTeam { get => _lInTeam; }
@@ -402,9 +402,17 @@ namespace PokemonConsole
 
         public void AddMetPokemon(Enemy newEnemy, Game game)
         {
-            if (!game.lEnemiesMeet.ContainsKey(newEnemy.Name))
+            bool test = true;
+
+            foreach(var enemy in lEnemiesMeet)
             {
-                game.lEnemiesMeet.Add(newEnemy.Name, newEnemy);
+                if(enemy.Name == newEnemy.Name)
+                {
+                    test = false;
+                }
+            }
+            if (test == true) {
+                game.lEnemiesMeet.Add(newEnemy);
             }
         }
 
@@ -439,7 +447,9 @@ namespace PokemonConsole
                         strength + (strength * scaling));                                                       // strength
 
                     enemy.isInTeam = true;
+
                     lInTeam.Add(enemy);
+                    lEnemiesMeet.Add(enemy);
                     //
                 }
 
