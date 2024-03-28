@@ -256,10 +256,7 @@ namespace PokemonConsole.State
                     {
                         case "P":
 
-                            foreach (var pokemon in game.lInTeam)
-                            {
-                                game.PushState(new PokeCenterState());
-                            }
+                            game.PushState(new PokeCenterState());
                             break;
 
                         case "D":

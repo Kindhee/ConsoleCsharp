@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonConsole.Items;
 
 namespace PokemonConsole.State
 {
@@ -238,6 +239,7 @@ namespace PokemonConsole.State
                     {
                         if (option == 4)
                         {
+                            
                             if (_enemyTeam.Count != 1)
                             {
                                 Console.WriteLine("Can't capture trainer's pokemon");
