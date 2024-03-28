@@ -15,6 +15,7 @@ namespace PokemonConsole
         Wall,
         Roof,
         Door,
+        Pokedoor,
         Challenger,
         Pokeball,
     }
