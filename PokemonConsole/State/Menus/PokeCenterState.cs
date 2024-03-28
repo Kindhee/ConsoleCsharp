@@ -15,7 +15,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
             ConsoleKeyInfo key;
 
             int option = 1;
-            int i = 1;
+            int optionNumber = 1;
             var decorator = " \u001b[32m";
             bool isSelected = false;
 
@@ -31,24 +31,25 @@ namespace PokemonConsole.State.Menus.Sous_Menus
             while (!isSelected)
             {
                 Console.SetCursorPosition(0, 1);
-                i = 1;
+
+                optionNumber = 1;
                 foreach (var pokemonInTeam in game.lInTeam)
                 {
-                    Console.SetCursorPosition(0, i+1);
-                    Console.WriteLine($"{(option == i ? decorator : " ")}" + pokemonInTeam.Name + "\u001b[0m");
-                    i++;
+                    Console.SetCursorPosition(0, optionNumber +1);
+                    Console.WriteLine($"{(option == optionNumber ? decorator : " ")}" + pokemonInTeam.Name + "\u001b[0m");
+                    optionNumber++;
                 }
 
                 if (game.lPokemonCatch.Count > 0)
                 {
                     Console.SetCursorPosition(20, 1);
                     Console.Write("Your Pokemons :");
-                    i = 1;
+                    optionNumber = 1;
                     foreach (var pokemonCatch in game.lPokemonCatch)
                     {
-                        Console.SetCursorPosition(20, i + 2);
-                        Console.WriteLine($"{(option == i ? decorator : " ")}" + pokemonCatch.Name + "\u001b[0m");
-                        i++;
+                        Console.SetCursorPosition(20, optionNumber + 2);
+                        Console.WriteLine($"{(option == optionNumber ? decorator : " ")}" + pokemonCatch.Name + "\u001b[0m");
+                        optionNumber++;
                     }
                 }
 
