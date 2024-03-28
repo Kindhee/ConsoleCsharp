@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,14 @@ namespace PokemonConsole.Items
         public float GetCatchMultiplier()
         {
             return _catchMultiplier;
+        }
+
+        public override void OnBattleUse(Game game, BattleState state)
+        {
+            state.CaptureBall = this;
+            Inventory inventory = game._player.Inventory;
+            if (RemoveOnUse())
+                inventory.RemoveItem(this);
         }
     }
 }

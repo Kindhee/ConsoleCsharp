@@ -8,10 +8,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using PokemonConsole.Items;
+using System.Numerics;
 
 namespace PokemonConsole.State
 {
-    internal class BattleState : BlankState
+    public class BattleState : BlankState
     {
 
         TypeManager _typeManager;
@@ -25,6 +26,12 @@ namespace PokemonConsole.State
         int _enemyRandom;
 
         int _turnPlayed;
+
+        Enemy _selectedPKM;
+        public Enemy SelectedPKM { get { return _selectedPKM; } set { _selectedPKM = value; } }
+
+        PokeBall _captureBall;
+        public PokeBall CaptureBall { get { return _captureBall; } set { _captureBall = value; } }
 
         Random _rand;
 
@@ -198,7 +205,7 @@ namespace PokemonConsole.State
 
                     Console.WriteLine($"{(option == 3 ? decorator : " ")}{game.lInTeam[_pokemonOnField].Capacities[3].Name} | Attack : {game.lInTeam[_pokemonOnField].Capacities[3].Attack} | Accuracy : {game.lInTeam[_pokemonOnField].Capacities[3].Accuracy}\u001b[0m");
 
-                    Console.WriteLine($"{(option == 4 ? decorator : " ")}Try to capture\u001b[0m");
+                    Console.WriteLine($"{(option == 4 ? decorator : " ")}Inventory\u001b[0m");
 
                     Console.WriteLine($"{(option == 5 ? decorator : " ")}Run\u001b[0m");
 
@@ -220,11 +227,79 @@ namespace PokemonConsole.State
                     }
                 }
 
-                if(option == 5)
+                if (option == 4)
+                {
+                    SelectedPKM = null;
+                    CaptureBall = null;
+                    game.PushState(new State.Menus.Sous_Menus.InventoryState());
+                    while (SelectedPKM == null && CaptureBall == null)
+                        game.StateList.Last().Run(game);
+                    game.PopState();
+                    if (CaptureBall == null) break;
+                    if (_enemyTeam.Count != 1)
+                    {
+                        Console.WriteLine("Can't capture trainer's pokemon");
+                        isSelected = false;
+                        _turnPlayed += 1;
+                        _currentTurn = "Enemy";
+                        break;
+                    }
+                    else if (game.lInTeam.Count > 6)
+                    {
+                        Console.WriteLine("Your team is full");
+                        isSelected = false;
+                        _turnPlayed += 1;
+                        _currentTurn = "Enemy";
+                        break;
+                    }
+
+                    (bool doCatch, int shakeCount) = HandleCapture();
+
+                    for (int i = 0; i < shakeCount; i++)
+                    {
+                        Thread.Sleep(1000);
+                        string dots = ".";
+                        int j = 0;
+                        while (j < i)
+                        {
+                            dots += ".";
+                            j++;
+                        }
+                        Console.WriteLine("It shakes" + dots);
+                    }
+
+                    if (doCatch)
+                    {
+                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
+                        _enemyTeam[_enemyOnField].isInTeam = true;
+                        _turnPlayed = 2;
+                        _combat = true;
+                        _currentTurn = "Capture";
+                        break;
+                    }
+                    else
+                    {
+                        string message;
+                        if (shakeCount == 0)
+                            message = "Oh, no! The Pokémon broke free!";
+                        else if (shakeCount == 1)
+                            message = "Darn! The Pokémon broke free!";
+                        else if (shakeCount == 2)
+                            message = "Aargh! Almost had it!";
+                        else
+                            message = "Shoot! It was so close, too!";
+                        Console.WriteLine(message);
+                        Console.ReadKey(true);
+                        isSelected = false;
+                        _turnPlayed += 1;
+                        _currentTurn = "Enemy";
+                    }
+                }
+                else if (option == 5)
                 {
                     _currentTurn = "Run";
                     _combat = true;
-                    game.PushState(new OverworldState());
+                    game.SetState(new OverworldState());
                     break;
                 }
 
@@ -237,51 +312,7 @@ namespace PokemonConsole.State
                 {
                     if (_currentTurn == "You")
                     {
-                        if (option == 4)
-                        {
-                            
-                            if (_enemyTeam.Count != 1)
-                            {
-                                Console.WriteLine("Can't capture trainer's pokemon");
-                                isSelected = false;
-                                _turnPlayed += 1;
-                                _currentTurn = "Enemy";
-                            }
-                            else
-                            {
-                                if (_rand.Next(0, 100) < 100 - _enemyTeam[_enemyOnField].Health)
-                                {
-                                    haveCapture = !haveCapture;
-                                }
-
-                                if (haveCapture)
-                                {
-                                    if (game.lInTeam.Count >= 6)
-                                    {
-                                        Console.WriteLine("Your team is full");
-                                        game.lPokemonCatch.Add(_enemyTeam[_enemyOnField]);
-
-                                    }
-                                    else
-                                    {
-                                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
-                                        _enemyTeam[_enemyOnField].isInTeam = true;
-                                    }
-                                    Console.WriteLine("\nCapture succeed");
-                                    _turnPlayed += 1;
-                                    _combat = true;
-                                    _currentTurn = "Enemy";
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nCapture failed");
-                                    isSelected = false;
-                                    _turnPlayed += 1;
-                                    _currentTurn = "Enemy";
-                                }
-                            }
-                        }
-                        else if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyTeam[_enemyOnField]) == true)
+                        if (Attack(game.lInTeam[_pokemonOnField], game.lInTeam[_pokemonOnField].Capacities[option], _enemyTeam[_enemyOnField]) == true)
                         {
                             test = false;
 
@@ -416,6 +447,7 @@ namespace PokemonConsole.State
                     break;
 
                 case "Capture":
+                    Console.WriteLine($"Gotcha! {_enemyTeam[_enemyOnField].Name} was caught! ");
                     break;
             }
 
@@ -423,6 +455,42 @@ namespace PokemonConsole.State
             game.PushState(new OverworldState());
             Console.ReadKey();
             game.DrawMapInit();
+        }
+
+        public Tuple<bool, int> HandleCapture()
+        {
+            if (CaptureBall.name.ToLower() == "master ball")
+                return new Tuple<bool, int>(true, 3);
+            Enemy pkm = _enemyTeam[0];
+            Console.WriteLine((3 * pkm.MaxHealth));
+            Console.WriteLine((3 * pkm.MaxHealth - 2 * pkm.Health));
+            Console.WriteLine((3 * pkm.MaxHealth - 2 * pkm.Health) * CaptureBall.GetCatchMultiplier());
+            float a = ((3 * pkm.MaxHealth - 2 * pkm.Health) * CaptureBall.GetCatchMultiplier())*100 / (3 * pkm.MaxHealth);
+            a = Math.Max(a, 1);
+            float rand = _rand.Next(255/2);
+            if (rand <= a) return new Tuple<bool, int>(true, 3);
+            int shakeCount = 0;
+            int ball = 150;
+            if (CaptureBall.name.ToLower() == "poké ball")
+                ball = 255;
+            else if (CaptureBall.name.ToLower() == "great ball")
+                ball = 200;
+            float d = CaptureBall.GetCatchMultiplier()*10000/ball;
+            if (d >= 60)
+                shakeCount = 3;
+            else
+            {
+                float x = d * a / (255 / 2);
+                if (x < 10)
+                    shakeCount = 0;
+                else if (x < 30)
+                    shakeCount = 1;
+                else if (x < 70)
+                    shakeCount = 2;
+                else
+                    shakeCount = 3;
+            }
+            return new Tuple<bool, int>(false, shakeCount);
         }
     }
 }

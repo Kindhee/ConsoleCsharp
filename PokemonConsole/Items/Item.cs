@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonConsole.State;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace PokemonConsole.Items
             return !_isKey;
         }
 
-        public virtual void onOverWorldUse(Game game)
+        public virtual void OnOverWorldUse(Game game)
         {
             Console.Write("Used item " + name);
             Inventory inventory = game._player.Inventory;
@@ -51,9 +52,9 @@ namespace PokemonConsole.Items
                 inventory.RemoveItem(this);
         }
 
-        public virtual void onBattleUse()
+        public virtual void OnBattleUse(Game game, BattleState state)
         {
-
+            Console.WriteLine(name + " cannot be used in battle!");
         }
     }
 }
