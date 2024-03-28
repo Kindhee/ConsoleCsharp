@@ -28,7 +28,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
 
             if (keyPressed == 'e')
             {
-                game.SetState(new MenuOverwold());
+                game.PushState(new MenuOverwold());
             }
         }
     }

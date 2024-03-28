@@ -152,7 +152,7 @@ namespace PokemonConsole.State
                 Console.WriteLine("You don't have any Pokemon that can fight");
                 Console.WriteLine("Go heal them");
 
-                game.SetState(new OverworldState());
+                game.PushState(new OverworldState());
                 Console.ReadKey();
                 game.DrawMapInit();
 
@@ -223,7 +223,7 @@ namespace PokemonConsole.State
                 {
                     _currentTurn = "Run";
                     _combat = true;
-                    game.SetState(new OverworldState());
+                    game.PushState(new OverworldState());
                     break;
                 }
 
@@ -418,7 +418,7 @@ namespace PokemonConsole.State
             }
 
             Console.WriteLine("End of combat");
-            game.SetState(new OverworldState());
+            game.PushState(new OverworldState());
             Console.ReadKey();
             game.DrawMapInit();
         }
