@@ -49,6 +49,15 @@ namespace PokemonConsole
             _isInTeam = false;
         }
 
+        public void LevelUp (Enemy enemy, int reward)
+        {
+            enemy.Level += reward;
+            enemy.MaxHealth += reward;
+            enemy.Defense += reward; 
+            enemy.Speed += reward;
+            enemy.Strength += reward;
+        }
+
         // get / set
         public string Name { get => _name; set => _name = value; }
         public AttributType Type { get => _attributType;  set => _attributType = value; }

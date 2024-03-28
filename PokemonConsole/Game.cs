@@ -442,6 +442,17 @@ namespace PokemonConsole
                     lInTeam.Add(enemy);
                     //
                 }
+
+                for (int i = 0; i < lInTeam.Count; i++)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{lInTeam[i].Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(" has been added to the team !");
+                }
+            } else
+            {
+                Console.WriteLine("You already took your pokemons");
             }
         }
     }
