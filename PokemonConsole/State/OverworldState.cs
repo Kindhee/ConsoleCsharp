@@ -124,10 +124,10 @@ namespace PokemonConsole.State
                         {
                             case "overworld":
                                 // update map
-                                game._currentMap = "center";
+                                game._currentMap = "healcenter";
                                 break;
 
-                            case "blank":
+                            case "pokecenter":
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
@@ -227,14 +227,14 @@ namespace PokemonConsole.State
 
                         switch (game._currentMap)
                         {
-                            case "center":
+                            case "healcenter":
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
 
                             case "overworld":
                                 // update map
-                                game._currentMap = "blank";
+                                game._currentMap = "pokecenter";
                                 break;
                         }
 
@@ -259,6 +259,14 @@ namespace PokemonConsole.State
 
                     switch (tileDir)
                     {
+                        case "P":
+
+                            foreach (var pokemon in game.lInTeam)
+                            {
+                                game.PushState(new PokeCenterState());
+                            }
+                            break;
+
                         case "D":
 
                             foreach (var pokemon in game.lInTeam)
@@ -279,14 +287,7 @@ namespace PokemonConsole.State
                             break;
 
                         case "O": 
-
                             game.OnPokeballPickUp();
-                            for (int i = 0; i < game.lInTeam.Count; i++) {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write($"{game.lInTeam[i].Name} ");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine(" has been added to the team !");
-                            }
                             break;
 
                         default:
