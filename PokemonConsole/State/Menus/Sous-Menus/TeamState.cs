@@ -19,7 +19,7 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                 {
                     Console.Write(enemy.Name);
                     Console.Write(" | Level : " + enemy.Level);
-                    Console.Write(" | Health : " + enemy.Health);
+                    Console.Write(" | Health : " + enemy.Health + "/" + enemy.MaxHealth);
                     Console.WriteLine();
                 }
             }

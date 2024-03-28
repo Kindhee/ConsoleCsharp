@@ -173,6 +173,11 @@ namespace PokemonConsole.State
                                 // update map
                                 game._currentMap = "overworld";
                                 break;
+
+                            case "overworld":
+                                // update map
+                                game._currentMap = "lobby";
+                                break;
                         }
 
                         game.ChangeMap(game._currentMap);
@@ -273,14 +278,7 @@ namespace PokemonConsole.State
                             break;
 
                         case "O": 
-
                             game.OnPokeballPickUp();
-                            for (int i = 0; i < game.lInTeam.Count; i++) {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write($"{game.lInTeam[i].Name} ");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine(" has been added to the team !");
-                            }
                             break;
 
                         default:

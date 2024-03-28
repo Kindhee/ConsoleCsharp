@@ -102,6 +102,7 @@ namespace PokemonConsole.State
 
                 if (isDead(defender) == true)
                 {
+                    defender.Health = 0;
                     return true;
                 } 
                 return false;
@@ -136,11 +137,13 @@ namespace PokemonConsole.State
             bool haveCapture = false;
             bool test = false;
 
-            foreach (var pokemon in game.lInTeam)
+            for (int i =0; i < game.lInTeam.Count; i++)
             {
-                if(pokemon.Health > 0)
+                if (game.lInTeam[i].Health > 0)
                 {
+                    _pokemonOnField = i;
                     test = true;
+                    break;
                 }
             }
 
@@ -153,7 +156,9 @@ namespace PokemonConsole.State
                 Console.ReadKey();
                 game.DrawMapInit();
 
+                _currentTurn = "Unable";
                 _combat = true;
+
             }
 
             while (_combat == false)
@@ -303,7 +308,7 @@ namespace PokemonConsole.State
                             }
 
                             if (test == false)
-                            {
+                            {   
                                 _turnPlayed = 2;
                                 _combat = true;
                                 break;
@@ -343,6 +348,7 @@ namespace PokemonConsole.State
                                     Console.ForegroundColor = ConsoleColor.White;
 
                                     test = true;
+                                    isSelected = false;
                                     _turnPlayed = 2;
                                     break;
                                 }
@@ -369,11 +375,20 @@ namespace PokemonConsole.State
             switch (_currentTurn)
             {
                 case "You":
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You won !\n");
-                    Console.ForegroundColor = ConsoleColor.White;
 
-                    game.lInTeam[_pokemonOnField].Level += _enemyTeam[_enemyOnField].Reward;
+                    if (_enemyTeam.Count > 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("You defeated the trainer !\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    } else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("You won !\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    game.lInTeam[_pokemonOnField].LevelUp(game.lInTeam[_pokemonOnField], _enemyTeam[_enemyOnField].Reward);
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write($"{game.lInTeam[_pokemonOnField].Name} ");
@@ -393,6 +408,7 @@ namespace PokemonConsole.State
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
 
+                case "Unable":
                 case "Run":
                     Console.WriteLine("You ran");
                     break;

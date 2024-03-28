@@ -22,21 +22,25 @@ namespace PokemonConsole
         private List<BlankState> _StateList;
         List<string[]> pokemons = Utils.GetListFromFile("txt/Pokemons.txt");
 
+        Enemy _selectedPkm;
+
         int chance;
         Random rand = new Random();
         
         public BlankState State {get => StateList.Last(); set => throw new Exception("Use setState or pushState to set the State."); }
         public List<BlankState> StateList { get => _StateList; }
 
-        private Dictionary<string, Enemy> _lEnemiesMeet = new Dictionary<string, Enemy>();
-        public Dictionary<string, Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
+        private List<Enemy> _lEnemiesMeet = new List<Enemy>();
+        public List<Enemy> lEnemiesMeet { get => _lEnemiesMeet; }
 
         private List<Enemy> _lInTeam = new List<Enemy>();
         public List<Enemy> lInTeam { get => _lInTeam; }
 
         private List<Enemy> _lPokemonCatch = new List<Enemy>();
         public List<Enemy> lPokemonCatch { get => _lPokemonCatch; }
-
+        
+        public Enemy SelectedPKM { get => _selectedPkm; set => _selectedPkm = value; }
+        
         public Game(int size, Player player)
         {
             Console.WindowHeight= size+15; 
@@ -378,21 +382,21 @@ namespace PokemonConsole
             if (StateList.Count > 0)
             {
                 old = StateList.Last();
-                old.Leave(state);
+                old.Leave(state, this);
             }
             StateList.Clear();
 
             StateList.Add(state);
             if (old != null)
-                state.Enter(old);
+                state.Enter(old, this);
         }
 
         public void PushState(BlankState state)
         {
             BlankState old = StateList.Last();
             StateList.Add(state);
-            state.Enter(old);
-            old.Pause(state);
+            state.Enter(old, this);
+            old.Pause(state, this);
         }
 
         public void PopState()
@@ -400,16 +404,24 @@ namespace PokemonConsole
             BlankState old = StateList.Last();
             StateList.RemoveAt(StateList.Count - 1);
             BlankState newS = StateList.Last();
-            old.Leave(newS);
-            newS.Resume(old);
+            old.Leave(newS, this);
+            newS.Resume(old, this);
 
         }
 
         public void AddMetPokemon(Enemy newEnemy, Game game)
         {
-            if (!game.lEnemiesMeet.ContainsKey(newEnemy.Name))
+            bool test = true;
+
+            foreach(var enemy in lEnemiesMeet)
             {
-                game.lEnemiesMeet.Add(newEnemy.Name, newEnemy);
+                if(enemy.Name == newEnemy.Name)
+                {
+                    test = false;
+                }
+            }
+            if (test == true) {
+                game.lEnemiesMeet.Add(newEnemy);
             }
         }
 
@@ -444,9 +456,22 @@ namespace PokemonConsole
                         strength + (strength * scaling));                                                       // strength
 
                     enemy.isInTeam = true;
+
                     lInTeam.Add(enemy);
+                    lEnemiesMeet.Add(enemy);
                     //
                 }
+
+                for (int i = 0; i < lInTeam.Count; i++)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{lInTeam[i].Name} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(" has been added to the team !");
+                }
+            } else
+            {
+                Console.WriteLine("You already took your pokemons");
             }
         }
     }

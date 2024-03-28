@@ -25,7 +25,7 @@ namespace PokemonConsole.Items
         public int _price = 100;
         public int _sell = 100;
 
-        private bool _isKey = false;
+        private readonly bool _isKey = false;
 
         public string name { get => _name; set => _name = value; }
         public string desc { get => _desc; set => _desc = value; }
@@ -33,22 +33,25 @@ namespace PokemonConsole.Items
         public int price { get => _price; set => _price = value; }
         public int sell { get => _sell; set => _sell = value; }
 
-        public bool canSell()
+        public virtual bool canSell()
         {
             return sell > 0;
         }
 
-        public bool RemoveOnUse()
+        public virtual bool RemoveOnUse()
         {
             return !_isKey;
         }
 
-        public void onOverWorldUse()
+        public virtual void onOverWorldUse(Game game)
         {
-
+            Console.Write("Used item " + name);
+            Inventory inventory = game._player.Inventory;
+            if (RemoveOnUse())
+                inventory.RemoveItem(this);
         }
 
-        public void onBattleUse()
+        public virtual void onBattleUse()
         {
 
         }

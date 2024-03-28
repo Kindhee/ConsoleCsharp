@@ -89,5 +89,52 @@ namespace PokemonConsole
 
             return true;
         }
+
+        public void RemoveItem(Item item, bool fullRemove=false)
+        {
+            (StorageItemInfo sItem, string storage) = GetItemInStorage(item);
+            if (sItem == null)
+                return;
+            if (!fullRemove)
+                sItem.amount -= 1;
+            else
+                sItem.amount = 0;
+            if (sItem.amount <= 0)
+            {
+                _bag[storage].Remove(sItem);
+            }
+        }
+
+        //Awful
+        public Tuple<StorageItemInfo, string> GetItemInStorage(Item item)
+        {
+            StorageItemInfo sItem;
+            sItem = GetItemInStorage(item, "items");
+            if (sItem != null)
+                return new(sItem, "items");
+            sItem = GetItemInStorage(item, "pokeballs");
+            if (sItem != null)
+                return new(sItem, "pokeballs");
+            sItem = GetItemInStorage(item, "cds");
+            if (sItem != null)
+                return new(sItem, "cds");
+            sItem = GetItemInStorage(item, "keys");
+            if (sItem != null)
+                return new(sItem, "keys");
+            return new(null, null);
+        }
+
+        public StorageItemInfo GetItemInStorage(Item item, string storage)
+        {
+            for (int i = 0; i < _bag[storage].Count; i++)
+            {
+                var storItem = _bag[storage][i];
+                if (storItem.item.name == item.name && storItem.item.desc == item.desc)
+                {
+                    return storItem;
+                }
+            }
+            return null;
+        }
     }
 }
