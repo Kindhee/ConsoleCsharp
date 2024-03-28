@@ -242,37 +242,35 @@ namespace PokemonConsole.State
                             }
                             else
                             {
-                                if (game.lInTeam.Count >= 6)
+                                if (_rand.Next(0, 100) < 0 + _enemyTeam[_enemyOnField].Health)
                                 {
-                                    Console.WriteLine("Your team is full");
-                                    isSelected = false;
-                                    _turnPlayed += 1;
-                                    _currentTurn = "Enemy";
-
+                                    haveCapture = !haveCapture;
                                 }
-                                else
-                                {
-                                    if (_rand.Next(0, 100) < 0 + _enemyTeam[_enemyOnField].Health)
-                                    {
-                                        haveCapture = !haveCapture;
-                                    }
 
-                                    if (haveCapture)
+                                if (haveCapture)
+                                {
+                                    if (game.lInTeam.Count >= 6)
                                     {
-                                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
-                                        _enemyTeam[_enemyOnField].isInTeam = true;
-                                        _turnPlayed = 2;
-                                        _combat = true;
-                                        _currentTurn = "Capture";
-                                        break;
+                                        Console.WriteLine("Your team is full");
+                                        game.lPokemonCatch.Add(_enemyTeam[_enemyOnField]);
+
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Capture failed");
-                                        isSelected = false;
-                                        _turnPlayed += 1;
-                                        _currentTurn = "Enemy";
+                                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
                                     }
+                                    Console.WriteLine("\nCapture succeed");
+                                    _enemyTeam[_enemyOnField].isInTeam = true;
+                                    _turnPlayed += 1;
+                                    _combat = true;
+                                    _currentTurn = "Enemy";
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nCapture failed");
+                                    isSelected = false;
+                                    _turnPlayed += 1;
+                                    _currentTurn = "Enemy";
                                 }
                             }
                         }
@@ -400,7 +398,6 @@ namespace PokemonConsole.State
                     break;
 
                 case "Capture":
-                    Console.WriteLine("Capture succed");
                     break;
             }
 

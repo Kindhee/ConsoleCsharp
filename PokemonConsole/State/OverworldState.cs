@@ -249,6 +249,14 @@ namespace PokemonConsole.State
 
                     switch (tileDir)
                     {
+                        case "P":
+
+                            foreach (var pokemon in game.lInTeam)
+                            {
+                                game.PushState(new PokeCenterState());
+                            }
+                            break;
+
                         case "D":
 
                             foreach (var pokemon in game.lInTeam)

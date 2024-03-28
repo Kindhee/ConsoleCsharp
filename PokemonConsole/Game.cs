@@ -34,6 +34,9 @@ namespace PokemonConsole
         private List<Enemy> _lInTeam = new List<Enemy>();
         public List<Enemy> lInTeam { get => _lInTeam; }
 
+        private List<Enemy> _lPokemonCatch = new List<Enemy>();
+        public List<Enemy> lPokemonCatch { get => _lPokemonCatch; }
+
         public Game(int size, Player player)
         {
             Console.WindowHeight= size+15; 
@@ -79,6 +82,10 @@ namespace PokemonConsole
 
                         case 'w':
                             _map[colNumber, lineNumber] = new Tile(TileType.Wall);
+                            break;
+
+                        case 'p':
+                            _map[colNumber, lineNumber] = new Tile(TileType.Pokedoor);
                             break;
 
                         case 'd':
@@ -148,6 +155,7 @@ namespace PokemonConsole
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
 
+                            case TileType.Pokedoor:
                             case TileType.Door:
                                 Console.SetCursorPosition(i * 2 + 1, j + 1);
                                 Console.BackgroundColor = ConsoleColor.Red;
@@ -235,6 +243,7 @@ namespace PokemonConsole
                                 Console.BackgroundColor = ConsoleColor.Black;
                                 break;
 
+                            case (TileType.Pokedoor):
                             case (TileType.Door):
                                 Console.BackgroundColor = ConsoleColor.Red;
                                 Console.Write("  ");
