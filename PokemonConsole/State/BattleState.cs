@@ -244,14 +244,6 @@ namespace PokemonConsole.State
                         _currentTurn = "Enemy";
                         break;
                     }
-                    else if (game.lInTeam.Count > 6)
-                    {
-                        Console.WriteLine("Your team is full");
-                        isSelected = false;
-                        _turnPlayed += 1;
-                        _currentTurn = "Enemy";
-                        break;
-                    }
 
                     (bool doCatch, int shakeCount) = HandleCapture();
 
@@ -270,8 +262,16 @@ namespace PokemonConsole.State
 
                     if (doCatch)
                     {
-                        game.lInTeam.Add(_enemyTeam[_enemyOnField]);
-                        _enemyTeam[_enemyOnField].isInTeam = true;
+                        if(game.lInTeam.Count == 6)
+                        {
+                            game.lPokemonCatch.Add(_enemyTeam[_enemyOnField]);
+                        }
+                        else
+                        {
+                            game.lInTeam.Add(_enemyTeam[_enemyOnField]);
+                            _enemyTeam[_enemyOnField].isInTeam = true;
+
+                        }
                         _turnPlayed = 2;
                         _combat = true;
                         _currentTurn = "Capture";
@@ -462,9 +462,7 @@ namespace PokemonConsole.State
             if (CaptureBall.name.ToLower() == "master ball")
                 return new Tuple<bool, int>(true, 3);
             Enemy pkm = _enemyTeam[0];
-            Console.WriteLine((3 * pkm.MaxHealth));
-            Console.WriteLine((3 * pkm.MaxHealth - 2 * pkm.Health));
-            Console.WriteLine((3 * pkm.MaxHealth - 2 * pkm.Health) * CaptureBall.GetCatchMultiplier());
+
             float a = ((3 * pkm.MaxHealth - 2 * pkm.Health) * CaptureBall.GetCatchMultiplier())*100 / (3 * pkm.MaxHealth);
             a = Math.Max(a, 1);
             float rand = _rand.Next(255/2);
