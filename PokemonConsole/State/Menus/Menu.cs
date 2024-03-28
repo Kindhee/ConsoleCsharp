@@ -65,11 +65,11 @@ namespace PokemonConsole.State
             {
                 Console.Clear();
                 game.DrawMapInit();
-                game.SetState(new OverworldState());
+                game.PushState(new OverworldState());
             } 
             else if (option == 2)
             {
-                // quit 
+                System.Environment.Exit(1);
             }
         }
     }

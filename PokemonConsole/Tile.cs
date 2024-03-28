@@ -50,7 +50,9 @@ namespace PokemonConsole
 
                 case TileType.Pokeball:
                     return "O";
-
+                
+                case TileType.DoorH:
+                    return "H";
 
                 default:
                     return " ";

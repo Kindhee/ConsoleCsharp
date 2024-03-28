@@ -12,7 +12,7 @@ namespace PokemonConsole
         public static string GetTextFromFile(string path)
         {
             string returnString = "";
-            using (StreamReader contentFile = new StreamReader("../../../" + path))
+            using (StreamReader contentFile = new StreamReader("./" + path))
             {
                 returnString = contentFile.ReadToEnd();
             }

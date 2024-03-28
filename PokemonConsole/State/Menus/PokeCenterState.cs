@@ -78,7 +78,6 @@ namespace PokemonConsole.State.Menus.Sous_Menus
                         break;
                 }
             }
-
         }
     }
 }

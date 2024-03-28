@@ -55,12 +55,12 @@ namespace PokemonConsole.State
                 case 1:
                     Console.Clear();
                     game.DrawMapInit();
-                    game.SetState(new OverworldState());
+                    game.PushState(new OverworldState());
                     break;
 
                 case 2:
                     Console.Clear();
-                    game.SetState(new TeamState());
+                    game.PushState(new TeamState());
                     break;
 
                 case 3:
@@ -70,12 +70,12 @@ namespace PokemonConsole.State
                
                 case 4:
                     Console.Clear();
-                    game.SetState(new PokedexState());
+                    game.PushState(new PokedexState());
                     break; 
                 
                 case 5:
                     Console.Clear();
-                    game.SetState(new Menu());
+                    game.PushState(new Menu());
                     break;
             }
         }
