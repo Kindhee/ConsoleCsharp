@@ -69,7 +69,7 @@ namespace PokemonConsole.State
             } 
             else if (option == 2)
             {
-                // quit 
+                System.Environment.Exit(1);
             }
         }
     }
