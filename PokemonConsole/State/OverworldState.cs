@@ -19,7 +19,7 @@ namespace PokemonConsole.State
             if (OperatingSystem.IsWindows())
             {
                 _player = new SoundPlayer("aud/forest.wav");
-                _player.Play();
+                _player.PlayLooping();
             }
         }
 
@@ -29,7 +29,7 @@ namespace PokemonConsole.State
             if (oldState is MenuOverwold) return;
             if (OperatingSystem.IsWindows())
             {
-                _player.Play();
+                _player.PlayLooping();
             }
         }
 

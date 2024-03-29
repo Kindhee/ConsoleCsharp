@@ -63,7 +63,7 @@ namespace PokemonConsole.State
             {
                 string mode = (_enemyTeam.Count != 1) ? "trainer" : "wild";
                 _player = new System.Media.SoundPlayer($"aud/battle_{mode}.wav");
-                _player.Play();
+                _player.PlayLooping();
             }
         }
 
@@ -73,7 +73,7 @@ namespace PokemonConsole.State
             if (oldState is InventoryState || oldState is PokeSelectScreen) return;
             if (OperatingSystem.IsWindows())
             {
-                _player.Play();
+                _player.PlayLooping();
             }
         }
 
