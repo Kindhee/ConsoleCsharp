@@ -54,8 +54,8 @@ namespace PokemonConsole.State
             {
                 case 1:
                     Console.Clear();
+                    game.PopState();
                     game.DrawMapInit();
-                    game.PushState(new OverworldState());
                     break;
 
                 case 2:
@@ -75,7 +75,7 @@ namespace PokemonConsole.State
                 
                 case 5:
                     Console.Clear();
-                    game.PushState(new Menu());
+                    game.SetState(new Menu());
                     break;
             }
         }

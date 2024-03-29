@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace PokemonConsole.State
     public class BlankState
     {
         private string _name = "BLANK";
+
+        protected SoundPlayer _player;
 
         public string Name { get { return _name; } }
         public virtual void Enter(BlankState oldState, Game game)

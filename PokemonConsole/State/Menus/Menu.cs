@@ -3,11 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace PokemonConsole.State
 {
     public class Menu : BlankState
-    { 
+    {
+        public override void Enter(BlankState oldState, Game game)
+        {
+            base.Enter(oldState, game);
+            if (OperatingSystem.IsWindows())
+            {
+                _player = new SoundPlayer("aud/title.wav");
+                _player.Load();
+                _player.PlayLooping();
+            }
+        }
+
+        public override void Leave(BlankState newState, Game game)
+        {
+            base.Leave(newState, game);
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Stop();
+            }
+        }
 
         override public void Run(Game game)
         {
@@ -65,7 +85,7 @@ namespace PokemonConsole.State
             {
                 Console.Clear();
                 game.DrawMapInit();
-                game.PushState(new OverworldState());
+                game.SetState(new OverworldState());
             } 
             else if (option == 2)
             {

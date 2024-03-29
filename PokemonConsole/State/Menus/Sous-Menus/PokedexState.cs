@@ -21,7 +21,7 @@
             
             if(keyPressed == 'e')
             {
-                game.PushState(new MenuOverwold());
+                game.PopState();
             }
         }
     }

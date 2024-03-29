@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PokemonConsole.Items;
 using System.Numerics;
+using PokemonConsole.State.Menus.Sous_Menus;
 
 namespace PokemonConsole.State
 {
@@ -53,6 +54,46 @@ namespace PokemonConsole.State
 
             _rand = new Random();
 
+        }
+
+        public override void Enter(BlankState oldState, Game game)
+        {
+            base.Enter(oldState, game);
+            if (OperatingSystem.IsWindows())
+            {
+                string mode = (_enemyTeam.Count != 1) ? "trainer" : "wild";
+                _player = new System.Media.SoundPlayer($"aud/battle_{mode}.wav");
+                _player.Play();
+            }
+        }
+
+        public override void Resume(BlankState oldState, Game game)
+        {
+            base.Resume(oldState, game);
+            if (oldState is InventoryState || oldState is PokeSelectScreen) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Play();
+            }
+        }
+
+        public override void Pause(BlankState newState, Game game)
+        {
+            base.Pause(newState, game);
+            if (newState is InventoryState || newState is PokeSelectScreen) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Stop();
+            }
+        }
+
+        public override void Leave(BlankState newState, Game game)
+        {
+            base.Pause(newState, game);
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Stop();
+            }
         }
 
         bool isDead(Enemy enemy)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -49,6 +50,7 @@ namespace PokemonConsole
             _size = size;
             _player = player;
             _StateList = new List<BlankState>();
+
 
             // choose map
             _currentMap = "lobby";
@@ -395,16 +397,15 @@ namespace PokemonConsole
             StateList.Clear();
 
             StateList.Add(state);
-            if (old != null)
-                state.Enter(old, this);
+            state.Enter(old, this);
         }
 
         public void PushState(BlankState state)
         {
             BlankState old = StateList.Last();
             StateList.Add(state);
-            state.Enter(old, this);
             old.Pause(state, this);
+            state.Enter(old, this);
         }
 
         public void PopState()

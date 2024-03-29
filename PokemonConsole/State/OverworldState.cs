@@ -4,12 +4,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace PokemonConsole.State
 {
     internal class OverworldState : BlankState
     {
         private string _name = "OVERWORLD";
+
+        public override void Enter(BlankState oldState, Game game)
+        {
+            base.Enter(oldState, game);
+            if (oldState is MenuOverwold) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player = new SoundPlayer("aud/forest.wav");
+                _player.Play();
+            }
+        }
+
+        public override void Resume(BlankState oldState, Game game)
+        {
+            base.Resume(oldState, game);
+            if (oldState is MenuOverwold) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Play();
+            }
+        }
+
+        public override void Pause(BlankState newState, Game game)
+        {
+            base.Pause(newState, game);
+            if (newState is MenuOverwold) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Stop();
+            }
+        }
+
+        public override void Leave(BlankState newState, Game game)
+        {
+            base.Pause(newState, game);
+            if (newState is MenuOverwold) return;
+            if (OperatingSystem.IsWindows())
+            {
+                _player.Stop();
+            }
+        }
 
         override public void Run(Game game)
         {
